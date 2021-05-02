@@ -1,6 +1,6 @@
 # The ultimate anime-themed bot for your Discord community!
  <img alt="Discord" src="https://img.shields.io/discord/652432413586358273?color=%237289da&label=Shinobu%20%26%20Friends&logo=discord&logoColor=%237289da"> </a>
-<a href="https://www.codefactor.io/repository/github/pkly/shinobu-bot"><img src="https://www.codefactor.io/repository/github/zappin-ctrl/shinobubot.js/badge" alt="CodeFactor" /></a>
+[![CodeFactor](https://www.codefactor.io/repository/github/pkly/shinobu-bot/badge)](https://www.codefactor.io/repository/github/pkly/shinobu-bot)
 
 ## Upcoming C# rewrite.
 
