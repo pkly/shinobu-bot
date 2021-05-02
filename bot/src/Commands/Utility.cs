@@ -124,7 +124,7 @@ namespace Shinobu.Commands
                 }
 
                 // remove last newlines
-                embed.WithDescription(description.Substring(0, description.Length - 4));
+                embed.WithDescription(description.Substring(0, description.Length - 2));
 
                 if (attributePair.Equals(last))
                 {
@@ -139,8 +139,6 @@ namespace Shinobu.Commands
             var addedReaction = false;
             foreach (var embed in embeds)
             {
-                // Console.WriteLine(embed.Title);
-                // Console.WriteLine(embed.Description);
                 try
                 {
                     await Context.Author.SendMessageAsync(builder.WithEmbed(embed).Build());
