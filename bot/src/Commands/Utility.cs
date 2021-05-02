@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Gateway;
 using Disqord.Rest;
 using Qmmands;
+using Shinobu.Attributes;
 using Shinobu.Extensions;
 
 namespace Shinobu.Commands
 {
+    [Section("Utility")]
     public class Utility : ShinobuModuleBase
     {
         private const string PING_MESSAGE = "Receive delay {0}ms, latency is {1}ms";
@@ -17,6 +21,13 @@ namespace Shinobu.Commands
         private const string INVITE_URL = "https://discord.com/oauth2/authorize?client_id=490901986502377512&scope=bot&permissions=388160";
         private const string SUPPORT_SERVER = "https://discord.gg/qwdMmsG/";
 
+        private readonly CommandService _commands;
+
+        public Utility(CommandService commands)
+        {
+            _commands = commands;
+        }
+        
         [Command("ping")]
         public async Task Ping()
         {
@@ -72,8 +83,99 @@ namespace Shinobu.Commands
         [Command("help")]
         public async Task Help()
         {
+            var embeds = new List<LocalEmbedBuilder>();
+
+            var commands = new Dictionary<string, List<Command>>();
+            var sections = new Dictionary<string, SectionAttribute>();
+            
+            // categorize commands by section first
+            foreach (var command in _commands.GetAllCommands())
+            {
+                foreach (var attribute in command.Module.Attributes)
+                {
+                    if (attribute is SectionAttribute attr)
+                    {
+                        if (!commands.ContainsKey(attr.Name))
+                        {
+                            commands.Add(attr.Name, new List<Command>());
+                            sections.Add(attr.Name, attr);
+                        }
+                        
+                        commands[attr.Name].Add(command);
+                    }
+                }
+            }
+
+            var last = sections.Last();
+            foreach (var attributePair in sections)
+            {
+                var embed = GetEmbed()
+                    .WithTitle(attributePair.Value.Name);
+
+                var description = "";
+                if (null != attributePair.Value.Description)
+                {
+                    description = attributePair.Value.Description + "\n=======================\n\n";
+                }
+                
+                foreach (var command in commands[attributePair.Value.Name])
+                {
+                    description += command.FullAliases[0] + " " + string.Join<string>(' ', command.Parameters.Select<Parameter, string>(new Func<Parameter, string>(FormatParameter))) + "\n\n";
+                }
+
+                // remove last newlines
+                embed.WithDescription(description.Substring(0, description.Length - 4));
+
+                if (attributePair.Equals(last))
+                {
+                    embed.WithFooter("Made by Ly#3449, original concept by zappin#1312");
+                }
+                
+                embeds.Add(embed);
+            }
+            
             var builder = new LocalMessageBuilder();
-            builder.WithEmbed(GetEmbed().WithTitle("🍩 Here's a list of what i can do 🍩"));
+            var lastEmbed = embeds.Last();
+            var addedReaction = false;
+            foreach (var embed in embeds)
+            {
+                // Console.WriteLine(embed.Title);
+                // Console.WriteLine(embed.Description);
+                try
+                {
+                    await Context.Author.SendMessageAsync(builder.WithEmbed(embed).Build());
+                    if (!embed.Equals(lastEmbed))
+                    {
+                        await Task.Delay(500);
+                    }
+
+                    if (!addedReaction)
+                    {
+                        await Context.Message.AddReactionAsync(new LocalEmoji("✅"));
+                    }
+                }
+                catch (Exception e) // in case someone has blocked dms
+                {
+                    await EmbedReply("You seem to have dms disabled or other error occurred!");
+                    return;
+                }
+            }
+            
+            // this is just pulled out of Disqord.Bot.FormatFailureMessage
+            static string FormatParameter(Parameter parameter)
+            {
+                string format;
+                if (parameter.IsMultiple)
+                {
+                    format = "{0}[]";
+                }
+                else
+                {
+                    string str = parameter.IsRemainder ? "{0}…" : "{0}";
+                    format = parameter.IsOptional ? "[" + str + "]" : "<" + str + ">";
+                }
+                return string.Format(format, (object) parameter.Name);
+            }
         }
 
         [Command("invite", "inv")]

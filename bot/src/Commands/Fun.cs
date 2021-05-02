@@ -8,11 +8,13 @@ using Disqord;
 using Disqord.Bot;
 using Disqord.Rest;
 using Qmmands;
+using Shinobu.Attributes;
 using Shinobu.Extensions;
 using Shinobu.Utility;
 
 namespace Shinobu.Commands
 {
+    [Section("Fun/memes")]
     public class Fun : ShinobuModuleBase
     {
         private const string RESPECTS_TEXT = "**{0} {1}** paid their respects{2}";

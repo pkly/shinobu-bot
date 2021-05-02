@@ -37,6 +37,13 @@ namespace Shinobu
             return base.AddTypeParsersAsync(cancellationToken);
         }
 
+        protected override LocalMessageBuilder FormatFailureMessage(
+            DiscordCommandContext context,
+            FailedResult result)
+        {
+            return base.FormatFailureMessage(context, result);
+        }
+
         //
         // public async Task MessageReceivedAsync(SocketMessage msg)
         // {
