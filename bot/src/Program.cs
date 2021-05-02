@@ -19,6 +19,11 @@ namespace Shinobu
 {
     internal sealed class Program
     {
+        /// <summary>
+        /// Entrypoint
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         static int Main(string[] args)
         {
             Helper.Init(args);
