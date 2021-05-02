@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -17,6 +18,8 @@ namespace Shinobu.Commands
     [Section("Fun/memes")]
     public class Fun : ShinobuModuleBase
     {
+        private const string LOVE_STRING = "{0} and {1}'s love is at **{2}%**\n\nYour shipname is **{3}**";
+        
         private const string RESPECTS_TEXT = "**{0} {1}** paid their respects{2}";
 
         private const string GAY_SELF = "You're **{0}%** gay! {1}";
@@ -62,6 +65,16 @@ namespace Shinobu.Commands
             new Range<string>(101, "You're beyond gay wow", 200),
             new Range<string>(201, "You're gay beyond what is cosmically known...", 206),
             new Range<string>(207, "GAY OVERLORD OF CUM")
+        });
+
+        private readonly RangeHelper<string> _loveRanges = new RangeHelper<string>(new Range<string>[]
+        {
+            new Range<string>(0, "You guys aren't even remotely a match...", 0),
+            new Range<string>(1, "Maybe you're better off as distant friends", 25),
+            new Range<string>(26, "You guys are friends but I sense no romance", 50),
+            new Range<string>(51, "There's a connection between the two!", 75),
+            new Range<string>(76, "Love is in the air <3", 99),
+            new Range<string>(100, "Such a cute couple <3 <3 <3")
         });
         
         public Fun(HttpClient client, Random random)
@@ -184,6 +197,43 @@ namespace Shinobu.Commands
                     .WithImageUrl(string.Format("http://www.yarntomato.com/percentbarmaker/button.php?barPosition={0}&leftFill=%23FF99FF", result.ToString()))
                     .WithFooter(_gayRanges.GetValue(result))
             );
+        }
+
+        [Command("love", "lovecalc", "ship", "calclove")]
+        public DiscordCommandResult Love(IMember memberA, IMember? memberB = null)
+        {
+            if (null == memberB)
+            {
+                memberB = memberA;
+                memberA = (IMember) Context.Author;
+            }
+
+            var name = memberA.NickOrName().Substring(0, (int) Math.Ceiling((double) memberA.NickOrName().Length / 2)) +
+                       memberB.NickOrName().Substring(0, (int) Math.Ceiling((double) memberB.NickOrName().Length / 2));
+
+            var random = new Random((int) memberA.Id.RawValue + (int) memberB.Id.RawValue);
+            var result = Math.Max(
+                Math.Min(
+                    random.Next(100),
+                    100
+                ),
+                0
+            );
+
+            var embed = GetEmbed(string.Format(
+                    LOVE_STRING,
+                    memberA.Mention,
+                    memberB.Mention,
+                    result,
+                    name
+                ))
+                .WithFooter(_loveRanges.GetValue(result))
+                .WithImageUrl(string.Format("https://api.alexflipnote.dev/ship?user={0}&user2={1}", // this will fail for now since Alex hid his api, welp
+                    WebUtility.UrlEncode(memberA.GetAvatarUrl(ImageFormat.Png, 128)),
+                    WebUtility.UrlEncode(memberB.GetAvatarUrl(ImageFormat.Png, 128))
+                ));
+
+            return Reply(embed);
         }
         
         [Command("roll")]
