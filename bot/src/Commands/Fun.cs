@@ -76,6 +76,14 @@ namespace Shinobu.Commands
             new Range<string>(76, "Love is in the air <3", 99),
             new Range<string>(100, "Such a cute couple <3 <3 <3")
         });
+
+        private readonly RangeHelper<string> _rateRanges = new RangeHelper<string>(new Range<string>[]
+        {
+            new Range<string>(0, "Not that great...", 24),
+            new Range<string>(25, "It's okay...", 49),
+            new Range<string>(50, "Pretty good!", 74),
+            new Range<string>(75, "I love it!")
+        });
         
         public Fun(HttpClient client, Random random)
         {
@@ -234,6 +242,18 @@ namespace Shinobu.Commands
                 ));
 
             return Reply(embed);
+        }
+
+        [Command("rate")]
+        public DiscordCommandResult Rate([Remainder] string toRate)
+        {
+            var result = _random.Next(100);
+            return EmbedReply(string.Format(
+                "I'd rate **{0}** a solid **{1}/100**, {2}",
+                toRate,
+                result,
+                _rateRanges.GetValue(result)
+            ));
         }
         
         [Command("roll")]
