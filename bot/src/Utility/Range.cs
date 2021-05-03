@@ -18,7 +18,7 @@
 
         public override string ToString()
         {
-            return "Range from: " + From + ", to: " + (null == To ? "null" : To) + ", value: " + Value;
+            return "Range from: " + From + ", to: " + (To == null ? "null" : To) + ", value: " + Value;
         }
     }
 }

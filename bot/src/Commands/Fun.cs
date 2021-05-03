@@ -121,7 +121,7 @@ namespace Shinobu.Commands
             }
 
             choices = choices.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-            if (0 == choices.Length)
+            if (choices.Length == 0)
             {
                 return Embed("Please type your options separated with a comma");
             }

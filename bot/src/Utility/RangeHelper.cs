@@ -17,7 +17,7 @@ namespace Shinobu.Utility
 
         public void AddRange(Range<T> range)
         {
-            if (null != GetValue(range.From) || (null != range.To && null != GetValue((int) range.To)))
+            if (GetValue(range.From) != null || (range.To != null && GetValue((int) range.To) != null))
             {
                 throw new Exception("Ranges cannot overlap");
             }
