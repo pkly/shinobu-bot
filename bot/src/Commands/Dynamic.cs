@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
@@ -9,22 +10,9 @@ namespace Shinobu.Commands
 {
     public static class Dynamic
     {
-        public static async Task<DiscordResponseCommandResult> DoReaction(DiscordCommandContext context, CommandService commands)
+        public static async Task DoReaction(DiscordCommandContext context)
         {
-            List<IMember> members = new List<IMember>();
-            Console.WriteLine(context.Arguments.Count);
-            if (context.Arguments.Count > 0 && context.Arguments[0] != null && !string.IsNullOrEmpty(context.Arguments[0].ToString()))
-            {
-                foreach (var arg in context.Arguments[0].ToString().Split(" "))
-                {
-                    var user = await commands.GetTypeParser<IMember>().ParseAsync(null, arg, context);
-                    if (user.IsSuccessful)
-                    {
-                        members.Add(user.Value);
-                    }
-                }
-            }
-
+            IEnumerable<IMember?> members = ((IMember?[]) context.Arguments[0]).Where(x => x != null);
             var mentions = "";
             foreach (var member in members)
             {
@@ -32,7 +20,7 @@ namespace Shinobu.Commands
             }
             
             Console.WriteLine(mentions);
-            return new DiscordResponseCommandResult(context, (new LocalMessageBuilder()).WithContent("yeet " + mentions).Build());
+            await new DiscordResponseCommandResult(context, (new LocalMessageBuilder()).WithContent("yeet " + mentions).Build());
         }
     }
 }

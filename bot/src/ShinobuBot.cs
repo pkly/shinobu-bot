@@ -35,8 +35,10 @@ namespace Shinobu
             CancellationToken cancellationToken = new CancellationToken()
         )
         {
-            Commands.AddTypeParser(new ReadOnlyCollectionIMemberTypeParser());
-            return base.AddTypeParsersAsync(cancellationToken);
+            var value = base.AddTypeParsersAsync(cancellationToken);
+            // add custom ones last
+            Commands.AddTypeParser(new ErrorIgnoringMemberTypeParser());
+            return value;
         }
 
         protected override ValueTask AddModulesAsync(
@@ -47,7 +49,7 @@ namespace Shinobu
             foreach (var pair in Helper.ApiCommands)
             {
                 Commands.AddModule(
-                    x => x.AddCommand(context => Dynamic.DoReaction((DiscordCommandContext) context, Commands),
+                    x => x.AddCommand(context => Dynamic.DoReaction((DiscordCommandContext) context),
                     x =>
                     {
                         x.WithName(pair.Key);
@@ -60,8 +62,12 @@ namespace Shinobu
 
                         // just pass everything
                         x.AddParameter(
-                            typeof(string),
-                            x => x.WithIsRemainder(true).WithIsOptional(true)
+                            typeof(IMember),
+                            x => 
+                                x.WithIsMultiple(true)
+                                    .WithIsOptional(true)
+                                    .WithCustomTypeParserType(typeof(ErrorIgnoringMemberTypeParser))
+                                    .WithDefaultValue(new IMember[] {})
                         );
                     })
                 );
