@@ -20,7 +20,7 @@ namespace Shinobu
             var embed = (new LocalEmbedBuilder())
                 .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Helper.Env("EMBED_COLOR")));
 
-            if (null != description) {
+            if (description != null) {
                 embed.WithDescription(description);
             }
 

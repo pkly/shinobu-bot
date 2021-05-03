@@ -8,15 +8,14 @@ namespace Shinobu.Extensions
 {
     public static class DiscordCommandContextExtensions
     {
-        public static async Task<IMember?> GetCurrentMember(this DiscordCommandContext context)
+        public static IMember? GetCurrentMember(this DiscordCommandContext context)
         {
-            if (null == context.Author || null == context.GuildId)
+            if (context.Author == null || context.GuildId == null)
             {
                 return null;
             }
 
-            return (IMember?) context.Bot.GetMember((Snowflake) context.GuildId, context.Author.Id) ??
-                   await context.Bot.FetchMemberAsync((Snowflake) context.GuildId, context.Author.Id);
+            return (IMember) context.Author;
         }
     }
 }

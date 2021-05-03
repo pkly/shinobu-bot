@@ -159,7 +159,7 @@ namespace Shinobu.Commands
         [RequireGuild]
         public async Task Fight(IMember? member = null)
         {
-            if (null == member || member.Id == Context.Author.Id)
+            if (member == null || member.Id == Context.Author.Id)
             {
                 await Embed(string.Format(
                     "{0} killed themselves {1}",
@@ -210,7 +210,7 @@ namespace Shinobu.Commands
         [Command("love", "lovecalc", "ship", "calclove")]
         public DiscordCommandResult Love(IMember memberA, IMember? memberB = null)
         {
-            if (null == memberB)
+            if (memberB == null)
             {
                 memberB = memberA;
                 memberA = (IMember) Context.Author;

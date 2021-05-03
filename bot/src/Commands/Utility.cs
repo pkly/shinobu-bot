@@ -57,9 +57,9 @@ namespace Shinobu.Commands
         
         [Command("avatar", "pfp", "image", "profilepic", "pic")]
         [RequireGuild]
-        public async Task<DiscordCommandResult> Avatar(IMember? member = null)
+        public DiscordCommandResult Avatar(IMember? member = null)
         {
-            member ??= await Context.GetCurrentMember();
+            member ??= Context.GetCurrentMember();
 
             return Reply(
                 GetEmbed()
@@ -113,7 +113,7 @@ namespace Shinobu.Commands
                     .WithTitle(attributePair.Value.Name);
 
                 var description = "";
-                if (null != attributePair.Value.Description)
+                if (attributePair.Value.Description == null)
                 {
                     description = attributePair.Value.Description + "\n=======================\n\n";
                 }
