@@ -14,11 +14,21 @@ namespace Shinobu.Models.Assets
         public IList<string> Aliases = new List<string>();
         
         // Texts
-        public IList<string> Mention;
-        public IList<string> NoMention;
+        public IList<string> Mention = new List<string>();
+        public IList<string> NoMention = new List<string>();
 
         // Help parts
         public string Group = "Unknown";
         public int? SimpleGroup = null;
+
+        public string GetFixedImageUrl(string imageUrl)
+        {
+            if (ReplaceUrl == null)
+            {
+                return imageUrl;
+            }
+
+            return string.Format(ReplaceUrl, imageUrl);
+        }
     }
 }

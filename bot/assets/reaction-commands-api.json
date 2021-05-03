@@ -3,10 +3,10 @@
     "Name": "baka",
     "Url": "https://nekos.life/api/v2/img/baka",
     "Mention": [
-      "$1 called $2 a dummy",
-      "$2, you're a dumbass according to $1",
-      "$2, you b-baka ><",
-      "$1 is sceptical of $2's intellectual prowess"
+      "{0} called {1} a dummy",
+      "{1}, you're a dumbass according to {0}",
+      "{1}, you b-baka ><",
+      "{0} is sceptical of {1}'s intellectual prowess"
     ],
     "Aliases": [
       "dummy",
@@ -40,15 +40,15 @@
     "Name": "bite",
     "Url": "https://waifu.pics/api/sfw/bite",
     "Mention": [
-      "$1 bit $2",
-      "$1 took a bite out of $2",
-      "$2 just got friggin chomped by $1",
-      "$1 Used Crunch on $2 - It was highly effective!"
+      "{0} bit {1}",
+      "{0} took a bite out of {1}",
+      "{1} just got friggin chomped by {0}",
+      "{0} Used Crunch on {1} - It was highly effective!"
     ],
     "NoMention": [
-      "$1 bit themselves",
-      "$1 is his own dinner . . .",
-      "$1 chomped on themselves"
+      "{0} bit themselves",
+      "{0} is his own dinner . . .",
+      "{0} chomped on themselves"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -57,14 +57,14 @@
     "Name": "blush",
     "Url": "https://waifu.pics/api/sfw/blush",
     "Mention": [
-      "$1 blushes at $2",
-      "$1 is flustered cause of $2",
-      "$2 you made $1 blush"
+      "{0} blushes at {1}",
+      "{0} is flustered cause of {1}",
+      "{1} you made {0} blush"
     ],
     "NoMention": [
-      "$1 blushed",
-      "$1 is blushing",
-      "$1 is flustered"
+      "{0} blushed",
+      "{0} is blushing",
+      "{0} is flustered"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -73,13 +73,13 @@
     "Name": "cry",
     "Url": "https://waifu.pics/api/sfw/cry",
     "Mention": [
-      "$1 cries with $2",
-      "$1 is crying with $2",
-      "$1 and $2 are having a crying party",
-      "$1 and $2 are pretty sad right now"
+      "{0} cries with {1}",
+      "{0} is crying with {1}",
+      "{0} and {1} are having a crying party",
+      "{0} and {1} are pretty sad right now"
     ],
-    "imagePath": "path",
-    "imageReplaceUrl": "https://rra.ram.moe$1",
+    "Path": "path",
+    "ReplaceUrl": "https://rra.ram.moe{0}",
     "Group": "gif",
     "SimpleGroup": 1
   },
@@ -87,14 +87,14 @@
     "Name": "cuddle",
     "Url": "https://nekos.life/api/v2/img/cuddle",
     "Mention": [
-      "$1 cuddled with $2",
-      "$2 you just got cuddled by $1",
-      "$1 is having cuddles with $2"
+      "{0} cuddled with {1}",
+      "{1} you just got cuddled by {0}",
+      "{0} is having cuddles with {1}"
     ],
     "NoMention": [
-      "$1 cuddled with themselves",
-      "$1 is cuddling empty space",
-      "$1 is having cuddles with the air"
+      "{0} cuddled with themselves",
+      "{0} is cuddling empty space",
+      "{0} is having cuddles with the air"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -103,12 +103,12 @@
     "Name": "dance",
     "Url": "https://waifu.pics/api/sfw/dance",
     "Mention": [
-      "$1 is dancing with $2",
-      "$1 and $2 are partying hard",
-      "$1 is hitting the stanky leg with $2"
+      "{0} is dancing with {1}",
+      "{0} and {1} are partying hard",
+      "{0} is hitting the stanky leg with {1}"
     ],
     "NoMention": [
-      "$1 is dancing alone"
+      "{0} is dancing alone"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -117,13 +117,13 @@
     "Name": "highfive",
     "Url": "https://waifu.pics/api/sfw/highfive",
     "Mention": [
-      "$1 highfived $2",
-      "$2 here's a highfive from $1"
+      "{0} highfived {1}",
+      "{1} here's a highfive from {0}"
     ],
     "NoMention": [
-      "$1 highfived themselves",
-      "$1 is highfiving literal air...",
-      "$1 is trying to slap space"
+      "{0} highfived themselves",
+      "{0} is highfiving literal air...",
+      "{0} is trying to slap space"
     ],
     "Group": "gif",
     "SimpleGroup": 2
@@ -132,14 +132,14 @@
     "Name": "hug",
     "Url": "https://waifu.pics/api/sfw/hug",
     "Mention": [
-      "$1 hugged $2",
-      "$1 and $2 are sharing a hug",
-      "$1 held $2 tight for a hug"
+      "{0} hugged {1}",
+      "{0} and {1} are sharing a hug",
+      "{0} held {1} tight for a hug"
     ],      
     "NoMention": [
-      "$1 hugged themselves",
-      "$1 hugged their imaginary friend...",
-      "$1 and the air are hugging"
+      "{0} hugged themselves",
+      "{0} hugged their imaginary friend...",
+      "{0} and the air are hugging"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -148,15 +148,15 @@
     "Name": "kiss",
     "Url": "https://waifu.pics/api/sfw/kiss",
     "Mention": [
-      "$1 kissed $2",
-      "$1 smooched $2",
-      "$1 and $2 are sharing a kiss",
-      "$1 and $2 should get a room..."
+      "{0} kissed {1}",
+      "{0} smooched {1}",
+      "{0} and {1} are sharing a kiss",
+      "{0} and {1} should get a room..."
     ],
     "NoMention": [
-      "$1 kissed themselves",
-      "$1 is extremelly alone rn",
-      "$1 is kissing straight up nothingness"
+      "{0} kissed themselves",
+      "{0} is extremelly alone rn",
+      "{0} is kissing straight up nothingness"
     ],
     "Aliases": [
       "smooch",
@@ -170,12 +170,12 @@
     "Name": "lewd",
     "Url": "https://rra.ram.moe/i/r?type=lewd",
     "Mention": [
-      "$1 bonks $2 for being lewd",
-      "$2 is pretty friggin lewd, $1 is concerned",
-      "$1 found $2's post very lewd indeed"
+      "{0} bonks {1} for being lewd",
+      "{1} is pretty friggin lewd, {0} is concerned",
+      "{0} found {1}'s post very lewd indeed"
     ],
-    "imagePath": "path",
-    "imageReplaceUrl": "https://rra.ram.moe$1",
+    "Path": "path",
+    "ReplaceUrl": "https://rra.ram.moe{0}",
     "Group": "gif",
     "SimpleGroup": 3
   },
@@ -183,14 +183,14 @@
     "Name": "nom",
     "Url": "https://waifu.pics/api/sfw/nom",
     "Mention": [
-      "$1 nommed $2",
-      "$1 took a bite out of $2",
-      "$1 almost vored $2"
+      "{0} nommed {1}",
+      "{0} took a bite out of {1}",
+      "{0} almost vored {1}"
     ],
     "NoMention": [
-      "$1 just nommed empty space",
-      "$1 is trying to nom themselves???",
-      "$1 is self-nomming"
+      "{0} just nommed empty space",
+      "{0} is trying to nom themselves???",
+      "{0} is self-nomming"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -199,15 +199,15 @@
     "Name": "pat",
     "Url": "https://waifu.pics/api/sfw/pat",
     "Mention": [
-      "$1 gave $2 a pat",
-      "$1 pats $2's head",
-      "$2 just got patted by $1",
-      "$1 gave $2 a headpat"
+      "{0} gave {1} a pat",
+      "{0} pats {1}'s head",
+      "{1} just got patted by {0}",
+      "{0} gave {1} a headpat"
     ],
     "NoMention": [
-      "$1 gave themselves a pat",
-      "$1 is trying to pat the sky",
-      "$1 pats a ghost"
+      "{0} gave themselves a pat",
+      "{0} is trying to pat the sky",
+      "{0} pats a ghost"
     ],
     "Group": "gif",
     "SimpleGroup": 2,
@@ -219,13 +219,13 @@
     "Name": "poke",
     "Url": "https://waifu.pics/api/sfw/poke",
     "Mention": [
-      "$1 poked $2",
-      "$1 is poking $2 with a stick",
-      "$2 got friggin poked by $1"
+      "{0} poked {1}",
+      "{0} is poking {1} with a stick",
+      "{1} got friggin poked by {0}"
     ],
     "NoMention": [
-      "$1 poked themselves",
-      "$1 is shaking a finger around aimlessly..."
+      "{0} poked themselves",
+      "{0} is shaking a finger around aimlessly..."
     ],
     "Group": "gif",
     "SimpleGroup": 2
@@ -234,12 +234,12 @@
     "Name": "pout",
     "Url": "https://rra.ram.moe/i/r?type=pout",
     "Mention": [
-      "$1 pouts at $2",
-      "$2 made $1 pout",
-      "$1 is grumpy because of $2"
+      "{0} pouts at {1}",
+      "{1} made {0} pout",
+      "{0} is grumpy because of {1}"
     ],
-    "imagePath": "path",
-    "imageReplaceUrl": "https://rra.ram.moe$1",
+    "Path": "path",
+    "ReplaceUrl": "https://rra.ram.moe{0}",
     "Group": "gif",
     "SimpleGroup": 3
   },
@@ -247,14 +247,14 @@
     "Name": "slap",
     "Url": "https://nekos.life/api/v2/img/slap",
     "Mention": [
-      "$1 slapped $2",
-      "$1 slammed $2's cheek",
-      "$2 just got slapped by $1"
+      "{0} slapped {1}",
+      "{0} slammed {1}'s cheek",
+      "{1} just got slapped by {0}"
     ],
     "NoMention": [
-      "$1 slapped themselves",
-      "$1 hands are shaking about?",
-      "$1 is aimlessly slapping the air"
+      "{0} slapped themselves",
+      "{0} hands are shaking about?",
+      "{0} is aimlessly slapping the air"
     ],
     "Group": "gif",
     "SimpleGroup": 3
@@ -263,13 +263,13 @@
     "Name": "smug",
     "Url": "https://waifu.pics/api/sfw/smug",
     "Mention": [
-      "$1 smugs at $2",
-      "$1 is being smug at $2"
+      "{0} smugs at {1}",
+      "{0} is being smug at {1}"
     ],
     "NoMention": [
-      "$1 is feeling smug",
-      "$1 is so smug rn",
-      "$1 is being extra smug"
+      "{0} is feeling smug",
+      "{0} is so smug rn",
+      "{0} is being extra smug"
     ],
     "Group": "gif",
     "SimpleGroup": 2
@@ -278,12 +278,12 @@
     "Name": "stare",
     "Url": "https://rra.ram.moe/i/r?type=stare",
     "Mention": [
-      "$1 stares at $2",
-      "$1 is staring into $2's eyes",
-      "$2, I'd run if i were you - $1 is staring at you..."
+      "{0} stares at {1}",
+      "{0} is staring into {1}'s eyes",
+      "{1}, I'd run if i were you - {0} is staring at you..."
     ],
-    "imagePath": "path",
-    "imageReplaceUrl": "https://rra.ram.moe$1",
+    "Path": "path",
+    "ReplaceUrl": "https://rra.ram.moe{0}",
     "Group": "gif",
     "SimpleGroup": 1
   },
@@ -291,13 +291,13 @@
     "Name": "tickle",
     "Url": "https://nekos.life/api/v2/img/tickle",
     "Mention": [
-      "$1 tickled $2",
-      "$1 and $2 are having a tickle-fight",
-      "$2 is laughing involuntarily, thanks to $1"
+      "{0} tickled {1}",
+      "{0} and {1} are having a tickle-fight",
+      "{1} is laughing involuntarily, thanks to {0}"
     ],
     "NoMention": [
-      "$1 tickled themselves",
-      "$1 is uh... Not okay..."
+      "{0} tickled themselves",
+      "{0} is uh... Not okay..."
     ],
     "Group": "gif",
     "SimpleGroup": 2
@@ -306,15 +306,15 @@
     "Name": "lick",
     "Url": "https://waifu.pics/api/sfw/lick",
     "Mention": [
-      "$1 licked $2",
-      "$1 run his tongue along $2",
-      "$2 just got licked by $1",
-      "$1 tasted $2, it's pretty nice!"
+      "{0} licked {1}",
+      "{0} run his tongue along {1}",
+      "{1} just got licked by {0}",
+      "{0} tasted {1}, it's pretty nice!"
     ],
     "NoMention": [
-      "$1 licked themselves",
-      "$1's tongue is swinging around",
-      "$1 is licking air, probably tastes like nothing"
+      "{0} licked themselves",
+      "{0}'s tongue is swinging around",
+      "{0} is licking air, probably tastes like nothing"
     ],
     "Group": "gif",
     "SimpleGroup": 3
@@ -323,13 +323,13 @@
     "Name": "wink",
     "Url": "https://waifu.pics/api/sfw/wink",
     "Mention": [
-      "$1 winked at $2",
-      "$1 is winking over at $2",
-      "$1's wink at $2 could mean lots of things"
+      "{0} winked at {1}",
+      "{0} is winking over at {1}",
+      "{0}'s wink at {1} could mean lots of things"
     ],
     "NoMention": [
-      "$1 is winking",
-      "$1 is blinking? I think?"
+      "{0} is winking",
+      "{0} is blinking? I think?"
     ],
     "Group": "gif",
     "SimpleGroup": 2
@@ -338,8 +338,8 @@
     "Name": "rem",
     "Url": "https://rra.ram.moe/i/r?type=rem",
     "Group": "waifu",
-    "imagePath": "path",
-    "imageReplaceUrl": "https://rra.ram.moe$1",
+    "Path": "path",
+    "ReplaceUrl": "https://rra.ram.moe{0}",
     "SimpleGroup": 1
   },
   "waifu": {
@@ -364,13 +364,13 @@
     "Name": "happy",
     "Url": "https://waifu.pics/api/sfw/happy",
     "Mention": [
-      "$1 is happy cause of $2",
-      "$1 and $2 are happy!"
+      "{0} is happy cause of {1}",
+      "{0} and {1} are happy!"
     ],
     "NoMention": [
-      "$1 is feeling happy af",
-      "$1 is beyond the moon with happiness!!!",
-      "$1 is super happy rn!"
+      "{0} is feeling happy af",
+      "{0} is beyond the moon with happiness!!!",
+      "{0} is super happy rn!"
     ],
     "Group": "gif",
     "SimpleGroup": 3

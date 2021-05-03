@@ -39,7 +39,6 @@ namespace Shinobu
                     throw new Exception("Assets directory not found");
                 }
 
-                Console.WriteLine(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
                 ApiCommands = JsonConvert.DeserializeObject<Dictionary<string, ApiCommand>>(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
             });
         }
