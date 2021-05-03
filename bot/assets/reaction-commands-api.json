@@ -107,7 +107,9 @@
       "$1 and $2 are partying hard",
       "$1 is hitting the stanky leg with $2"
     ],
-    "NoMention": "$1 is dancing alone",
+    "NoMention": [
+      "$1 is dancing alone"
+    ],
     "Group": "gif",
     "SimpleGroup": 1
   },
@@ -338,15 +340,6 @@
     "Group": "waifu",
     "imagePath": "path",
     "imageReplaceUrl": "https://rra.ram.moe$1",
-    "special": {
-      "ultimateFailure": {
-        "chance": 20,
-        "message": [
-          "Who's Rem, $1?",
-          "Who's that?"
-        ]
-      }
-    },
     "SimpleGroup": 1
   },
   "waifu": {

@@ -11,7 +11,7 @@ namespace Shinobu.Models.Assets
 
         // Identifiers
         public string Name;
-        public IList<string> Aliases;
+        public IList<string> Aliases = new List<string>();
         
         // Texts
         public IList<string> Mention;

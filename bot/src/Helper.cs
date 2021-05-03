@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text.Json;
-using Disqord;
 using CommandLine;
+using Newtonsoft.Json;
 using Shinobu.Models.Assets;
 
 namespace Shinobu
@@ -11,6 +10,8 @@ namespace Shinobu
     class Helper
     {
         private const string REACTION_COMMANDS_FILE = "reaction-commands-api.json";
+        
+        public static Dictionary<string, ApiCommand> ApiCommands { get; private set; }
         
         public static long GetTimestamp()
         {
@@ -39,12 +40,7 @@ namespace Shinobu
                 }
 
                 Console.WriteLine(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
-                var parsed = JsonSerializer.Deserialize<Dictionary<string, ApiCommand>>(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
-                foreach (var command in parsed)
-                {
-                    Console.WriteLine(command.Key);
-                    Console.WriteLine(command.Value.Group);
-                }
+                ApiCommands = JsonConvert.DeserializeObject<Dictionary<string, ApiCommand>>(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
             });
         }
     }
