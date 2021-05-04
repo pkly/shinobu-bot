@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Shinobu.Extensions
 {
@@ -25,6 +26,11 @@ namespace Shinobu.Extensions
             }
             
             return items[_random.Next(items.Count)];
+        }
+
+        public static void Rewind(this Stream stream)
+        {
+            stream.Seek(0, SeekOrigin.Begin);
         }
     }
 }

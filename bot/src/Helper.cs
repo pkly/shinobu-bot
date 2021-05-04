@@ -7,11 +7,12 @@ using Shinobu.Models.Assets;
 
 namespace Shinobu
 {
-    class Helper
+    static class Helper
     {
         private const string REACTION_COMMANDS_FILE = "reaction-commands-api.json";
         
         public static Dictionary<string, ApiCommand> ApiCommands { get; private set; }
+        public static string AssetsPath { get; private set; }
         
         public static long GetTimestamp()
         {
@@ -33,13 +34,13 @@ namespace Shinobu
                     path + "/.env.local"
                 });
 
-                var assetsPath = o.AssetsPath ?? "assets/";
-                if (!Directory.Exists(assetsPath))
+                AssetsPath = o.AssetsPath ?? "assets/";
+                if (!Directory.Exists(AssetsPath))
                 {
                     throw new Exception("Assets directory not found");
                 }
 
-                ApiCommands = JsonConvert.DeserializeObject<Dictionary<string, ApiCommand>>(File.ReadAllText(assetsPath + "/" + REACTION_COMMANDS_FILE));
+                ApiCommands = JsonConvert.DeserializeObject<Dictionary<string, ApiCommand>>(File.ReadAllText(AssetsPath + "/" + REACTION_COMMANDS_FILE));
             });
         }
     }

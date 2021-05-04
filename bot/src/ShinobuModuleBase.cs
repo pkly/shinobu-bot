@@ -1,5 +1,7 @@
-﻿using Disqord;
+﻿using System.IO;
+using Disqord;
 using Disqord.Bot;
+using Shinobu.Extensions;
 
 namespace Shinobu
 {
@@ -25,6 +27,22 @@ namespace Shinobu
             }
 
             return embed;
+        }
+        
+        protected DiscordCommandResult RespondWithAttachment(
+            string description,
+            Stream stream)
+        {
+            stream.Rewind(); // this would later crash if not rewound so
+            
+            return Response(
+                (new LocalMessageBuilder())
+                .WithEmbed(GetEmbed()
+                    .WithDescription(description)
+                    .WithImageUrl("attachment://file.png"))
+                .AddAttachment(new LocalAttachment(stream, "file.png"))
+                .Build()
+            );
         }
     }
 }
