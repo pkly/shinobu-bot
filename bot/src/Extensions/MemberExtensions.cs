@@ -1,7 +1,10 @@
 ﻿using System.Net.Http;
 using System.Threading.Tasks;
 using Disqord;
+using Disqord.Gateway;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+using Color = SixLabors.ImageSharp.Color;
 
 namespace Shinobu.Extensions
 {
@@ -17,6 +20,20 @@ namespace Shinobu.Extensions
         public static async Task<Image> Avatar(this IMember member, int size = 256, ImageFormat format = ImageFormat.Png)
         {
             return await Image.LoadAsync(await _client.GetStreamAsync(member.GetAvatarUrl(format, size)));
+        }
+
+        public static Color? Color(this IMember member)
+        {
+            foreach (var role in member.GetRoles())
+            {
+                var color = role.Value.Color;
+                if (color != null)
+                {
+                    return new Color(new Rgba32(color.Value.R, color.Value.G, color.Value.B));
+                }
+            }
+
+            return null;
         }
     }
 }

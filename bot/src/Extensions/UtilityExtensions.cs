@@ -32,5 +32,10 @@ namespace Shinobu.Extensions
         {
             stream.Seek(0, SeekOrigin.Begin);
         }
+
+        public static bool NextBoolean(this Random random)
+        {
+            return Convert.ToBoolean(random.Next(2)); // why 2 lmao C#
+        }
     }
 }

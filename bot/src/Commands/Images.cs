@@ -1,16 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
+using Disqord.Gateway;
 using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Extensions;
 using Shinobu.Utility;
+using SixLabors.Fonts;
 using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
+using Color = SixLabors.ImageSharp.Color;
 
 namespace Shinobu.Commands
 {
@@ -18,6 +23,11 @@ namespace Shinobu.Commands
     public class Images : ShinobuModuleBase
     {
         private const string LOVE_STRING = "{0} and {1}'s love is at **{2}%**\n\nYour shipname is **{3}**";
+        
+        private readonly FontCollection _fontCollection = new FontCollection();
+        private readonly FontFamily _fontFamily;
+        private readonly Font _bold;
+
 
         private readonly Image<Rgba32> _bonk;
         private readonly Image<Rgba32> _ejected;
@@ -27,6 +37,8 @@ namespace Shinobu.Commands
         private readonly Image<Rgba32> _sauce;
         private readonly Image<Rgba32> _tuck;
         private readonly Image<Rgba32> _love;
+
+        private readonly Random _random;
         
         private readonly RangeHelper<string> _loveRanges = new RangeHelper<string>(new Range<string>[]
         {
@@ -38,7 +50,13 @@ namespace Shinobu.Commands
             new Range<string>(100, "Such a cute couple <3 <3 <3")
         });
 
-        public Images()
+        private readonly Dictionary<bool, string> _imposterDictionary = new Dictionary<bool, string>()
+        {
+            {false, "{0} was not The Imposter"},
+            {true, "{0} was The Imposter"}
+        };
+
+        public Images(Random random)
         {
             _bonk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/bonk.jpg");
             _ejected = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/ejected.png");
@@ -48,6 +66,11 @@ namespace Shinobu.Commands
             _sauce = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/sauce.jpg");
             _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.jpg");
             _love = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/love.png");
+
+            _fontFamily = _fontCollection.Install(Program.AssetsPath + "/fonts/Roboto.ttf");
+            _bold = _fontFamily.CreateFont(34, FontStyle.Bold);
+
+            _random = random;
         }
 
         [Command("milk")]
@@ -195,11 +218,36 @@ namespace Shinobu.Commands
             );
         }
         
-        //
-        // [Command("sus", "amongus", "amogus", "eject", "imposter", "impostor")]
-        // public async Task<DiscordCommandResult> Imposter(IMember? member = null)
-        // {
-        //     
-        // }
+        
+        [Command("sus", "amongus", "amogus", "eject", "imposter", "impostor")]
+        public async Task<DiscordCommandResult> Imposter(IMember? member = null)
+        {
+            member ??= (IMember) Context.Author;
+
+            bool result = _random.NextBoolean();
+            var text = _imposterDictionary[result];
+
+            var stream = new MemoryStream();
+            
+            using (Image empty = new Image<Rgba32>(1116, 628))
+            using (Image copy = _ejected.Clone())
+            {
+                var color = member.Color() ?? Color.White;
+                if (color.ToHex() == Color.Black.ToHex()) // we don't want to show a black bg with black fill lmao
+                {
+                    color = Color.White;
+                }
+
+                empty.Mutate(x => 
+                    x.Fill(color)
+                        .DrawImage(copy, 1)
+                        .DrawTextCentered(string.Format(text, member.NickOrName()), _bold, Color.White, 314)
+                );
+
+                await empty.SaveAsPngAsync(stream);
+            }
+
+            return RespondWithAttachment($"{string.Format(text, member.Mention)} {Program.Env(result ? "EMOTE_MINUS" : "EMOTE_PLUS")}", stream);
+        }
     }
 }
