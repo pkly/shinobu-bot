@@ -33,12 +33,18 @@ namespace Shinobu
             string description,
             Stream stream)
         {
+            return RespondWithAttachment(GetEmbed(description), stream);
+        }
+
+        protected DiscordCommandResult RespondWithAttachment(
+            LocalEmbedBuilder embed,
+            Stream stream)
+        {
             stream.Rewind(); // this would later crash if not rewound so
-            
+
             return Response(
                 (new LocalMessageBuilder())
-                .WithEmbed(GetEmbed()
-                    .WithDescription(description)
+                .WithEmbed(embed
                     .WithImageUrl("attachment://file.png"))
                 .AddAttachment(new LocalAttachment(stream, "file.png"))
                 .Build()

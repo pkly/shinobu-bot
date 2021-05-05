@@ -91,6 +91,27 @@ namespace Shinobu.Commands
             // categorize commands by section first
             foreach (var command in _commands.GetAllCommands())
             {
+                bool foundSection = false;
+                foreach (var attribute in command.Attributes)
+                {
+                    if (attribute is SectionAttribute attr)
+                    {
+                        if (!commands.ContainsKey(attr.Name))
+                        {
+                            commands.Add(attr.Name, new List<Command>());
+                            sections.Add(attr.Name, attr);
+                        }
+                        
+                        commands[attr.Name].Add(command);
+                        foundSection = true;
+                    }
+                }
+
+                if (foundSection)
+                {
+                    continue;
+                }
+
                 foreach (var attribute in command.Module.Attributes)
                 {
                     if (attribute is SectionAttribute attr)
@@ -120,11 +141,11 @@ namespace Shinobu.Commands
                 
                 foreach (var command in commands[attributePair.Value.Name])
                 {
-                    description += command.FullAliases[0] + " " + string.Join<string>(' ', command.Parameters.Select<Parameter, string>(new Func<Parameter, string>(FormatParameter))) + "\n\n";
+                    description += command.FullAliases[0] + " " + string.Join<string>(' ', command.Parameters.Select<Parameter, string>(new Func<Parameter, string>(FormatParameter))) + "\n";
                 }
 
                 // remove last newlines
-                embed.WithDescription(description.Substring(0, description.Length - 2));
+                embed.WithDescription(description.Substring(0, description.Length - 1));
 
                 if (attributePair.Equals(last))
                 {

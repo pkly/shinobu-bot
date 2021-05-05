@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Qmmands;
+using Shinobu.Attributes;
 using Shinobu.Commands;
 using Shinobu.TypeParsers;
 
@@ -54,6 +55,7 @@ namespace Shinobu
                     {
                         x.WithName(pair.Key);
                         x.AddAlias(pair.Key);
+                        x.AddAttribute(new SectionAttribute("Reactions"));
 
                         foreach (var alias in pair.Value.Aliases)
                         {
@@ -68,6 +70,7 @@ namespace Shinobu
                                     .WithIsOptional(true)
                                     .WithCustomTypeParserType(typeof(ErrorIgnoringMemberTypeParser))
                                     .WithDefaultValue(new IMember[] {})
+                                    .WithName("members")
                         );
                     })
                 );
