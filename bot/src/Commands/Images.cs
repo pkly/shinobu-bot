@@ -40,14 +40,14 @@ namespace Shinobu.Commands
 
         public Images()
         {
-            _bonk = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/bonk.jpg");
-            _ejected = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/ejected.png");
-            _marry = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/marry.jpg");
-            _milk = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/milk.jpg");
-            _pin = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/pin.jpg");
-            _sauce = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/sauce.jpg");
-            _tuck = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/tuck.jpg");
-            _love = Image.Load<Rgba32>(Helper.AssetsPath + "/images/meme/love.png");
+            _bonk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/bonk.jpg");
+            _ejected = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/ejected.png");
+            _marry = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/marry.jpg");
+            _milk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/milk.jpg");
+            _pin = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/pin.jpg");
+            _sauce = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/sauce.jpg");
+            _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.jpg");
+            _love = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/love.png");
         }
 
         [Command("milk")]

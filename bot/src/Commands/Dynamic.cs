@@ -20,10 +20,10 @@ namespace Shinobu.Commands
             IMember?[] members = ((IMember?[]) context.Arguments[0]).Where(x => x != null).ToArray();
             
             var embed = (new LocalEmbedBuilder())
-                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Helper.Env("EMBED_COLOR")));
+                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Program.Env("EMBED_COLOR")));
             var builder = new LocalMessageBuilder();
 
-            var apiCommand = Helper.ApiCommands[context.Command.Name];
+            var apiCommand = Program.ApiCommands[context.Command.Name];
 
             // for now emulate the old behavior
             var text = apiCommand.NoMention.Random();

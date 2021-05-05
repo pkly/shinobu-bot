@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using Disqord;
 using Disqord.Bot;
 using Shinobu.Extensions;
@@ -7,6 +8,11 @@ namespace Shinobu
 {
     public abstract class ShinobuModuleBase : DiscordModuleBase
     {
+        public static long GetTimestamp()
+        {
+            return Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalMilliseconds);
+        }
+        
         protected DiscordResponseCommandResult EmbedReply(string description)
         {
             return Reply(GetEmbed(description));
@@ -20,7 +26,7 @@ namespace Shinobu
         protected LocalEmbedBuilder GetEmbed(string? description = null)
         {
             var embed = (new LocalEmbedBuilder())
-                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Helper.Env("EMBED_COLOR")));
+                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Program.Env("EMBED_COLOR")));
 
             if (description != null) {
                 embed.WithDescription(description);

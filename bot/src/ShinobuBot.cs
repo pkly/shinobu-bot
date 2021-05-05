@@ -47,7 +47,7 @@ namespace Shinobu
         )
         {
             // register the api commands
-            foreach (var pair in Helper.ApiCommands)
+            foreach (var pair in Program.ApiCommands)
             {
                 Commands.AddModule(
                     x => x.AddCommand(context => Dynamic.DoReaction((DiscordCommandContext) context),

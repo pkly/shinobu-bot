@@ -31,9 +31,8 @@ namespace Shinobu.Commands
         [Command("ping")]
         public async Task Ping()
         {
-            long now = Helper.GetTimestamp();
             long message = Context.Message.CreatedAt.ToUnixTimeMilliseconds();
-            long diff = now - message;
+            long diff = GetTimestamp() - message;
             var embed = GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
             var response = await Response(embed);
             await response.ModifyAsync(x => 

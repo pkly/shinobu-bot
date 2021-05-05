@@ -95,7 +95,7 @@ namespace Shinobu.Commands
                 "placeholder",
                 message,
                 data["magic"]["answer"],
-                Helper.Env(_eightballTypeDictionary[data["magic"]["type"]])
+                Program.Env(_eightballTypeDictionary[data["magic"]["type"]])
             ));
         }
         
@@ -121,7 +121,7 @@ namespace Shinobu.Commands
         public async Task Coinflip()
         {
             var embed = GetEmbed(
-                Helper.Env("EMOTE_COINFLIP") + " " + _coinflipStartQuote.Random() + " . . . "
+                Program.Env("EMOTE_COINFLIP") + " " + _coinflipStartQuote.Random() + " . . . "
             );
             var response = await Response(embed);
             await Task.Delay(3000);
@@ -136,7 +136,7 @@ namespace Shinobu.Commands
             return Embed(
                 string.Format(
                     RESPECTS_TEXT,
-                    Helper.Env("DEAD_EMOTE"),
+                    Program.Env("DEAD_EMOTE"),
                     Context.Author.Mention,
                     string.IsNullOrEmpty(towards) ? "" : " for " + towards
                 )
@@ -152,12 +152,12 @@ namespace Shinobu.Commands
                 await Embed(string.Format(
                     "{0} killed themselves {1}",
                     Context.Author.Mention,
-                    Helper.Env("DEAD_EMOTE")
+                    Program.Env("DEAD_EMOTE")
                 ));
                 return;
             }
 
-            var embed = GetEmbed(Helper.Env("LOADING_EMOTE") + " " + _fightStartQuotes.Random());
+            var embed = GetEmbed(Program.Env("LOADING_EMOTE") + " " + _fightStartQuotes.Random());
             var response = await Response(embed);
 
             var items = new List<IUser> {Context.Author, member};
@@ -171,7 +171,7 @@ namespace Shinobu.Commands
                 "{0} is the winner! **R.I.P. {1}** {2}",
                 winner.Mention,
                 loser.Mention,
-                Helper.Env("DEAD_EMOTE")
+                Program.Env("DEAD_EMOTE")
             )).Build());
         }
 
@@ -186,7 +186,7 @@ namespace Shinobu.Commands
                         string.Format(
                             user.IsSameAs(Context.Author) ? GAY_SELF : GAY_ELSE,
                             result.ToString(),
-                            Helper.Env("EMOTE_DANCE"),
+                            Program.Env("EMOTE_DANCE"),
                             user.Mention
                         )
                     )
