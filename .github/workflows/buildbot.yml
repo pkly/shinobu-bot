@@ -7,8 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Build C# binary
+    
     steps:
       - uses: actions/setup-dotnet@v1.8.0
         with:
           dotnet-version: '5.0.x'
-      - run: dotnet build <my project>
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
