@@ -13,4 +13,5 @@ jobs:
         with:
           dotnet-version: '5.0.x'
       - name: Build
-        run: dotnet build --configuration Release <my project>
+        working-directory: ./bot/src
+        run: dotnet build --configuration Release Shinobu
