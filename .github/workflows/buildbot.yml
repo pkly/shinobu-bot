@@ -9,4 +9,6 @@ jobs:
     name: Build C# binary
     steps:
       - uses: actions/setup-dotnet@v1.8.0
-      - run: ls -la
+        with:
+          dotnet-version: '5.0.x'
+      - run: dotnet build <my project>
