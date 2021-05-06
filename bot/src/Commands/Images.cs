@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Gateway;
+using Newtonsoft.Json;
 using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Extensions;
+using Shinobu.Models.Api.OpenWeather;
 using Shinobu.Utility;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -23,11 +26,21 @@ namespace Shinobu.Commands
     public class Images : ShinobuModuleBase
     {
         private const string LOVE_STRING = "{0} and {1}'s love is at **{2}%**\n\nYour shipname is **{3}**";
+        private const string WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}";
+        private const string FLAG_URL = "https://www.countryflags.io/{0}/flat/64.png";
+        private const string ICON_URL = "http://openweathermap.org/img/wn/{0}@2x.png";
         
         private readonly FontCollection _fontCollection = new FontCollection();
         private readonly FontFamily _fontFamily;
         private readonly Font _bold;
 
+        private readonly Color _weatherLightBgColor = new Color(new Rgba32(255, 233, 89));
+        private readonly Color _weatherDarkBgColor = new Color(new Rgba32(67, 68, 92));
+        private readonly Font _weatherTitleFont;
+        private readonly Font _weatherFont;
+        private readonly Font _weatherMainFont;
+        private readonly Font _weatherHumidityFont;
+        private readonly Font _weatherSpeedFont;
 
         private readonly Image<Rgba32> _bonk;
         private readonly Image<Rgba32> _ejected;
@@ -38,7 +51,11 @@ namespace Shinobu.Commands
         private readonly Image<Rgba32> _tuck;
         private readonly Image<Rgba32> _love;
 
+        private readonly Image<Rgba32> _weatherHumid;
+        private readonly Image<Rgba32> _weatherWind;
+
         private readonly Random _random;
+        private readonly HttpClient _client;
         
         private readonly RangeHelper<string> _loveRanges = new RangeHelper<string>(new Range<string>[]
         {
@@ -56,7 +73,7 @@ namespace Shinobu.Commands
             {true, "{0} was The Imposter"}
         };
 
-        public Images(Random random)
+        public Images(Random random, HttpClient client)
         {
             _bonk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/bonk.jpg");
             _ejected = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/ejected.png");
@@ -67,10 +84,25 @@ namespace Shinobu.Commands
             _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.jpg");
             _love = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/love.png");
 
+            _weatherHumid = Image.Load<Rgba32>(Program.AssetsPath + "/images/weather/humidity.png");
+            _weatherWind = Image.Load<Rgba32>(Program.AssetsPath + "/images/weather/wind.png");
+
             _fontFamily = _fontCollection.Install(Program.AssetsPath + "/fonts/Roboto.ttf");
             _bold = _fontFamily.CreateFont(34, FontStyle.Bold);
+            
+            // pre-modify weather and wind images anyway
+            _weatherHumid.Mutate(x => x.Resize(31, 31));
+            _weatherWind.Mutate(x => x.Resize(35, 35));
+            
+            // pre-create all the fonts we'll need anyway
+            _weatherTitleFont = _fontFamily.CreateFont(80);
+            _weatherFont = _fontFamily.CreateFont(40);
+            _weatherMainFont = _fontFamily.CreateFont(24);
+            _weatherHumidityFont = _fontFamily.CreateFont(21);
+            _weatherSpeedFont = _fontFamily.CreateFont(18);
 
             _random = random;
+            _client = client;
         }
 
         [Command("milk")]
@@ -248,6 +280,70 @@ namespace Shinobu.Commands
             }
 
             return RespondWithAttachment($"{string.Format(text, member.Mention)} {Program.Env(result ? "EMOTE_MINUS" : "EMOTE_PLUS")}", stream);
+        }
+
+        [Section("Fun/memes")]
+        [Command("weather")]
+        public async Task<DiscordCommandResult> Weather([Remainder][Minimum(2)] string query)
+        {
+            Color textColor = Color.Black;
+            Color bgColor = _weatherLightBgColor;
+
+            var response = await _client.GetAsync(string.Format(WEATHER_URL,
+                WebUtility.UrlEncode(query),
+                Program.Env("OPENWEATHER_API_KEY")
+            ));
+            
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                return EmbedReply("Please use a valid location name");
+            }
+
+            var weather = JsonConvert.DeserializeObject<WeatherResponse>(await response.Content.ReadAsStringAsync());
+
+            if (weather.Dt > weather.Sys.Sunset || weather.Dt < weather.Sys.Sunrise)
+            {
+                textColor = Color.White;
+                bgColor = _weatherDarkBgColor;
+            }
+            
+            var stream = new MemoryStream();
+            using (Image flag = await Image.LoadAsync(await _client.GetStreamAsync(string.Format(FLAG_URL, weather.Sys.Country))))
+            using (Image icon = await Image.LoadAsync(await _client.GetStreamAsync(string.Format(ICON_URL, weather.Weather[0].Icon))))
+            using (Image bg = new Image<Rgba32>(400, 168))
+            using (Image empty = new Image<Rgba32>(400, 400))
+            {
+                flag.Mutate(x => x.Resize(64, 64));
+                icon.Mutate(x => x.Resize(160, 160));
+                
+                bg.Mutate(x => x.Fill(textColor));
+                
+                empty.Mutate(x => 
+                    x.Fill(bgColor)
+                        .DrawImage(bg, new Point(0, 20), 0.2f)
+                        .DrawTextCentered($"{Convert.ToInt16(weather.Main.Temp).ToString()}°C", _weatherTitleFont, textColor, 220)
+                        .DrawTextCentered(weather.Weather[0].Main.ToLower(), _weatherFont, textColor, 345)
+                        .DrawTextCentered(weather.Name, _weatherMainFont, textColor, 140)
+                        .DrawText(
+                            new TextGraphicsOptions(new GraphicsOptions() { BlendPercentage = 0.7f }, new TextOptions() {HorizontalAlignment = HorizontalAlignment.Center}),
+                            $"feels like {Convert.ToInt16(weather.Main.Feels_like).ToString()}°C",
+                            _weatherMainFont,
+                            Brushes.Solid(textColor), 
+                            null,
+                            new PointF(x.GetCurrentSize().Width / 2, 297)
+                        )
+                        .DrawImage(_weatherHumid, new Point(35, 250), 1)
+                        .DrawTextCentered($"{weather.Main.Humidity}%", _weatherHumidityFont, textColor, new PointF(51, 290))
+                        .DrawImage(_weatherWind, new Point(330, 250), 1)
+                        .DrawTextCentered($"{Convert.ToInt16(weather.Wind.Speed).ToString()}km/h", _weatherSpeedFont, textColor, new PointF(350, 290))
+                        .DrawImage(flag, new Point(-2, 9), 1)
+                        .DrawImage(icon, new Point(120, -2), 1)
+                );
+
+                await empty.SaveAsPngAsync(stream);
+            }
+
+            return RespondWithAttachment(stream);
         }
     }
 }

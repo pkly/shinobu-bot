@@ -5,7 +5,7 @@ namespace Shinobu.Attributes
     /// <summary>
     /// This attribute allows us to later identify which group the class belongs to
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class SectionAttribute : Attribute
     {
         public string Name { get; private set; }

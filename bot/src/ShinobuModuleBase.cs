@@ -34,6 +34,11 @@ namespace Shinobu
 
             return embed;
         }
+
+        protected DiscordCommandResult RespondWithAttachment(Stream stream)
+        {
+            return RespondWithAttachment(GetEmbed(), stream);
+        }
         
         protected DiscordCommandResult RespondWithAttachment(
             string description,
