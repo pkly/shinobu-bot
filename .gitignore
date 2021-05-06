@@ -4,5 +4,5 @@ logs/
 .env.local
 
 # csharp
-bot/src/bin
-bot/src/obj
+bot/bin
+bot/obj
