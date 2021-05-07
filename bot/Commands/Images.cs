@@ -79,7 +79,7 @@ namespace Shinobu.Commands
             _ejected = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/ejected.png");
             _marry = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/marry.jpg");
             _milk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/milk.jpg");
-            _pin = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/pin.jpg");
+            _pin = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/pin.png");
             _sauce = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/sauce.jpg");
             _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.jpg");
             _love = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/love.png");
@@ -151,6 +151,31 @@ namespace Shinobu.Commands
             }
 
             return RespondWithAttachment($"{Context.Author.Mention} has bonked {member.Mention}", stream);
+        }
+
+        [Command("pin")]
+        public async Task<DiscordCommandResult> Ping(IMember member)
+        {
+            var stream = new MemoryStream();
+            using (Image copy = _pin.Clone())
+            {
+                using (Image authorAvatar = await ((IMember) Context.Author).Avatar())
+                using (Image memberAvatar = await member.Avatar())
+                {
+                    authorAvatar.Mutate(x => x.Resize(150, 150));
+                    memberAvatar.Mutate(x => x.Resize(150, 150));
+                    
+                    
+                    copy.Mutate(x => 
+                        x.DrawImage(authorAvatar, new Point(235, 40), 1)
+                            .DrawImage(memberAvatar, new Point(125, 365), 1)
+                    );
+                }
+
+                await copy.SaveAsPngAsync(stream);
+            }
+
+            return RespondWithAttachment($"{Context.Author.Mention} has pinned {member.Mention} down", stream);
         }
 
         [Command("sauce")]
