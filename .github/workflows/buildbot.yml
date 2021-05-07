@@ -39,15 +39,14 @@ jobs:
     if: github.event_name == 'push'
 
     steps:
+      - uses: actions/checkout@v2
+      
       - uses: actions/download-artifact@v2
         with:
           name: shinobu-csharp-build
-          
-      - name: List
-        run: ls -la
 
       - name: Build image
-        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/bot/Dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
