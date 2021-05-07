@@ -33,6 +33,7 @@ jobs:
           if-no-files-found: error
   
   push:
+    needs: [build]
     runs-on: ubuntu-latest
     name: Upload to github packages
     if: github.event_name == 'push'
