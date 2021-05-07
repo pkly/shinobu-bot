@@ -81,7 +81,7 @@ namespace Shinobu.Commands
             _milk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/milk.jpg");
             _pin = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/pin.png");
             _sauce = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/sauce.jpg");
-            _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.jpg");
+            _tuck = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/tuck.png");
             _love = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/love.png");
 
             _weatherHumid = Image.Load<Rgba32>(Program.AssetsPath + "/images/weather/humidity.png");
@@ -219,6 +219,30 @@ namespace Shinobu.Commands
             }
 
             return RespondWithAttachment($"{Context.Author.Mention} has married {member.Mention}", stream);
+        }
+
+        [Command("tuck")]
+        public async Task<DiscordCommandResult> Tuck(IMember member)
+        {
+            var stream = new MemoryStream();
+            using (Image copy = _tuck.Clone())
+            {
+                using (Image authorAvatar = await ((IMember) Context.Author).Avatar())
+                using (Image memberAvatar = await member.Avatar())
+                {
+                    authorAvatar.Mutate(x => x.Resize(266, 266));
+                    memberAvatar.Mutate(x => x.Resize(365, 365).Rotate(310));
+                    
+                    copy.Mutate(x =>
+                        x.DrawImage(authorAvatar, new Point(66, 475), 1)
+                            .DrawImage(memberAvatar, new Point(264, 8), 1)
+                    );
+                }
+
+                await copy.SaveAsPngAsync(stream);
+            }
+
+            return RespondWithAttachment($"{Context.Author.Mention} has tucked {member.Mention} to sleep", stream);
         }
         
         [Command("love", "lovecalc", "ship", "calclove")]
