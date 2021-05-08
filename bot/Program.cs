@@ -38,8 +38,8 @@ namespace Shinobu
             Parser.Default.ParseArguments<Options>(args).WithParsed(o => {
                 var path = o.EnvPath;
                 DotNetEnv.Env.LoadMulti(new[] {
-                    path + "/.env",
-                    path + "/.env.local"
+                    string.IsNullOrEmpty(path) ? ".env" : path + "/.env",
+                    string.IsNullOrEmpty(path) ? ".env.local" : path + "/.env.local"
                 });
 
                 AssetsPath = o.AssetsPath ?? "assets/";
