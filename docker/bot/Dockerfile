@@ -3,4 +3,4 @@ WORKDIR /home/bot
 COPY Shinobu app
 RUN chmod +x app
 COPY bot/assets assets
-CMD ./app
+CMD ls -la && ./app
