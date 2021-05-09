@@ -94,13 +94,15 @@ jobs:
           rm -rf .github
 
       - name: Create tarball
-        run: tar zcvf ../out.tar.gz .
+        run: |
+          tar zcf ../out.tar.gz .
+          mv ../out.tar.gz out.tar.gz
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: shinobu-config-app
-          path: ../out.tar.gz
+          path: out.tar.gz
           if-no-files-found: error
 
   push_website:
