@@ -94,7 +94,7 @@ jobs:
           rm -rf .github
 
       - name: Create tarball
-        run: tar ../zcvf out.tar.gz .
+        run: tar zcvf ../out.tar.gz .
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
