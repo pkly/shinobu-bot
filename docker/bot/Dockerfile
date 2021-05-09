@@ -5,7 +5,7 @@ RUN chmod +x app
 COPY bot/assets assets
 
 # must be hard-copied because of build context
-COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+COPY docker/bot/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 

@@ -21,16 +21,13 @@ RUN pecl install -o -f redis \
 &&  rm -rf /tmp/pear \
 &&  docker-php-ext-enable redis
 
-# install composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-
 # for now just copy the default configs for fpm
-COPY ./php-fpm/ini/custom.ini /usr/local/etc/php/conf.d/custom.ini
-COPY ./php-fpm/ini/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
-COPY ./php-fpm/conf/php-fpm-custom.conf /usr/local/etc/php-fpm.d/zz-php-fpm-custom.conf:ro
+COPY docker/php-app/ini/custom.ini /usr/local/etc/php/conf.d/custom.ini
+COPY docker/php-app/ini/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
+COPY docker/php-app/conf/php-fpm-custom.conf /usr/local/etc/php-fpm.d/zz-php-fpm-custom.conf:ro
 
 # must be hard-copied because of build context
-COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+COPY docker/php-app/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 
