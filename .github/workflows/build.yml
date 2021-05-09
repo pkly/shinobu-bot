@@ -86,10 +86,12 @@ jobs:
       - uses: php-actions/composer@v5
         with:
           php_version: 8.0
-          php_extensions: redis
 
       - name: Delete unecessary files
-        run: rm -rf bot/
+        run: |
+          rm -rf bot/
+          rm -rf .git
+          rm -rf .github
 
       - name: Upload artifact
         uses: actions/upload-artifact@v2
@@ -104,8 +106,6 @@ jobs:
     name: Upload PHP application to github packages
 
     steps:
-      - uses: actions/checkout@v2
-
       - uses: actions/download-artifact@v2
         with:
           name: shinobu-config-app
