@@ -30,7 +30,7 @@ COPY ./php-fpm/ini/opcache.ini /usr/local/etc/php/conf.d/opcache.ini
 COPY ./php-fpm/conf/php-fpm-custom.conf /usr/local/etc/php-fpm.d/zz-php-fpm-custom.conf:ro
 
 # must be hard-copied because of build context
-COPY docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
+COPY ./docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/bin/docker-entrypoint.sh"]
 
