@@ -59,12 +59,7 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true,
-        "platform": {
-            "php": "8.0.6",
-            "ext-json": "1.0",
-            "ext-curl": "1.0"
-        }
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {

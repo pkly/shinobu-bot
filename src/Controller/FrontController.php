@@ -8,11 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FrontController extends AbstractController
 {
-    #[Route('/front', name: 'front')]
+    #[Route('/', name: 'index')]
     public function index(): Response
     {
-        return $this->render('front/index.html.twig', [
-            'controller_name' => 'FrontController',
-        ]);
+        return $this->render('front/index.html.twig');
     }
 }

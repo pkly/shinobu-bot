@@ -1,20 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FrontController!{% endblock %}
+{% block title %}Coming soon ™️{% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    html, body {
+        background-color: #191919;
+        color: #ddd;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div style="margin-top: 80px;">
+    <div style="text-align: center">
+        <img src="{{ asset('assets/images/queen.png') }}" alt="Shinobu" style="max-width: 90vw; max-height: 50vh; margin-bottom: 40px;" />
+        <h1>Ka ka ka</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/FrontController.php'|file_link(0) }}">src/Controller/FrontController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/front/index.html.twig'|file_link(0) }}">templates/front/index.html.twig</a></code></li>
-    </ul>
+        <span style="font-style: italic">I'm not yet ready. Come back later, servant.</span>
+    </div>
 </div>
 {% endblock %}

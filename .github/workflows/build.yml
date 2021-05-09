@@ -1,0 +1,133 @@
+name: Build required binaries and images
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - v*
+
+env:
+  BOT_IMAGE_NAME: shinobu-bot
+  WEBSITE_IMAGE_NAME: shinobu-config
+
+jobs:
+  # C# stuff
+  build_binary:
+    runs-on: ubuntu-latest
+    name: Build C# binary
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/setup-dotnet@v1.8.0
+        with:
+          dotnet-version: '5.0.x'
+      
+      - name: Build
+        run: dotnet publish -o build -r linux-x64 -c Release bot/Shinobu.csproj /p:PublishSingleFile=true /p:PublishTrimmed=true /p:DebugType=None /p:DebugSymbols=false /p:IncludeNativeLibrariesForSelfExtract=true 
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: shinobu-csharp-build
+          path: build
+          if-no-files-found: error
+  
+  push_binary:
+    needs: [build_binary]
+    runs-on: ubuntu-latest
+    name: Upload C# binary to github packages
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - uses: actions/download-artifact@v2
+        with:
+          name: shinobu-csharp-build
+
+      - name: Build image
+        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/bot/Dockerfile --tag $IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$BOT_IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $BOT_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
+
+  # php stuff
+  compose_website:
+    needs: [build_binary]
+    runs-on: ubuntu-latest
+    name: Install composer dependencies required
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: /tmp/composer-cache
+          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+      - uses: php-actions/composer@v5
+        with:
+          php_version: 8.0
+          php_extensions: redis
+
+      - name: Delete unecessary files
+        run: rm -rf bot/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: shinobu-config-app
+          path: .
+          if-no-files-found: error
+
+  push_website:
+    needs: [compose_website]
+    runs-on: ubuntu-latest
+    name: Upload PHP application to github packages
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: shinobu-config-app
+
+      - name: Build image
+        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/php-app/Dockerfile --tag $WEBSITE_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$WEBSITE_IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $WEBSITE_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
