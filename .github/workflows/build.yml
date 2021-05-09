@@ -47,7 +47,7 @@ jobs:
           name: shinobu-csharp-build
 
       - name: Build image
-        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/bot/Dockerfile --tag $IMAGE_NAME
+        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/bot/Dockerfile --tag $BOT_IMAGE_NAME
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
