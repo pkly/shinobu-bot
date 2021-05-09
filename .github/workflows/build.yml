@@ -93,11 +93,14 @@ jobs:
           rm -rf .git
           rm -rf .github
 
+      - name: Create tarball
+        run: tar zcvf out.tar.gz .
+
       - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: shinobu-config-app
-          path: .
+          path: out.tar.gz
           if-no-files-found: error
 
   push_website:
@@ -109,6 +112,11 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: shinobu-config-app
+
+      - name: Unpack tarball
+        run: |
+          tar zxvf shinobu-config-app
+          rm shinobu-config-app
 
       - name: Build image
         run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/php-app/Dockerfile --tag $WEBSITE_IMAGE_NAME
