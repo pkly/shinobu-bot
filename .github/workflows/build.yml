@@ -117,8 +117,8 @@ jobs:
 
       - name: Unpack tarball
         run: |
-          tar zxvf shinobu-config-app
-          rm shinobu-config-app
+          tar zxf out.tar.gz
+          rm out.tar.gz
 
       - name: Build image
         run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/php-app/Dockerfile --tag $WEBSITE_IMAGE_NAME
