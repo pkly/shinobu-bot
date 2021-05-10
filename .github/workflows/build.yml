@@ -70,7 +70,6 @@ jobs:
 
   # php stuff
   compose_website:
-    needs: [build_binary]
     runs-on: ubuntu-latest
     name: Install composer dependencies required
 

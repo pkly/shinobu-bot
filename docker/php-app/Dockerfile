@@ -37,7 +37,10 @@ COPY . /var/www
 
 # remove the docker files from image since it's just trash here
 RUN rm -rf /var/www/docker
-RUN php --version
+RUN bin/console cache:warmup --env=prod
+RUN bin/console cache:warmup --env=dev
+
+RUN chmod -R 755 var/cache
 
 CMD php-fpm
 EXPOSE 9000
