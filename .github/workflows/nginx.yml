@@ -2,8 +2,8 @@ name: Build nginx image
 
 on:
   push:
-    tags:
-      - nginx
+    branches:
+      - master
 
 env:
   NGINX_IMAGE_NAME: shinobu-nginx
