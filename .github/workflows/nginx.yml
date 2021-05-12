@@ -3,7 +3,7 @@ name: Build nginx image
 on:
   push:
     branches:
-      - nginx* # just ignore this workflow
+      - master
 
 env:
   NGINX_IMAGE_NAME: shinobu-nginx
@@ -19,11 +19,11 @@ jobs:
         run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/nginx-host/Dockerfile --tag $NGINX_IMAGE_NAME
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$NGINX_IMAGE_NAME
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$NGINX_IMAGE_NAME
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
           # Strip git ref prefix from version
