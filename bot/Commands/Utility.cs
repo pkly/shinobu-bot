@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
@@ -148,7 +149,7 @@ namespace Shinobu.Commands
 
                 if (attributePair.Equals(last))
                 {
-                    embed.WithFooter("Made by Ly#3449, original concept by zappin#1312");
+                    embed.WithFooter("Made by Ly#3449, original concept by zappin#1312, version " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
                 }
                 
                 embeds.Add(embed);

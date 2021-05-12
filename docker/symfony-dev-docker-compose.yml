@@ -2,8 +2,7 @@ version: "3.0"
 services:
   shino_maria_db:
     container_name: shino_maria_db
-    build:
-      context: ./db
+    image: mariadb:10.5.5
     restart: always
     environment:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -12,6 +11,10 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_PASSWORD}
     ports:
       - "${MYSQL_PORT}:3306"
+    security_opt:
+      - seccomp:unconfined
+    volumes:
+      - ./mariadblib:/var/lib/mysql
 
   shino_php_fpm:
     container_name: shino_php_fpm
@@ -43,4 +46,4 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./logs/nginx:/var/log/nginx
     ports:
-      - "${NGINX_PORT}:80"
+      - "80:80"
