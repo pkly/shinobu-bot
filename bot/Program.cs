@@ -9,6 +9,7 @@ using System.Net.Http;
 using CommandLine;
 using Disqord;
 using Disqord.Bot.Hosting;
+using Disqord.Gateway;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -80,6 +81,7 @@ namespace Shinobu
                     bot.Token = token;
                     bot.UseMentionPrefix = true;
                     bot.Prefixes = new[] { Env("PREFIX") };
+                    bot.Intents = GatewayIntents.RecommendedUnprivileged;
                 })
                 .UseDefaultServiceProvider(x => x.ValidateOnBuild = true)
                 .Build();
