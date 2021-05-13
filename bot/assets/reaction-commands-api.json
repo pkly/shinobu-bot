@@ -78,8 +78,7 @@
       "{0} and {1} are having a crying party",
       "{0} and {1} are pretty sad right now"
     ],
-    "Path": "path",
-    "ReplaceUrl": "https://rra.ram.moe{0}",
+    "Path": "url",
     "Group": "gif",
     "SimpleGroup": 1
   },

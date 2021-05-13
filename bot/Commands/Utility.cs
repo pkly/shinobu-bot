@@ -149,7 +149,7 @@ namespace Shinobu.Commands
 
                 if (attributePair.Equals(last))
                 {
-                    embed.WithFooter("Made by Ly#3449, original concept by zappin#1312, version " + Assembly.GetExecutingAssembly().GetName().Version.ToString());
+                    embed.WithFooter("Made by Ly#3449, original concept by zappin#1312, version " + Program.Version);
                 }
                 
                 embeds.Add(embed);

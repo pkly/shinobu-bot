@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Reflection;
 using CommandLine;
 using Disqord;
 using Disqord.Bot.Hosting;
@@ -29,6 +30,20 @@ namespace Shinobu
         public static Dictionary<string, ApiCommand> ApiCommands { get; private set; }
         public static string AssetsPath { get; private set; }
         
+        public static string Version
+        {
+            get
+            {
+                var version = Assembly.GetExecutingAssembly().GetName().Version;
+                if (version == null)
+                {
+                    return "Unknown";
+                }
+
+                return version.ToString(3);
+            }
+        }
+
         public static string? Env(string name)
         {
             return System.Environment.GetEnvironmentVariable(name);
@@ -82,6 +97,10 @@ namespace Shinobu
                     bot.UseMentionPrefix = true;
                     bot.Prefixes = new[] { Env("PREFIX") };
                     bot.Intents = GatewayIntents.RecommendedUnprivileged;
+                    bot.Activities = new LocalActivity[]
+                    {
+                        new LocalActivity(Env("PREFIX") + "help | v" + Version, ActivityType.Playing)
+                    };
                 })
                 .UseDefaultServiceProvider(x => x.ValidateOnBuild = true)
                 .Build();
