@@ -136,7 +136,7 @@ namespace Shinobu.Commands
             return Embed(
                 string.Format(
                     RESPECTS_TEXT,
-                    Program.Env("DEAD_EMOTE"),
+                    Program.Env("EMOTE_DEAD"),
                     Context.Author.Mention,
                     string.IsNullOrEmpty(towards) ? "" : " for " + towards
                 )
@@ -152,12 +152,12 @@ namespace Shinobu.Commands
                 await Embed(string.Format(
                     "{0} killed themselves {1}",
                     Context.Author.Mention,
-                    Program.Env("DEAD_EMOTE")
+                    Program.Env("EMOTE_DEAD")
                 ));
                 return;
             }
 
-            var embed = GetEmbed(Program.Env("LOADING_EMOTE") + " " + _fightStartQuotes.Random());
+            var embed = GetEmbed(Program.Env("EMOTE_LOADING") + " " + _fightStartQuotes.Random());
             var response = await Response(embed);
 
             var items = new List<IUser> {Context.Author, member};
@@ -171,7 +171,7 @@ namespace Shinobu.Commands
                 "{0} is the winner! **R.I.P. {1}** {2}",
                 winner.Mention,
                 loser.Mention,
-                Program.Env("DEAD_EMOTE")
+                Program.Env("EMOTE_DEAD")
             )).Build());
         }
 

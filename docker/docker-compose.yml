@@ -55,6 +55,14 @@ services:
       - PREFIX=${BOT_PREFIX}
       - EMBED_COLOR=${BOT_COLOR}
       - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - EMOTE_DEAD=${EMOTE_DEAD}
+      - EMOTE_LOADING=${EMOTE_LOADING}
+      - EMOTE_VERIFIED=${EMOTE_VERIFIED}
+      - EMOTE_DANCE=${EMOTE_DANCE}
+      - EMOTE_PLUS=${EMOTE_PLUS}
+      - EMOTE_MINUS=${EMOTE_MINUS}
+      - EMOTE_NEUTRAL=${EMOTE_NEUTRAL}
+      - EMOTE_COINFLIP=${EMOTE_COINFLIP}
     volumes:
       - ./logs/bot:/home/bot/logs
 
