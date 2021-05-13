@@ -45,7 +45,7 @@ services:
       - ${SSL_PEM_PATH}:/etc/ssl/config.pem
       - ${SSL_KEY_PATH}:/etc/ssl/config.key
     ports:
-      - "${NGINX_PORT}:443"
+      - "443:443"
 
   shino_bot:
     container_name: shino_bot
@@ -55,6 +55,8 @@ services:
       - PREFIX=${BOT_PREFIX}
       - EMBED_COLOR=${BOT_COLOR}
       - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+    volumes:
+      - ./logs/bot:/home/bot/logs
 
   shino_watchtower:
     container_name: shino_watchtower
