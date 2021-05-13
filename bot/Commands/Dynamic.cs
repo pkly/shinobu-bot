@@ -24,14 +24,20 @@ namespace Shinobu.Commands
             var builder = new LocalMessageBuilder();
 
             var apiCommand = Program.ApiCommands[context.Command.Name];
-
-            // for now emulate the old behavior
-            var text = apiCommand.NoMention.Random();
-            if (members.Length > 0)
+            string? text = null;
+            if (apiCommand.Actions.Ranges.Count > 0) // force new behaviour only
             {
-                text = apiCommand.Mention.Random();
+                text = apiCommand.Actions.GetValue(members.Length)?.Random();
             }
-            
+            else // or emulate the old behavior
+            {
+                text = apiCommand.NoMention.Random();
+                if (members.Length > 0)
+                {
+                    text = apiCommand.Mention.Random();
+                }
+            }
+
             // insert the author as the first "mention"
             members = members.Prepend((IMember) context.Author).ToArray();
 

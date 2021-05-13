@@ -7,6 +7,21 @@ namespace Shinobu.Utility
     {
         private List<Range<T>> _ranges = new List<Range<T>>();
         
+        public List<Range<T>> Ranges
+        {
+            get => _ranges;
+            set
+            {
+                _ranges = new List<Range<T>>();
+                foreach (var v in value)
+                {
+                    AddRange(v);
+                }
+            }
+        }
+        
+        public RangeHelper() {}
+        
         public RangeHelper(Range<T>[] ranges)
         {
             foreach (var range in ranges)

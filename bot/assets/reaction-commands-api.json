@@ -2,17 +2,70 @@
   "baka": {
     "Name": "baka",
     "Url": "https://nekos.life/api/v2/img/baka",
-    "Mention": [
-      "{0} called {1} a dummy",
-      "{1}, you're a dumbass according to {0}",
-      "{1}, you b-baka ><",
-      "{0} is sceptical of {1}'s intellectual prowess"
-    ],
     "Aliases": [
       "dummy",
       "stupid",
       "dumbass"
     ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} called themselves an idiot",
+            "{0} is disappointed in themselves"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{1} trusted a Sicilian when their life was on the line",
+            "{0} points and laughs at {1}’s stupidity",
+            "{0} called {1} a dummy",
+            "{1}, you're a dumbass according to {0}",
+            "{1}, you b-baka ><",
+            "{0} is sceptical of {1}'s intellectual prowess"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} asks {1} and {2} why they even said that"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} calls {1} a moron, {2} a mongoloid, and {3} a twat"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "According to {0}, {1}, {2}, {3}, and {4} have a collective IQ of 4"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} points and laughs at the idiocy of {1}, {2}, {3}, {4}, and {5}"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} called everyone an idiot, especially {3}"
+          ]
+        }
+      ]
+    },
     "Group": "gif",
     "SimpleGroup": 2
   },
@@ -39,45 +92,196 @@
   "bite": {
     "Name": "bite",
     "Url": "https://waifu.pics/api/sfw/bite",
-    "Mention": [
-      "{0} bit {1}",
-      "{0} took a bite out of {1}",
-      "{1} just got friggin chomped by {0}",
-      "{0} Used Crunch on {1} - It was highly effective!"
-    ],
-    "NoMention": [
-      "{0} bit themselves",
-      "{0} is his own dinner . . .",
-      "{0} chomped on themselves"
-    ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} chowed down on their own arm",
+            "{0} bit themselves",
+            "{0} is his own dinner . . .",
+            "{0} chomped on themselves"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} mauled {1}'s leg",
+            "{0} bit {1}",
+            "{0} took a bite out of {1}",
+            "{1} just got friggin chomped by {0}",
+            "{0} Used Crunch on {1} - It was highly effective!"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} grabbed {1} and {2}'s ankles and took a bite"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} stacked {1}, {2}, and {3} into a sandwich and took a bite"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} ate {1} and {3}'s fingers, and bit {2} and {4}'s legs"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} was hungry"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} went on a biting spree"
+          ]
+        }
+      ]
+    },
     "Group": "gif",
     "SimpleGroup": 1
   },
   "blush": {
     "Name": "blush",
     "Url": "https://waifu.pics/api/sfw/blush",
-    "Mention": [
-      "{0} blushes at {1}",
-      "{0} is flustered cause of {1}",
-      "{1} you made {0} blush"
-    ],
-    "NoMention": [
-      "{0} blushed",
-      "{0} is blushing",
-      "{0} is flustered"
-    ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} blushed at themselves for some reason",
+            "{0} blushed",
+            "{0} is blushing",
+            "{0} is flustered"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} finds {1} cute",
+            "{0} liked the compliment",
+            "{0} blushes at {1}",
+            "{0} is flustered cause of {1}",
+            "{1} made {0} blush"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} saw {1} and {2} doing something embarassing"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0}'s face went red while looking at {1}, {2}, and {3}"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0}'s cheeks flushed and looked away from {1}, {2}, {3}, and {4}"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} looks at everyone with a flushed expression"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} blushes and looks around wildly"
+          ]
+        }
+      ]
+    },
     "Group": "gif",
     "SimpleGroup": 1
   },
   "cry": {
     "Name": "cry",
     "Url": "https://waifu.pics/api/sfw/cry",
-    "Mention": [
-      "{0} cries with {1}",
-      "{0} is crying with {1}",
-      "{0} and {1} are having a crying party",
-      "{0} and {1} are pretty sad right now"
-    ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} cries in the corner",
+            "{0} starts sobbing"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} cries on {1}'s shoulder",
+            "{0} cries with {1}",
+            "{0} is crying with {1}",
+            "{0} and {1} are having a crying party",
+            "{0} and {1} are pretty sad right now"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} holds themselves up on {1} and {2}'s shoulders"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} has a group crying session with {1}, {2}, and {3}"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} floods the room with tears, with the help of {1}, {2}, {3}, and {4}"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} lets the tear ducts flow"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} is crying with pretty much everyone"
+          ]
+        }
+      ]
+    },
     "Path": "url",
     "Group": "gif",
     "SimpleGroup": 1
@@ -85,15 +289,68 @@
   "cuddle": {
     "Name": "cuddle",
     "Url": "https://nekos.life/api/v2/img/cuddle",
-    "Mention": [
-      "{0} cuddled with {1}",
-      "{1} you just got cuddled by {0}",
-      "{0} is having cuddles with {1}"
-    ],
-    "NoMention": [
-      "{0} cuddled with themselves",
-      "{0} is cuddling empty space",
-      "{0} is having cuddles with the air"
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} snuggles with their pillow",
+            "{0} cuddled with themselves",
+            "{0} is cuddling empty space",
+            "{0} is having cuddles with the air"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} and {1} curl up in the corner together",
+            "{0} cuddled with {1}",
+            "{1} you just got cuddled by {0}",
+            "{0} is having cuddles with {1}"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} has a wholesome moment with {1} and {2}"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} gets nice and cozy with {1}, {2}, and {3}"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} engages in a group hug"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} cuddles up with everyone"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} is having a slumber party"
+          ]
+        }
+      ]
+    },
+    "Aliases": [
+      "snug",
+      "snuggle"
     ],
     "Group": "gif",
     "SimpleGroup": 1
@@ -101,29 +358,128 @@
   "dance": {
     "Name": "dance",
     "Url": "https://waifu.pics/api/sfw/dance",
-    "Mention": [
-      "{0} is dancing with {1}",
-      "{0} and {1} are partying hard",
-      "{0} is hitting the stanky leg with {1}"
-    ],
-    "NoMention": [
-      "{0} is dancing alone"
-    ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} dances awkwardly in the corner alone",
+            "{0} is dancing alone"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} and {1} boogie together",
+            "{0} and {1} start to waltz by a billabong",
+            "{0} is dancing with {1}",
+            "{0} and {1} are partying hard",
+            "{0} is hitting the stanky leg with {1}"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} is vibing with {1} and {2}"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} discos with {1}, {2}, and {3}"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} starts to jam with {1}, {2}, {3}, and {4}"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} starts to barn dance with everyone"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} starts a dance party"
+          ]
+        }
+      ]
+    },
     "Group": "gif",
     "SimpleGroup": 1
   },
   "highfive": {
     "Name": "highfive",
     "Url": "https://waifu.pics/api/sfw/highfive",
-    "Mention": [
-      "{0} highfived {1}",
-      "{1} here's a highfive from {0}"
-    ],
-    "NoMention": [
-      "{0} highfived themselves",
-      "{0} is highfiving literal air...",
-      "{0} is trying to slap space"
-    ],
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} missed the highfive and hit themselves",
+            "{0} highfived themselves",
+            "{0} is highfiving literal air...",
+            "{0} is trying to slap space"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0}'s hand smacked {1}'s",
+            "{0} highfived {1}",
+            "{1} here's a highfive from {0}"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} shared a double highfive with {1} and {2}"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} asked {1}, {2}, and {3} to slap their hand"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} asked for a quadruple highfive"
+          ]
+        },
+        {
+          "From": 5,
+          "To": 5,
+          "Value": [
+            "{0} engaged in a highfive-five"
+          ]
+        },
+        {
+          "From": 6,
+          "To": null,
+          "Value": [
+            "{0} slapped a lot of hands"
+          ]
+        }
+      ]
+    },
     "Group": "gif",
     "SimpleGroup": 2
   },
@@ -134,7 +490,7 @@
       "{0} hugged {1}",
       "{0} and {1} are sharing a hug",
       "{0} held {1} tight for a hug"
-    ],      
+    ],
     "NoMention": [
       "{0} hugged themselves",
       "{0} hugged their imaginary friend...",

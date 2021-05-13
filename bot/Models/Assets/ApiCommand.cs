@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Shinobu.Utility;
 
 namespace Shinobu.Models.Assets
 {
@@ -16,6 +17,9 @@ namespace Shinobu.Models.Assets
         // Texts
         public IList<string> Mention = new List<string>();
         public IList<string> NoMention = new List<string>();
+        
+        // // Multi-actions
+        public RangeHelper<IList<string>> Actions = new RangeHelper<IList<string>>();
 
         // Help parts
         public string Group = "Unknown";
