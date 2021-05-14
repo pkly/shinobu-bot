@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/dotnet/runtime:5.0
+FROM mcr.microsoft.com/dotnet/runtime:5.0-alpine
+
 WORKDIR /home/bot
 COPY Shinobu app
 RUN chmod +x app
