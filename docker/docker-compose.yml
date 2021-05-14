@@ -3,7 +3,6 @@ version: "3.0"
 # this just binds the images so nginx can serve them properly
 volumes:
   public-volume:
-  certbot-volume:
 
 services:
   shino_maria_db:
@@ -46,18 +45,18 @@ services:
       - ./logs/nginx:/var/log/nginx
       - ${SSL_PATH}/conf/live/config.shinobu.chat/fullchain.pem:/etc/ssl/fullchain.pem:ro
       - ${SSL_PATH}/conf/live/config.shinobu.chat/privkey.pem:/etc/ssl/privkey.pem:ro
-      - certbot-volume:/var/www/certbot:ro
+      - ./certbot:/var/www/certbot
     ports:
       - "443:443"
       - "80:80"
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx'"
 
   shino_certbot:
     container_name: shino_certbot
     image: certbot/certbot
     restart: unless-stopped
     volumes:
-      - certbot-volume:/var/www/certbot
+      - ./certbot:/var/www/certbot
       - ${SSL_PATH}/conf:/etc/letsencrypt
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
