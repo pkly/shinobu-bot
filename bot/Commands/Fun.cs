@@ -85,13 +85,11 @@ namespace Shinobu.Commands
             var response = await _client.GetStreamAsync("https://8ball.delegator.com/magic/JSON/" + message);
             var data = await JsonSerializer.DeserializeAsync<Dictionary<string, Dictionary<string, string>>>(response);
 
-            return Response(string.Format(
-                "{0} asks: \n > {1} \n \n **`Answer:`** **{2} {3}**",
-                "placeholder",
-                message,
-                data["magic"]["answer"],
-                Program.Env(_eightballTypeDictionary[data["magic"]["type"]])
-            ));
+            return Response(
+                GetEmbed(string.Format("{0} {1}", data["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
+                    .WithTitle(message + (message.EndsWith("?") ? "" : "?"))
+                    .WithAuthor(((IMember) Context.Author).NickOrName(), Context.Author.GetAvatarUrl(ImageFormat.Default, 128))
+            );
         }
         
         [Command("choose")]
