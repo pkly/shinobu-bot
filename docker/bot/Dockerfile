@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/runtime:5.0
 
 # install missing IP binary for entrypoint
+RUN uname -a
 RUN apt install -y iproute2
 
 WORKDIR /home/bot
