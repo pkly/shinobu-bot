@@ -3,7 +3,7 @@ name: Build nginx image
 on:
   push:
     branches:
-      - master
+      - nginx # ignore for now
 
 env:
   NGINX_IMAGE_NAME: shinobu-nginx

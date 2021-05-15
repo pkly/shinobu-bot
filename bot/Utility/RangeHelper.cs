@@ -52,5 +52,20 @@ namespace Shinobu.Utility
 
             return default(T);
         }
+
+        public override string ToString()
+        {
+            var str = "Total ranges: " + _ranges.Count;
+
+            if (_ranges.Count > 0)
+            {
+                foreach (var range in _ranges)
+                {
+                    str += range.ToString() + ", ";
+                }
+            }
+
+            return str;
+        }
     }
 }

@@ -89,7 +89,13 @@ namespace Shinobu
 
                     x.Services.Remove(x.Services.First(x => x.ServiceType == typeof(ILogger<>)));
                     x.Services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
-                    x.Services.AddSingleton(typeof(HttpClient));
+                    x.Services.AddSingleton<HttpClient>(y =>
+                    {
+                        var client = new HttpClient();
+                        client.DefaultRequestHeaders.Add("User-Agent", "ShinobuBot/v" + Version);
+
+                        return client;
+                    });
                     x.Services.AddSingleton(typeof(Random));
                 })
                 .ConfigureDiscordBotSharder<ShinobuBot>((context, bot) => {
