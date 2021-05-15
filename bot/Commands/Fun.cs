@@ -80,13 +80,8 @@ namespace Shinobu.Commands
         }
         
         [Command("8ball")]
-        public async Task<DiscordCommandResult> EightBall(string? message = null)
+        public async Task<DiscordCommandResult> EightBall([Remainder]string message)
         {
-            if (string.IsNullOrEmpty(message))
-            {
-                return Response("Please ask a **yes / no** question");
-            }
-
             var response = await _client.GetStreamAsync("https://8ball.delegator.com/magic/JSON/" + message);
             var data = await JsonSerializer.DeserializeAsync<Dictionary<string, Dictionary<string, string>>>(response);
 
