@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Gateway;
 using Disqord.Rest;
+using MoreLinq;
 using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Extensions;
@@ -30,6 +30,7 @@ namespace Shinobu.Commands
         }
         
         [Command("ping")]
+        [Description("Check delay between the bot and api")]
         public async Task Ping()
         {
             long message = Context.Message.CreatedAt.ToUnixTimeMilliseconds();
@@ -43,8 +44,9 @@ namespace Shinobu.Commands
             );
         }
 
-        [Command("owner")]
         [RequireBotOwner]
+        [HiddenCommand]
+        [Command("owner")]
         public DiscordCommandResult IsOwner()
         {
             return Embed(
@@ -56,19 +58,20 @@ namespace Shinobu.Commands
         }
         
         [Command("avatar", "pfp", "image", "profilepic", "pic")]
-        [RequireGuild]
+        [Description("Show a user's profile picture")]
         public DiscordCommandResult Avatar(IMember? member = null)
         {
             member ??= Context.GetCurrentMember();
 
             return Reply(
                 GetEmbed()
-                    .WithTitle(member.NickOrName() + "'s avatar")
+                    .WithTitle(member!.NickOrName() + "'s avatar")
                     .WithImageUrl(member.GetAvatarUrl(ImageFormat.Default, 256))
             );
         }
         
         [Command("emote", "emoji", "enlarge", "steal")]
+        [Description("Enlarge an emote with a download link... for reasons...")]
         public DiscordCommandResult Emote(ICustomEmoji emoji)
         {
             return Reply(
@@ -80,50 +83,99 @@ namespace Shinobu.Commands
             );
         }
 
+        /// <summary>
+        /// In theory the result of this method could be cached, but it's not a huge issue
+        /// and later down the line it's likely dynamic commands will be added so a cache-reset
+        /// must be possible anyway
+        ///
+        /// For the time being don't bother, afaik it's not a huge issue
+        /// </summary>
         [Command("help")]
+        [Description("Displays this message")]
         public async Task Help()
         {
             var embeds = new List<LocalEmbedBuilder>();
 
-            var commands = new Dictionary<string, List<Command>>();
+            // normal proper commands
+            var commands = new Dictionary<string, List<Tuple<Command, Dictionary<Type, Attribute>>>>();
+            // section splits
             var sections = new Dictionary<string, SectionAttribute>();
+            // extremely simple commands which will not display a description
+            // and share a single row for display
+            var simpleCommands = new Dictionary<SectionAttribute, List<Command>>();
+
+            // what we'll be collecting from commands
+            var searchAttributes = new List<Type>()
+            {
+                typeof(SectionAttribute),
+                typeof(SimpleCommandAttribute)
+            };
             
             // categorize commands by section first
             foreach (var command in _commands.GetAllCommands())
             {
-                bool foundSection = false;
-                foreach (var attribute in command.Attributes)
+                var attrs = new Dictionary<Type, Attribute>();
+                var copy = new List<Type>(searchAttributes);
+
+                var attrLists = new List<List<Attribute>>()
                 {
-                    if (attribute is SectionAttribute attr)
+                    command.Attributes.ToList(),
+                    command.Module.Attributes.ToList()
+                };
+
+                var hideCommand = false;
+                foreach (var list in attrLists)
+                {
+                    foreach (var attr in list)
                     {
-                        if (!commands.ContainsKey(attr.Name))
+                        if (attr.GetType() == typeof(HiddenCommandAttribute))
                         {
-                            commands.Add(attr.Name, new List<Command>());
-                            sections.Add(attr.Name, attr);
+                            hideCommand = true;
+                            break;
                         }
                         
-                        commands[attr.Name].Add(command);
-                        foundSection = true;
+                        for (int i = copy.Count - 1; i > -1; i--)
+                        {
+                            var item = copy[i];
+                            if (attr.GetType() == item)
+                            {
+                                attrs.Add(item, attr);
+                                copy.RemoveAt(i);
+                            }
+                        }
+                    }
+
+                    if (hideCommand)
+                    {
+                        break;
                     }
                 }
 
-                if (foundSection)
+                if (hideCommand || !attrs.TryGetValue(typeof(SectionAttribute), out var temp))
                 {
-                    continue;
+                    continue; // invalid or hidden command?
                 }
 
-                foreach (var attribute in command.Module.Attributes)
+                // re-cast
+                SectionAttribute section = (SectionAttribute) temp;
+                if (!commands.ContainsKey(section.Name))
                 {
-                    if (attribute is SectionAttribute attr)
+                    commands.Add(section.Name, new List<Tuple<Command, Dictionary<Type, Attribute>>>());
+                    sections.Add(section.Name, section);
+                }
+                
+                if (!attrs.ContainsKey(typeof(SimpleCommandAttribute)))
+                {
+                    commands[section.Name].Add(new Tuple<Command, Dictionary<Type, Attribute>>(command, attrs));
+                }
+                else
+                {
+                    if (!simpleCommands.ContainsKey(section))
                     {
-                        if (!commands.ContainsKey(attr.Name))
-                        {
-                            commands.Add(attr.Name, new List<Command>());
-                            sections.Add(attr.Name, attr);
-                        }
-                        
-                        commands[attr.Name].Add(command);
+                        simpleCommands.Add(section, new List<Command>());
                     }
+                    
+                    simpleCommands[section].Add(command);
                 }
             }
 
@@ -132,27 +184,47 @@ namespace Shinobu.Commands
             {
                 var embed = GetEmbed()
                     .WithTitle(attributePair.Value.Name);
-
-                var description = "";
-                if (attributePair.Value.Description == null)
+                
+                var description = "\n";
+                if (attributePair.Value.Description != null)
                 {
-                    description = attributePair.Value.Description + "\n=======================\n\n";
+                    description = attributePair.Value.Description + "\n\n=======================\n\n";
                 }
                 
-                foreach (var command in commands[attributePair.Value.Name])
+                // normal commands
+                if (commands[attributePair.Value.Name].Count > 0)
                 {
-                    description += command.FullAliases[0] + " " + string.Join<string>(' ', command.Parameters.Select<Parameter, string>(new Func<Parameter, string>(FormatParameter))) + "\n";
+                    foreach (var tuple in commands[attributePair.Value.Name])
+                    {
+                        var name = "**" + tuple.Item1.FullAliases[0] + "**";
+                    
+                        description += name + " " + string.Join(' ', 
+                            tuple.Item1.Parameters.Select<Parameter, string>(FormatParameter)
+                        ) + "\n\n" + (string.IsNullOrEmpty(tuple.Item1.Description) ? "" : "> " + tuple.Item1.Description + "\n\n");
+                    }
                 }
-
-                // remove last newlines
-                embed.WithDescription(description.Substring(0, description.Length - 1));
-
+                
+                // simple commands
+                if (simpleCommands.TryGetValue(attributePair.Value, out var simpleList))
+                {
+                    // show 7 commands in each line
+                    foreach (var batch in simpleList.Batch(7))
+                    {
+                        description += "> " + string.Join(" ", batch.Select(x => x.FullAliases[0])) + "\n\n";
+                    }
+                }
+                
                 if (attributePair.Equals(last))
                 {
                     embed.WithFooter("Made by Ly#3449, original concept by zappin#1312, version " + Program.Version);
                 }
-                
-                embeds.Add(embed);
+                else
+                {
+                    // remove last newlines
+                    description = description.Substring(0, description.Length - 1);
+                }
+
+                embeds.Add(embed.WithDescription(description));
             }
             
             var builder = new LocalMessageBuilder();
@@ -173,7 +245,7 @@ namespace Shinobu.Commands
                         await Context.Message.AddReactionAsync(new LocalEmoji("✅"));
                     }
                 }
-                catch (Exception e) // in case someone has blocked dms
+                catch (Exception) // in case someone has blocked dms
                 {
                     await EmbedReply("You seem to have dms disabled or other error occurred!");
                     return;
@@ -198,6 +270,7 @@ namespace Shinobu.Commands
         }
 
         [Command("invite", "inv")]
+        [Description("Invite yours truly to your server")]
         public DiscordCommandResult Invite()
         {
             return Reply(

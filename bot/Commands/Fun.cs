@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -80,19 +79,21 @@ namespace Shinobu.Commands
         }
         
         [Command("8ball")]
+        [Description("Ask a yes/no question and have it answered")]
         public async Task<DiscordCommandResult> EightBall([Remainder]string message)
         {
             var response = await _client.GetStreamAsync("https://8ball.delegator.com/magic/JSON/" + message);
             var data = await JsonSerializer.DeserializeAsync<Dictionary<string, Dictionary<string, string>>>(response);
 
             return Response(
-                GetEmbed(string.Format("{0} {1}", data["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
+                GetEmbed(string.Format("{0} {1}", data!["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
                     .WithTitle(message + (message.EndsWith("?") ? "" : "?"))
                     .WithAuthor(((IMember) Context.Author).NickOrName(), Context.Author.GetAvatarUrl(ImageFormat.Default, 128))
             );
         }
         
         [Command("choose")]
+        [Description("I'll choose one of the options on your behalf")]
         public DiscordCommandResult Choose([Remainder][Minimum(3)] string message)
         {
             var choices = message.Split(",");
@@ -107,10 +108,11 @@ namespace Shinobu.Commands
                 return Embed("Please type your options separated with a comma");
             }
 
-            return Embed(choices.Random());
+            return Embed(choices.Random() ?? "Nothing?");
         }
         
         [Command("coinflip")]
+        [Description("It flips a coin, what else would it do?")]
         public async Task Coinflip()
         {
             var embed = GetEmbed(
@@ -124,6 +126,7 @@ namespace Shinobu.Commands
         }
         
         [Command("f", "rip")]
+        [Description("Pay respects")]
         public DiscordCommandResult Respects(string? towards = null)
         {
             return Embed(
@@ -137,7 +140,7 @@ namespace Shinobu.Commands
         }
         
         [Command("fight", "battle", "vs")]
-        [RequireGuild]
+        [Description("Fight someone and let fate decide who lives and who dies")]
         public async Task Fight(IMember? member = null)
         {
             if (member == null || member.Id == Context.Author.Id)
@@ -169,7 +172,7 @@ namespace Shinobu.Commands
         }
 
         [Command("gay")]
-        [RequireGuild]
+        [Description("Find out yours or your friends' gay potential")]
         public DiscordCommandResult Gay(IMember? member = null)
         {
             var user = (IUser?) member ?? Context.Author;
@@ -189,6 +192,7 @@ namespace Shinobu.Commands
         }
 
         [Command("rate")]
+        [Description("Rates whatever your heart desires")]
         public DiscordCommandResult Rate([Remainder] string toRate)
         {
             var result = _random.Next(100);
@@ -201,6 +205,7 @@ namespace Shinobu.Commands
         }
         
         [Command("roll")]
+        [Description("Roll between 1 and your number")]
         public DiscordCommandResult Roll([Minimum(1)] int number)
         {
             return Embed(string.Format(

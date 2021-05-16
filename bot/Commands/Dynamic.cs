@@ -16,11 +16,11 @@ namespace Shinobu.Commands
     {
         public static async Task DoReaction(DiscordCommandContext context)
         {
-            var client = context.Services.GetService<HttpClient>();
-            IMember?[] members = ((IMember?[]) context.Arguments[0]).Where(x => x != null).ToArray();
+            var client = context.Services.GetRequiredService<HttpClient>();
+            IMember[] members = ((IMember?[]) context.Arguments[0]).Where(x => x != null).ToArray()!;
             
             var embed = (new LocalEmbedBuilder())
-                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Program.Env("EMBED_COLOR")));
+                .WithColor(Program.Color);
             var builder = new LocalMessageBuilder();
 
             var apiCommand = Program.ApiCommands[context.Command.Name];

@@ -6,12 +6,12 @@ namespace Shinobu.Models.Assets
     public class ApiCommand
     {
         // Api-specific
-        public string Url;
+        public string Url = "";
         public string? ReplaceUrl = null;
         public string Path = "url"; // default api path for the image
 
         // Identifiers
-        public string Name;
+        public string Name = "invalid";
         public IList<string> Aliases = new List<string>();
         
         // Texts

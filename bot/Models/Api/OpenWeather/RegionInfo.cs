@@ -2,8 +2,8 @@
 {
     public class RegionInfo
     {
-        public string Country;
-        public long Sunrise;
-        public long Sunset;
+        public string Country = "US";
+        public long Sunrise = 0;
+        public long Sunset = 0;
     }
 }

@@ -26,7 +26,7 @@ namespace Shinobu
         protected LocalEmbedBuilder GetEmbed(string? description = null)
         {
             var embed = (new LocalEmbedBuilder())
-                .WithColor((Color) System.Drawing.ColorTranslator.FromHtml(Program.Env("EMBED_COLOR")));
+                .WithColor(Program.Color);
 
             if (description != null) {
                 embed.WithDescription(description);

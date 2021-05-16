@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
-using Disqord.Gateway;
 using Newtonsoft.Json;
 using Qmmands;
 using Shinobu.Attributes;
@@ -106,6 +105,7 @@ namespace Shinobu.Commands
         }
 
         [Command("milk")]
+        [Description("Create an \"I can milk this\" meme")]
         public async Task<DiscordCommandResult> Milk(IMember member)
         {
             var stream = new MemoryStream();
@@ -130,6 +130,7 @@ namespace Shinobu.Commands
         }
 
         [Command("bonk")]
+        [Description("Bonk someone when they're being horny")]
         public async Task<DiscordCommandResult> Bonk(IMember member)
         {
             var stream = new MemoryStream();
@@ -154,6 +155,7 @@ namespace Shinobu.Commands
         }
 
         [Command("pin")]
+        [Description("Pin someone down, for reasons I won't mention")]
         public async Task<DiscordCommandResult> Ping(IMember member)
         {
             var stream = new MemoryStream();
@@ -179,6 +181,7 @@ namespace Shinobu.Commands
         }
 
         [Command("sauce")]
+        [Description("Get a [someone]-tasting sauce, yum~")]
         public async Task<DiscordCommandResult> Sauce(IMember member)
         {
             var stream = new MemoryStream();
@@ -198,6 +201,7 @@ namespace Shinobu.Commands
         }
 
         [Command("marry")]
+        [Description("Engage in holy matrimony with someone")]
         public async Task<DiscordCommandResult> Marry(IMember member)
         {
             var stream = new MemoryStream();
@@ -222,6 +226,7 @@ namespace Shinobu.Commands
         }
 
         [Command("tuck")]
+        [Description("Tuck someone into bed")]
         public async Task<DiscordCommandResult> Tuck(IMember member)
         {
             var stream = new MemoryStream();
@@ -246,6 +251,7 @@ namespace Shinobu.Commands
         }
         
         [Command("love", "lovecalc", "ship", "calclove")]
+        [Description("How strong is the love between the two? Find out today!")]
         public async Task<DiscordCommandResult> Love(IMember memberA, IMember? memberB = null)
         {
             if (memberB == null)
@@ -255,7 +261,7 @@ namespace Shinobu.Commands
             }
 
             var name = memberA.NickOrName().Substring(0, (int) Math.Ceiling((double) memberA.NickOrName().Length / 2)) +
-                       memberB.NickOrName().Substring(0, (int) Math.Ceiling((double) memberB.NickOrName().Length / 2));
+                       memberB.NickOrName().Substring((int) Math.Ceiling((double) memberB.NickOrName().Length / 2));
 
             var random = new Random((int) memberA.Id.RawValue + (int) memberB.Id.RawValue);
             var result = Math.Max(
@@ -301,6 +307,7 @@ namespace Shinobu.Commands
         
         
         [Command("sus", "amongus", "amogus", "eject", "imposter", "impostor")]
+        [Description("Sus-check someone who's being a sussy sus")]
         public async Task<DiscordCommandResult> Imposter(IMember? member = null)
         {
             member ??= (IMember) Context.Author;
@@ -333,6 +340,7 @@ namespace Shinobu.Commands
 
         [Section("Fun/memes")]
         [Command("weather")]
+        [Description("See the weather conditions in the location of your choice")]
         public async Task<DiscordCommandResult> Weather([Remainder][Minimum(2)] string query)
         {
             Color textColor = Color.Black;

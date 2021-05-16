@@ -26,9 +26,9 @@ namespace Shinobu
     internal sealed class Program
     {
         private const string REACTION_COMMANDS_FILE = "reaction-commands-api.json";
-        
-        public static Dictionary<string, ApiCommand> ApiCommands { get; private set; }
-        public static string AssetsPath { get; private set; }
+
+        public static Dictionary<string, ApiCommand> ApiCommands { get; private set; } = new Dictionary<string, ApiCommand>();
+        public static string AssetsPath { get; private set; } = "";
         
         public static string Version
         {
@@ -41,6 +41,14 @@ namespace Shinobu
                 }
 
                 return version.ToString(3);
+            }
+        }
+
+        public static Color Color
+        {
+            get
+            {
+                return (Color) System.Drawing.ColorTranslator.FromHtml(Env("EMBED_COLOR") ?? "#00ff00");
             }
         }
 
@@ -67,7 +75,7 @@ namespace Shinobu
                 ApiCommands = JsonConvert.DeserializeObject<Dictionary<string, ApiCommand>>(File.ReadAllText(AssetsPath + "/" + REACTION_COMMANDS_FILE));
             });
             
-            string token = Env("BOT_TOKEN");
+            string? token = Env("BOT_TOKEN");
             if (string.IsNullOrEmpty(token)) {
                 Console.WriteLine(".env file could not be read, recheck your .env file or specify env-path as a cli argument");
                 return -1;

@@ -55,7 +55,8 @@ namespace Shinobu
                     {
                         x.WithName(pair.Key);
                         x.AddAlias(pair.Key);
-                        x.AddAttribute(new SectionAttribute("Reactions"));
+                        x.AddAttribute(new SectionAttribute("Reactions", "You can tag users after the command (one or more!)"));
+                        x.AddAttribute(new SimpleCommandAttribute());
 
                         foreach (var alias in pair.Value.Aliases)
                         {
