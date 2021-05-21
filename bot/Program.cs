@@ -27,9 +27,13 @@ namespace Shinobu
     {
         private const string REACTION_COMMANDS_FILE = "reaction-commands-api.json";
 
+        private static readonly DateTime BOOT = DateTime.UtcNow;
+            
         public static Dictionary<string, ApiCommand> ApiCommands { get; private set; } = new Dictionary<string, ApiCommand>();
         public static string AssetsPath { get; private set; } = "";
-        
+
+        public static TimeSpan Uptime => DateTime.UtcNow - BOOT;
+
         public static string Version
         {
             get

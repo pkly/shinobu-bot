@@ -37,5 +37,18 @@ namespace Shinobu.Extensions
         {
             return Convert.ToBoolean(random.Next(2)); // why 2 lmao C#
         }
+
+        public static string ToReadable(this TimeSpan span)
+        {
+            var total = span.TotalSeconds;
+            var hours = Convert.ToUInt32(Math.Floor(total / 3600));
+            total %= 3600;
+            var minutes = Convert.ToUInt32(Math.Floor(total / 60));
+            var seconds = Convert.ToUInt32(Math.Floor(total % 60));
+
+            return hours.ToString().PadLeft(2, '0') + ':' +
+                   minutes.ToString().PadLeft(2, '0') + ':' +
+                   seconds.ToString().PadLeft(2, '0');
+        }
     }
 }

@@ -22,6 +22,8 @@ namespace Shinobu.Commands
         private const string INVITE_URL = "https://discord.com/oauth2/authorize?client_id=490901986502377512&scope=bot&permissions=388160";
         private const string SUPPORT_SERVER = "https://discord.gg/qwdMmsG/";
 
+        private const string STATUS_MESSAGE = "Uptime: **{0}**, servers: **{1}**, v{2}";
+
         private readonly CommandService _commands;
 
         public Utility(CommandService commands)
@@ -284,6 +286,18 @@ namespace Shinobu.Commands
                         Context.Bot.GetGuilds().Count
                     ))
             );
+        }
+
+        [Command("status")]
+        [Description("Display current uptime, server info and more")]
+        public DiscordCommandResult Status()
+        {
+            return Embed(string.Format(
+                STATUS_MESSAGE,
+                Program.Uptime.ToReadable(),
+                Context.Bot.GetGuilds().Count,
+                Program.Version
+            ));
         }
     }
 }
