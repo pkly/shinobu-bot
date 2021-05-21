@@ -104,6 +104,7 @@ namespace Shinobu.Commands
             _client = client;
         }
 
+        [IgnoresExtraArguments]
         [Command("milk")]
         [Description("Create an \"I can milk this\" meme")]
         public async Task<DiscordCommandResult> Milk(IMember member)
@@ -129,6 +130,7 @@ namespace Shinobu.Commands
             return RespondWithAttachment($"{Context.Author.Mention} has milked {member.Mention}", stream);
         }
 
+        [IgnoresExtraArguments]
         [Command("bonk")]
         [Description("Bonk someone when they're being horny")]
         public async Task<DiscordCommandResult> Bonk(IMember member)
@@ -154,6 +156,7 @@ namespace Shinobu.Commands
             return RespondWithAttachment($"{Context.Author.Mention} has bonked {member.Mention}", stream);
         }
 
+        [IgnoresExtraArguments]
         [Command("pin")]
         [Description("Pin someone down, for reasons I won't mention")]
         public async Task<DiscordCommandResult> Ping(IMember member)
@@ -180,6 +183,7 @@ namespace Shinobu.Commands
             return RespondWithAttachment($"{Context.Author.Mention} has pinned {member.Mention} down", stream);
         }
 
+        [IgnoresExtraArguments]
         [Command("sauce")]
         [Description("Get a [someone]-tasting sauce, yum~")]
         public async Task<DiscordCommandResult> Sauce(IMember member)
@@ -200,6 +204,7 @@ namespace Shinobu.Commands
             return RespondWithAttachment($"Fresh tub of {member.Mention} sauce", stream);
         }
 
+        [IgnoresExtraArguments]
         [Command("marry")]
         [Description("Engage in holy matrimony with someone")]
         public async Task<DiscordCommandResult> Marry(IMember member)
@@ -225,6 +230,7 @@ namespace Shinobu.Commands
             return RespondWithAttachment($"{Context.Author.Mention} has married {member.Mention}", stream);
         }
 
+        [IgnoresExtraArguments]
         [Command("tuck")]
         [Description("Tuck someone into bed")]
         public async Task<DiscordCommandResult> Tuck(IMember member)
@@ -305,7 +311,7 @@ namespace Shinobu.Commands
             );
         }
         
-        
+        [IgnoresExtraArguments]
         [Command("sus", "amongus", "amogus", "eject", "imposter", "impostor")]
         [Description("Sus-check someone who's being a sussy sus")]
         public async Task<DiscordCommandResult> Imposter(IMember? member = null)

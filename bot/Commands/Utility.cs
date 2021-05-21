@@ -200,7 +200,7 @@ namespace Shinobu.Commands
                     
                         description += name + " " + string.Join(' ', 
                             tuple.Item1.Parameters.Select<Parameter, string>(FormatParameter)
-                        ) + "\n\n" + (string.IsNullOrEmpty(tuple.Item1.Description) ? "" : "> " + tuple.Item1.Description + "\n\n");
+                        ) + "\n" + (string.IsNullOrEmpty(tuple.Item1.Description) ? "" : "> " + tuple.Item1.Description + "\n\n");
                     }
                 }
                 

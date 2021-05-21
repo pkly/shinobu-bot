@@ -127,7 +127,7 @@ namespace Shinobu.Commands
         
         [Command("f", "rip")]
         [Description("Pay respects")]
-        public DiscordCommandResult Respects(string? towards = null)
+        public DiscordCommandResult Respects([Remainder] string? towards = null)
         {
             return Embed(
                 string.Format(
@@ -193,7 +193,7 @@ namespace Shinobu.Commands
 
         [Command("rate")]
         [Description("Rates whatever your heart desires")]
-        public DiscordCommandResult Rate([Remainder] string toRate)
+        public DiscordCommandResult Rate([Remainder][Minimum(2)] string toRate)
         {
             var result = _random.Next(100);
             return EmbedReply(string.Format(
