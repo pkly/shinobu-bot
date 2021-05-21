@@ -14,31 +14,47 @@ namespace Shinobu.Commands
 {
     public static class Dynamic
     {
+        /// <summary>
+        /// Handles simple Http-apis for "reaction" commands
+        ///
+        /// The incoming argument 0 from context is a collection of IMember, but for later purposes
+        /// that type is not required, as we simply use IUser's Mention property, as such converting
+        /// down to the lower interface acceptable to allow for implicit targetting
+        /// </summary>
+        /// <param name="context"></param>
         public static async Task DoReaction(DiscordCommandContext context)
         {
             var client = context.Services.GetRequiredService<HttpClient>();
-            IMember[] members = ((IMember?[]) context.Arguments[0]).Where(x => x != null).ToArray()!;
+            List<IUser> users = ((IUser?[]) context.Arguments[0]).Where(x => x != null).ToList()!;
             
             var embed = (new LocalEmbedBuilder())
                 .WithColor(Program.Color);
             var builder = new LocalMessageBuilder();
-
             var apiCommand = Program.ApiCommands[context.Command.Name];
+
+            // if no members are specified allow for implicit targeting via the reply system
+            if (users.Count == 0 &&
+                context.Message.ReferencedMessage.HasValue &&
+                context.Message.ReferencedMessage.Value != null &&
+                context.Message.ReferencedMessage.Value.Author != null)
+            {
+                users.Add(context.Message.ReferencedMessage.Value.Author);
+            }
             
             // prepare reaction text if needed
             string? text = null;
             if (apiCommand.Actions.Ranges.Count > 0)
             {
-                text = apiCommand.Actions.GetValue(members.Length)?.Random();
+                text = apiCommand.Actions.GetValue(users.Count)?.Random();
             }
 
             // insert the author as the first "mention"
-            members = members.Prepend((IMember) context.Author).ToArray();
+            users = users.Prepend(context.Author).ToList();
 
             // insert mentions
             if (text != null)
             {
-                text = string.Format(text, members.Select(x => x.Mention).ToArray());
+                text = string.Format(text, users.Select(x => x.Mention).ToArray());
                 embed.WithDescription(text);
             }
             
