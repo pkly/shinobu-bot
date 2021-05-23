@@ -6,4 +6,4 @@ COPY docker/nginx/sites/prod.conf /etc/nginx/sites-available/prod.conf
 COPY docker/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 CMD nginx
-EXPOSE 443 80
+EXPOSE 80
