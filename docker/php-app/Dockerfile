@@ -40,8 +40,8 @@ RUN rm -rf /var/www/docker
 RUN bin/console cache:warmup --env=prod
 RUN bin/console cache:warmup --env=dev
 
-RUN chown www-data:www-data /var
-RUN chmod -R 755 var/cache
+RUN chown www-data:www-data /var/www/var
+RUN chmod -R 755 /var/www/var/cache
 
 CMD php-fpm
 EXPOSE 9000

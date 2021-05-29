@@ -7,6 +7,8 @@ all contained neatly in dockers.
  <img alt="Discord" src="https://img.shields.io/discord/652432413586358273?color=%237289da&label=Shinobu%20%26%20Friends&logo=discord&logoColor=%237289da">
 [![CodeFactor](https://www.codefactor.io/repository/github/pkly/shinobu-bot/badge)](https://www.codefactor.io/repository/github/pkly/shinobu-bot)
 
+Companion website [Available here (currently unfinished!)](https://config.shinobu.chat)
+
 **Feel free to bully me on Discord @ `Ly#3449` or join zappin's server [Shinobu & Friends](https://discord.gg/shinobu)**
 
 It uses **nekos.life, waifu.pics, rra.ram.moe** for the GIF commands.
