@@ -3,7 +3,7 @@ name: Build php-fpm image
 on:
   push:
     branches:
-      - master # ignore for now
+      - php # ignore for now
 
 env:
   PHP_IMAGE_NAME: shinobu-php-fpm

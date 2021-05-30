@@ -18,8 +18,8 @@ RUN docker-php-ext-install opcache
 
 # install redis
 RUN pecl install -o -f redis \
-&&  rm -rf /tmp/pear \
-&&  docker-php-ext-enable redis
+&& rm -rf /tmp/pear \
+&& docker-php-ext-enable redis
 
 # for now just copy the default configs for fpm
 COPY docker/php-app/ini/custom.ini /usr/local/etc/php/conf.d/custom.ini
