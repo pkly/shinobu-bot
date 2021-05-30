@@ -1,0 +1,38 @@
+name: Build php-fpm image
+
+on:
+  push:
+    branches:
+      - master # ignore for now
+
+env:
+  PHP_IMAGE_NAME: shinobu-php-fpm
+
+jobs:
+  build_nginx_img:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build --build-arg=COMMIT=$(git rev-parse --short HEAD) . --file docker/php-app-fpm/Dockerfile --tag $PHP_IMAGE_NAME
+
+      - name: Log into registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=ghcr.io/${{ github.repository }}/$PHP_IMAGE_NAME
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+          # Strip git ref prefix from version
+          VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          # Strip "v" prefix from tag name
+          [[ "${{ github.ref }}" == "refs/tags/"* ]] && VERSION=$(echo $VERSION | sed -e 's/^v//')
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+          echo IMAGE_ID=$IMAGE_ID
+          echo VERSION=$VERSION
+          docker tag $PHP_IMAGE_NAME $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID:$VERSION
