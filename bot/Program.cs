@@ -85,6 +85,11 @@ namespace Shinobu
                 return -1;
             }
 
+            if (!Enum.TryParse(Env("MIN_LOG_LEVEL"), out LogEventLevel minLevel))
+            {
+                minLevel = LogEventLevel.Verbose;
+            }
+
             var host = new HostBuilder()
                 .ConfigureHostConfiguration(x => x.AddCommandLine(args))
                 .ConfigureAppConfiguration(x => {
@@ -92,7 +97,7 @@ namespace Shinobu
                 })
                 .ConfigureLogging(x => {
                     var logger = new LoggerConfiguration()
-                        .MinimumLevel.Verbose()
+                        .MinimumLevel.Is(minLevel)
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}", theme: AnsiConsoleTheme.Code)
                         .WriteTo.File($"logs/log-{DateTime.Now:HH_mm_ss}.txt", restrictedToMinimumLevel: LogEventLevel.Verbose, fileSizeLimitBytes: null, buffered: true)
@@ -115,6 +120,26 @@ namespace Shinobu
                     bot.UseMentionPrefix = true;
                     bot.Prefixes = new[] { Env("PREFIX") };
                     bot.Intents = GatewayIntents.RecommendedUnprivileged;
+
+                    if (null != Env("OWNER_IDS"))
+                    {
+                        List<Snowflake> ids = new List<Snowflake>();
+                        foreach (var id in Env("OWNER_IDS")!.Split(","))
+                        {
+                            try
+                            {
+                                var ownerId = Convert.ToUInt64(id);
+                                ids.Add(ownerId);
+                            }
+                            catch (Exception e)
+                            {
+                                continue;
+                            }
+                        }
+
+                        bot.OwnerIds = ids;
+                    }
+                    
                     bot.Activities = new LocalActivity[]
                     {
                         new LocalActivity(Env("PREFIX") + "help | v" + Version, ActivityType.Playing)
