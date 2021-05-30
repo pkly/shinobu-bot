@@ -69,9 +69,64 @@
     "Group": "gif",
     "SimpleGroup": 2
   },
+  "bully": {
+    "Name": "bully",
+    "Url": "https://api.waifu.pics/sfw/bully",
+    "Aliases": [
+      "heckingbully"
+    ],
+    "Group": "gif",
+    "SimpleGroup": 2,
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} wants to be bullied",
+            "{0} wants to bully the nearest target"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} bullies {1}",
+            "{1} is hekin bullied by {0}",
+            "{0} breaks the no-bully rules of the kindergarden and attacks {1}"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} bullies {1} and {2}",
+            "{1} and {2} got hekin bullied by {0}",
+            "{1} and {2} are being bullied by {0}"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} bullies {1}, {2} and {3}",
+            "{3}, {2} and {1} got bullied by {0}"
+          ]
+        },
+        {
+          "From": 4,
+          "To": null,
+          "Value": [
+            "{0} bullies a lot of people",
+            "A lot of peps are bein hekin bullied by {0}"
+          ]
+        }
+      ]
+    }
+  },
   "shinobu": {
     "Name": "shinobu",
-    "Url": "https://waifu.pics/api/sfw/shinobu",
+    "Url": "https://api.waifu.pics/sfw/shinobu",
     "Aliases": [
       "nobu",
       "kissshotacerolaorionheartunderblade"
@@ -81,7 +136,7 @@
   },
   "neko": {
     "Name": "neko",
-    "Url": "https://waifu.pics/api/sfw/neko",
+    "Url": "https://api.waifu.pics/sfw/neko",
     "Aliases": [
       "catgirl",
       "nekos"
@@ -91,7 +146,7 @@
   },
   "bite": {
     "Name": "bite",
-    "Url": "https://waifu.pics/api/sfw/bite",
+    "Url": "https://api.waifu.pics/sfw/bite",
     "Actions": {
       "Ranges": [
         {
@@ -157,7 +212,7 @@
   },
   "blush": {
     "Name": "blush",
-    "Url": "https://waifu.pics/api/sfw/blush",
+    "Url": "https://api.waifu.pics/sfw/blush",
     "Actions": {
       "Ranges": [
         {
@@ -223,7 +278,7 @@
   },
   "cry": {
     "Name": "cry",
-    "Url": "https://waifu.pics/api/sfw/cry",
+    "Url": "https://api.waifu.pics/sfw/cry",
     "Actions": {
       "Ranges": [
         {
@@ -357,7 +412,7 @@
   },
   "dance": {
     "Name": "dance",
-    "Url": "https://waifu.pics/api/sfw/dance",
+    "Url": "https://api.waifu.pics/sfw/dance",
     "Actions": {
       "Ranges": [
         {
@@ -421,7 +476,7 @@
   },
   "highfive": {
     "Name": "highfive",
-    "Url": "https://waifu.pics/api/sfw/highfive",
+    "Url": "https://api.waifu.pics/sfw/highfive",
     "Actions": {
       "Ranges": [
         {
@@ -485,7 +540,7 @@
   },
   "hug": {
     "Name": "hug",
-    "Url": "https://waifu.pics/api/sfw/hug",
+    "Url": "https://api.waifu.pics/sfw/hug",
     "Actions": {
       "Ranges": [
         {
@@ -557,7 +612,7 @@
   },
   "kiss": {
     "Name": "kiss",
-    "Url": "https://waifu.pics/api/sfw/kiss",
+    "Url": "https://api.waifu.pics/sfw/kiss",
     "Actions": {
       "Ranges": [
         {
@@ -704,7 +759,7 @@
   },
   "nom": {
     "Name": "nom",
-    "Url": "https://waifu.pics/api/sfw/nom",
+    "Url": "https://api.waifu.pics/sfw/nom",
     "Actions": {
       "Ranges": [
         {
@@ -775,7 +830,7 @@
   },
   "pat": {
     "Name": "pat",
-    "Url": "https://waifu.pics/api/sfw/pat",
+    "Url": "https://api.waifu.pics/sfw/pat",
     "Actions": {
       "Ranges": [
         {
@@ -855,7 +910,7 @@
   },
   "poke": {
     "Name": "poke",
-    "Url": "https://waifu.pics/api/sfw/poke",
+    "Url": "https://api.waifu.pics/sfw/poke",
     "Actions": {
       "Ranges": [
         {
@@ -1070,7 +1125,7 @@
   },
   "smug": {
     "Name": "smug",
-    "Url": "https://waifu.pics/api/sfw/smug",
+    "Url": "https://api.waifu.pics/sfw/smug",
     "Actions": {
       "Ranges": [
         {
@@ -1281,7 +1336,7 @@
   },
   "lick": {
     "Name": "lick",
-    "Url": "https://waifu.pics/api/sfw/lick",
+    "Url": "https://api.waifu.pics/sfw/lick",
     "Actions": {
       "Ranges": [
         {
@@ -1358,7 +1413,7 @@
   },
   "wink": {
     "Name": "wink",
-    "Url": "https://waifu.pics/api/sfw/wink",
+    "Url": "https://api.waifu.pics/sfw/wink",
     "Actions": {
       "Ranges": [
         {
@@ -1437,7 +1492,7 @@
   },
   "waifu": {
     "Name": "waifu",
-    "Url": "https://waifu.pics/api/sfw/waifu",
+    "Url": "https://api.waifu.pics/sfw/waifu",
     "Group": "waifu",
     "Aliases": [
       "randomwaifu"
@@ -1446,7 +1501,7 @@
   },
   "megumin": {
     "Name": "megumin",
-    "Url": "https://waifu.pics/api/sfw/megumin",
+    "Url": "https://api.waifu.pics/sfw/megumin",
     "Group": "waifu",
     "Aliases": [
       "megumeme"
@@ -1455,7 +1510,7 @@
   },
   "happy": {
     "Name": "happy",
-    "Url": "https://waifu.pics/api/sfw/happy",
+    "Url": "https://api.waifu.pics/sfw/happy",
     "Actions": {
       "Ranges": [
         {
