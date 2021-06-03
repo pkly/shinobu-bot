@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
@@ -21,14 +22,19 @@ namespace Shinobu.Commands
         private const string INVITE_TEXT = "**[Click this link]({0}) to invite me!**\nJoin our [support server]({1})!";
         private const string INVITE_URL = "https://discord.com/oauth2/authorize?client_id=490901986502377512&scope=bot&permissions=388160";
         private const string SUPPORT_SERVER = "https://discord.gg/qwdMmsG/";
+        private const string CHANGELOG_URL = "https://raw.githubusercontent.com/pkly/shinobu-bot/master/CHANGELOG.md";
 
         private const string STATUS_MESSAGE = "Uptime: **{0}**, servers: **{1}**, v{2}";
 
         private readonly CommandService _commands;
+        private readonly HttpClient _client;
 
-        public Utility(CommandService commands)
+        private string? _changelog = null;
+
+        public Utility(CommandService commands, HttpClient client)
         {
             _commands = commands;
+            _client = client;
         }
         
         [Command("ping")]
@@ -298,6 +304,19 @@ namespace Shinobu.Commands
                 Context.Bot.GetGuilds().Count,
                 Program.Version
             ));
+        }
+
+        [Command("changelog", "changes", "whatsnew")]
+        [Description("Displays latest changes to the bot")]
+        public DiscordCommandResult Changelog()
+        {
+            // if not fetched yet, do that
+            if (_changelog == null)
+            {
+                
+            }
+
+            return Reply("Not yet implemented");
         }
     }
 }
