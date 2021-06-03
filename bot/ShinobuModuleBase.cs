@@ -23,9 +23,9 @@ namespace Shinobu
             return Response(GetEmbed(description));
         }
 
-        protected LocalEmbedBuilder GetEmbed(string? description = null)
+        protected LocalEmbed GetEmbed(string? description = null)
         {
-            var embed = (new LocalEmbedBuilder())
+            var embed = (new LocalEmbed())
                 .WithColor(Program.Color);
 
             if (description != null) {
@@ -48,17 +48,16 @@ namespace Shinobu
         }
 
         protected DiscordCommandResult RespondWithAttachment(
-            LocalEmbedBuilder embed,
+            LocalEmbed embed,
             Stream stream)
         {
             stream.Rewind(); // this would later crash if not rewound so
 
             return Response(
-                (new LocalMessageBuilder())
+                (new LocalMessage())
                 .WithEmbed(embed
                     .WithImageUrl("attachment://file.png"))
                 .AddAttachment(new LocalAttachment(stream, "file.png"))
-                .Build()
             );
         }
     }

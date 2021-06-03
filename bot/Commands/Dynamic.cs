@@ -27,9 +27,9 @@ namespace Shinobu.Commands
             var client = context.Services.GetRequiredService<HttpClient>();
             List<IUser> users = ((IUser?[]) context.Arguments[0]).Where(x => x != null).ToList()!;
             
-            var embed = (new LocalEmbedBuilder())
+            var embed = (new LocalEmbed())
                 .WithColor(Program.Color);
-            var builder = new LocalMessageBuilder();
+            var builder = new LocalMessage();
             var apiCommand = Program.ApiCommands[context.Command.Name];
 
             // if no members are specified allow for implicit targeting via the reply system
@@ -61,7 +61,7 @@ namespace Shinobu.Commands
             var response = await client.GetAsync(apiCommand.Url);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                await new DiscordResponseCommandResult(context, builder.WithEmbed(embed.WithDescription("An error occurred while fetching reaction!")).Build());
+                await new DiscordResponseCommandResult(context, builder.WithEmbed(embed.WithDescription("An error occurred while fetching reaction!")));
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace Shinobu.Commands
             var decoded = JsonConvert.DeserializeObject<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
             
             embed.WithImageUrl(apiCommand.GetFixedImageUrl(decoded[apiCommand.Path]));
-            await new DiscordResponseCommandResult(context, (new LocalMessageBuilder()).WithEmbed(embed).Build());
+            await new DiscordResponseCommandResult(context, (new LocalMessage()).WithEmbed(embed));
         }
     }
 }

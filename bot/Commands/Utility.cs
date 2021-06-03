@@ -43,14 +43,14 @@ namespace Shinobu.Commands
         [Description("Check delay between the bot and api")]
         public async Task Ping()
         {
-            long message = Context.Message.CreatedAt.ToUnixTimeMilliseconds();
+            long message = Context.Message.CreatedAt().ToUnixTimeMilliseconds();
             long diff = GetTimestamp() - message;
             var embed = GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
             var response = await Response(embed);
             await response.ModifyAsync(x => 
                 x.Embed = embed.WithDescription(
-                    String.Format(PING_MESSAGE, diff, response.CreatedAt.ToUnixTimeMilliseconds() - message)
-                ).Build()
+                    String.Format(PING_MESSAGE, diff, response.CreatedAt().ToUnixTimeMilliseconds() - message)
+                )
             );
         }
 
@@ -121,7 +121,7 @@ namespace Shinobu.Commands
         [Description("Displays this message")]
         public async Task Help()
         {
-            var embeds = new List<LocalEmbedBuilder>();
+            var embeds = new List<LocalEmbed>();
 
             // normal proper commands
             var commands = new Dictionary<string, List<Tuple<Command, Dictionary<Type, Attribute>>>>();
@@ -254,14 +254,14 @@ namespace Shinobu.Commands
                 embeds.Add(embed.WithDescription(description));
             }
             
-            var builder = new LocalMessageBuilder();
+            var builder = new LocalMessage();
             var lastEmbed = embeds.Last();
             var addedReaction = false;
             foreach (var embed in embeds)
             {
                 try
                 {
-                    await Context.Author.SendMessageAsync(builder.WithEmbed(embed).Build());
+                    await Context.Author.SendMessageAsync(builder.WithEmbed(embed));
                     if (!embed.Equals(lastEmbed))
                     {
                         await Task.Delay(500);

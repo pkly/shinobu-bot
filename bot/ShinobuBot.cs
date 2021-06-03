@@ -25,11 +25,8 @@ namespace Shinobu
         public ShinobuBot(
             IOptions<DiscordBotSharderConfiguration> options,
             ILogger<DiscordBotSharder> logger,
-            IPrefixProvider prefixes,
-            ICommandQueue queue,
-            CommandService commands,
             IServiceProvider services,
-            DiscordClientSharder client) : base(options, logger, prefixes, queue, commands, services, client)
+            DiscordClientSharder client) : base(options, logger, services, client)
         {}
         
         protected override ValueTask AddTypeParsersAsync(

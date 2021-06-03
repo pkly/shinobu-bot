@@ -122,7 +122,7 @@ namespace Shinobu.Commands
             await Task.Delay(3000);
             await response.ModifyAsync(x => x.Embed = embed.WithDescription(
                 _coinflipEndQuote.Random()
-            ).Build());
+            ));
         }
         
         [Command("f", "rip")]
@@ -168,7 +168,7 @@ namespace Shinobu.Commands
                 winner.Mention,
                 loser.Mention,
                 Program.Env("EMOTE_DEAD")
-            )).Build());
+            )));
         }
 
         [Command("gay")]
