@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
@@ -80,8 +82,25 @@ namespace Shinobu.Commands
         
         [Command("emote", "emoji", "enlarge", "steal")]
         [Description("Enlarge an emote with a download link... for reasons...")]
-        public DiscordCommandResult Emote(ICustomEmoji emoji)
+        public DiscordCommandResult Emote(ICustomEmoji? emoji = null)
         {
+            // if not found, see if this is a reply and try to get it from there
+            if (emoji == null &&
+                Context.Message.ReferencedMessage.HasValue &&
+                Context.Message.ReferencedMessage.Value != null)
+            {
+                var list = Context.Message.ReferencedMessage.Value.GetCustomEmoji();
+                if (list.Any())
+                {
+                    emoji = list.First();
+                }
+            }
+
+            if (emoji == null)
+            {
+                return EmbedReply("No emote found");
+            }
+            
             return Reply(
                 GetEmbed()
                     .WithImageUrl(emoji.GetUrl())
@@ -308,15 +327,42 @@ namespace Shinobu.Commands
 
         [Command("changelog", "changes", "whatsnew")]
         [Description("Displays latest changes to the bot")]
-        public DiscordCommandResult Changelog()
+        public async Task<DiscordCommandResult> Changelog()
         {
             // if not fetched yet, do that
             if (_changelog == null)
             {
-                
+                var response = await _client.GetAsync(CHANGELOG_URL);
+                if (response.StatusCode != HttpStatusCode.OK)
+                {
+                    _changelog = "Something went wrong!";
+                }
+                else
+                {
+                    var text = await response.Content.ReadAsStringAsync();
+                    foreach (var s in Regex.Split(text, "\r\n|\r|\n"))
+                    {
+                        var segment = s.Split(" ");
+                        if (segment.Length > 0 && segment[0].Length > 0)
+                        {
+                            if (segment[0][0] == '#')
+                            {
+                                _changelog += "**" + String.Join(" ", segment.Skip(1)) + "**\n";
+                                continue;
+                            }
+                            else if (segment[0][0] == '*')
+                            {
+                                _changelog += "- " + String.Join(" ", segment.Skip(1)) + "\n";
+                                continue;
+                            }
+                        }
+
+                        _changelog += s + "\n";
+                    }
+                }
             }
 
-            return Reply("Not yet implemented");
+            return EmbedReply(_changelog!);
         }
     }
 }

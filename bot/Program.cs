@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 using System.Net.Http;
 using System.Reflection;
 using CommandLine;
@@ -131,7 +128,7 @@ namespace Shinobu
                                 var ownerId = Convert.ToUInt64(id);
                                 ids.Add(ownerId);
                             }
-                            catch (Exception e)
+                            catch (Exception)
                             {
                                 continue;
                             }
