@@ -4,7 +4,7 @@ A C# rewrite of the original concept with a companion website (coming soon!) and
 all contained neatly in dockers.
 
 ## The ultimate anime-themed bot for your Discord community!
- <img alt="Discord" src="https://img.shields.io/discord/652432413586358273?color=%237289da&label=Shinobu%20%26%20Friends&logo=discord&logoColor=%237289da">
+[![Shinobu and friends](https://img.shields.io/discord/652432413586358273?color=%237289da&label=Shinobu%20%26%20Friends&logo=discord&logoColor=%237289da)](https://discord.gg/shinobu)
 [![CodeFactor](https://www.codefactor.io/repository/github/pkly/shinobu-bot/badge)](https://www.codefactor.io/repository/github/pkly/shinobu-bot)
 
 Companion website [Available here (currently unfinished!)](https://config.shinobu.chat)
