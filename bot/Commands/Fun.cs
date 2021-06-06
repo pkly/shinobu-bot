@@ -256,7 +256,7 @@ namespace Shinobu.Commands
             
             if (token == null || id == null)
             {
-                EmbedReply("Command currently unavailable, sorry!");
+                await EmbedReply("Command currently unavailable, sorry!");
                 return;
             }
 
@@ -274,7 +274,7 @@ namespace Shinobu.Commands
 
             if (final == null)
             {
-                Response(message); // reply with just bot
+                await Response(message); // reply with just bot
             }
             else
             {
