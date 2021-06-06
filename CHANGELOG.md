@@ -2,6 +2,10 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.1.5
+
+* say command added (back from the dead), with preliminary support (only in Shinobu & Friends)
+
 ## 3.1.4
 
 * changelog command added, changelogs are now also listed in the official repository

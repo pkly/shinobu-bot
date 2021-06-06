@@ -24,6 +24,21 @@ namespace Shinobu.Commands
 
         private readonly HttpClient _client;
         private readonly Random _random;
+
+        private readonly Dictionary<ulong, string> _sayWebhookDictionary = new Dictionary<ulong, string>()
+        {
+            { 688536468112670733, "Shinobu Oshino" },
+            { 688536521959407628, "Suruga Kanbaru" },
+            { 688536685725745161, "Ougi Oshino" },
+            { 688536614397411413, "Karen Araragi" },
+            { 688536643497623641, "Yotsugi Ononoki" },
+            { 688536488488861720, "Hitagi Senjougahara" },
+            { 688536542364565522, "Tsubasa Hanekawa" },
+            { 758046971972812840, "Sodachi Oikura" },
+            { 688536413175808012, "Mayoi Hachikuji" },
+            { 688536582113722464, "Tsukihi Araragi" },
+            { 688536869939838993, "Nadeko Sengoku" }
+        };
         
         private readonly Dictionary<string, string> _eightballTypeDictionary = new Dictionary<string, string>()
         {
@@ -215,6 +230,76 @@ namespace Shinobu.Commands
                     number
                 )
             );
+        }
+
+        /// <summary>
+        /// This command is very server-specific so nothing will be done here to "optimize" it until someone really wants it
+        /// </summary>
+        /// <param name="message"></param>
+        [RequireGuild(652432413586358273)]
+        [RequireChannel(652432414135681060)]
+        [Command("say", "speak")]
+        [Description("Say something so your waifu can repeat it! (Only in [Shinobu & Friends](https://discord.gg/shinobu))")]
+        public async Task Say([Remainder] string message)
+        {
+            string? token = null;
+            ulong? id;
+            try
+            {
+                token = Program.Env("SAY_WEBHOOK_TOKEN");
+                id = Convert.ToUInt64(Program.Env("SAY_WEBHOOK_ID"));
+            }
+            catch (Exception)
+            {
+                id = null;
+            }
+            
+            if (token == null || id == null)
+            {
+                EmbedReply("Command currently unavailable, sorry!");
+                return;
+            }
+
+            string? name = "";
+            Snowflake? final = null;
+
+            foreach (var role in ((IMember) Context.Author).RoleIds)
+            {
+                if (_sayWebhookDictionary.TryGetValue(role, out name))
+                {
+                    final = role;
+                    break;
+                }
+            }
+
+            if (final == null)
+            {
+                Response(message); // reply with just bot
+            }
+            else
+            {
+                await Context.Bot.ExecuteWebhookAsync(
+                    new Snowflake((ulong) id),
+                    token,
+                    new LocalWebhookMessage()
+                    {
+                        AvatarUrl = Program.Env("CONFIG_URL") + $"/bot/webhook/say/sneksmall.png",
+                        // AvatarUrl = Program.Env("CONFIG_URL") + $"/bot/webhook/say/{final.Value.RawValue}.png",
+                        Name = name,
+                        Embeds =
+                        {
+                            new LocalEmbed()
+                            {
+                                Description = message,
+                                Color = Program.Color
+                            }
+                        }
+                    }
+                );
+            }
+
+            await Task.Delay(3000);
+            await Context.Message.DeleteAsync();
         }
     }
 }
