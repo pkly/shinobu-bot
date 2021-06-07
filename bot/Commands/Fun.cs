@@ -283,8 +283,7 @@ namespace Shinobu.Commands
                     token,
                     new LocalWebhookMessage()
                     {
-                        AvatarUrl = Program.Env("CONFIG_URL") + $"/bot/webhook/say/sneksmall.png",
-                        // AvatarUrl = Program.Env("CONFIG_URL") + $"/bot/webhook/say/{final.Value.RawValue}.png",
+                        AvatarUrl = Program.Env("CONFIG_URL") + $"/bot/webhook/say/{final.Value.RawValue}.png",
                         Name = name,
                         Embeds =
                         {
