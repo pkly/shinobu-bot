@@ -140,3 +140,17 @@ jobs:
           echo VERSION=$VERSION
           docker tag $WEBSITE_IMAGE_NAME $IMAGE_ID:$VERSION
           docker push $IMAGE_ID:$VERSION
+
+  deploy_update:
+    needs: [push_website, push_binary]
+    runs-on: ubuntu-latest
+    name: Deploys the updated code to the server
+
+    steps:
+      - uses: appleboy/ssh-action@v0.1.4
+        name: Starts the update process on the server
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          script: ${{ secrets.SSH_DEPLOY_SCRIPT }}

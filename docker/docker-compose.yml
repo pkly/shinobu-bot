@@ -72,10 +72,3 @@ services:
       - EMOTE_COINFLIP=${EMOTE_COINFLIP}
     volumes:
       - ./logs/bot:/home/bot/logs
-
-  shino_watchtower:
-    container_name: shino_watchtower
-    image: containrrr/watchtower
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: shino_php_fpm shino_bot --interval 600
