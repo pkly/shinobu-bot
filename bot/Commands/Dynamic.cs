@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -54,6 +53,7 @@ namespace Shinobu.Commands
             // insert mentions
             if (text != null)
             {
+                // ReSharper disable once CoVariantArrayConversion
                 text = string.Format(text, users.Select(x => x.Mention).ToArray());
                 embed.WithDescription(text);
             }

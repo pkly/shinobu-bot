@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Disqord;
 using Disqord.Bot;
 using Shinobu.Extensions;
@@ -8,11 +7,6 @@ namespace Shinobu
 {
     public abstract class ShinobuModuleBase : DiscordModuleBase
     {
-        public static long GetTimestamp()
-        {
-            return Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalMilliseconds);
-        }
-        
         protected DiscordResponseCommandResult EmbedReply(string description)
         {
             return Reply(GetEmbed(description));

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -31,7 +32,7 @@ namespace Shinobu.Commands
         private readonly CommandService _commands;
         private readonly HttpClient _client;
 
-        private string? _changelog = null;
+        private string? _changelog;
 
         public Utility(CommandService commands, HttpClient client)
         {
@@ -44,7 +45,7 @@ namespace Shinobu.Commands
         public async Task Ping()
         {
             long message = Context.Message.CreatedAt().ToUnixTimeMilliseconds();
-            long diff = GetTimestamp() - message;
+            long diff = Program.Timestamp - message;
             var embed = GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
             var response = await Response(embed);
             await response.ModifyAsync(x => 
@@ -82,6 +83,7 @@ namespace Shinobu.Commands
         
         [Command("emote", "emoji", "enlarge", "steal")]
         [Description("Enlarge an emote with a download link... for reasons...")]
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public DiscordCommandResult Emote(ICustomEmoji? emoji = null)
         {
             // if not found, see if this is a reply and try to get it from there
@@ -105,7 +107,7 @@ namespace Shinobu.Commands
                 GetEmbed()
                     .WithImageUrl(emoji.GetUrl())
                     .WithTitle(emoji.Name ?? "No emote name")
-                    .WithFooter("ID: " + emoji.Id.ToString() + string.Format(", {0}", emoji.IsAnimated ? "Animated (.gif)" : "Image (.png)"))
+                    .WithFooter("ID: " + emoji.Id + string.Format(", {0}", emoji.IsAnimated ? "Animated (.gif)" : "Image (.png)"))
                     .WithUrl(emoji.GetUrl())
             );
         }

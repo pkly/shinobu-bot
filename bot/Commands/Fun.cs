@@ -25,7 +25,7 @@ namespace Shinobu.Commands
         private readonly HttpClient _client;
         private readonly Random _random;
 
-        private readonly Dictionary<ulong, string> _sayWebhookDictionary = new Dictionary<ulong, string>()
+        private readonly Dictionary<ulong, string> _sayWebhookDictionary = new()
         {
             { 688536468112670733, "Shinobu Oshino" },
             { 688536521959407628, "Suruga Kanbaru" },
@@ -40,7 +40,7 @@ namespace Shinobu.Commands
             { 688536869939838993, "Nadeko Sengoku" }
         };
         
-        private readonly Dictionary<string, string> _eightballTypeDictionary = new Dictionary<string, string>()
+        private readonly Dictionary<string, string> _eightballTypeDictionary = new()
         {
             { "Affirmative", "EMOTE_PLUS" },
             { "Contrary", "EMOTE_MINUS" },
@@ -68,23 +68,23 @@ namespace Shinobu.Commands
             "Winner is chad, loser is incel"
         };
 
-        private readonly RangeHelper<string> _gayRanges = new RangeHelper<string>(new Range<string>[]
+        private readonly RangeHelper<string> _gayRanges = new(new Range<string>[]
         {
-            new Range<string>(0, "You're straight! Congrats!", 0),
-            new Range<string>(1, "Not that gay tbh", 24),
-            new Range<string>(25, "Kinda gay I guess", 49),
-            new Range<string>(50, "So gay it hurts oof", 100),
-            new Range<string>(101, "You're beyond gay wow", 200),
-            new Range<string>(201, "You're gay beyond what is cosmically known...", 206),
-            new Range<string>(207, "GAY OVERLORD OF CUM")
+            new(0, "You're straight! Congrats!", 0),
+            new(1, "Not that gay tbh", 24),
+            new(25, "Kinda gay I guess", 49),
+            new(50, "So gay it hurts oof", 100),
+            new(101, "You're beyond gay wow", 200),
+            new(201, "You're gay beyond what is cosmically known...", 206),
+            new(207, "GAY OVERLORD OF CUM")
         });
 
-        private readonly RangeHelper<string> _rateRanges = new RangeHelper<string>(new Range<string>[]
+        private readonly RangeHelper<string> _rateRanges = new (new Range<string>[]
         {
-            new Range<string>(0, "Not that great...", 24),
-            new Range<string>(25, "It's okay...", 49),
-            new Range<string>(50, "Pretty good!", 74),
-            new Range<string>(75, "I love it!")
+            new(0, "Not that great...", 24),
+            new(25, "It's okay...", 49),
+            new(50, "Pretty good!", 74),
+            new(75, "I love it!")
         });
         
         public Fun(HttpClient client, Random random)

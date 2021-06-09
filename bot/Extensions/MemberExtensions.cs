@@ -10,7 +10,13 @@ namespace Shinobu.Extensions
 {
     public static class MemberExtensions
     {
-        private static readonly HttpClient _client = new HttpClient();
+        private static readonly HttpClient CLIENT = new()
+        {
+            DefaultRequestHeaders =
+            {
+                {"User-Agent", Program.UserAgent}
+            }
+        };
         
         public static string NickOrName(this IMember member)
         {
@@ -19,7 +25,7 @@ namespace Shinobu.Extensions
 
         public static async Task<Image> Avatar(this IMember member, int size = 256, ImageFormat format = ImageFormat.Png)
         {
-            return await Image.LoadAsync(await _client.GetStreamAsync(member.GetAvatarUrl(format, size)));
+            return await Image.LoadAsync(await CLIENT.GetStreamAsync(member.GetAvatarUrl(format, size)));
         }
 
         public static Color? Color(this IMember member)

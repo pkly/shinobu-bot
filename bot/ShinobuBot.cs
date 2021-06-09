@@ -1,36 +1,31 @@
 using System;
 using System.Threading.Tasks;
-using System.Reflection;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Bot.Sharding;
-using Disqord.Gateway;
-using Disqord.Rest;
 using Disqord.Sharding;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
-using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Commands;
 using Shinobu.TypeParsers;
 
 namespace Shinobu
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class ShinobuBot : DiscordBotSharder
     {
         public ShinobuBot(
             IOptions<DiscordBotSharderConfiguration> options,
+            // ReSharper disable once ContextualLoggerProblem
             ILogger<DiscordBotSharder> logger,
             IServiceProvider services,
             DiscordClientSharder client) : base(options, logger, services, client)
         {}
         
         protected override ValueTask AddTypeParsersAsync(
-            CancellationToken cancellationToken = new CancellationToken()
+            CancellationToken cancellationToken = new()
         )
         {
             var value = base.AddTypeParsersAsync(cancellationToken);
@@ -40,7 +35,7 @@ namespace Shinobu
         }
 
         protected override ValueTask AddModulesAsync(
-            CancellationToken cancellationToken = new CancellationToken()
+            CancellationToken cancellationToken = new()
         )
         {
             // register the api commands

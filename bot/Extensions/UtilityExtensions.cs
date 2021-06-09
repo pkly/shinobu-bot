@@ -6,26 +6,16 @@ namespace Shinobu.Extensions
 {
     public static class UtilityExtensions
     {
-        private static Random _random = new Random();
+        private static readonly Random RANDOM = new();
 
         public static T? Random<T>(this T[] items)
         {
-            if (items.Length == 0)
-            {
-                return default;
-            }
-            
-            return items[_random.Next(items.Length)];
+            return items.Length == 0 ? default : items[RANDOM.Next(items.Length)];
         }
 
         public static T? Random<T>(this IList<T> items)
         {
-            if (items.Count == 0)
-            {
-                return default;
-            }
-            
-            return items[_random.Next(items.Count)];
+            return items.Count == 0 ? default : items[RANDOM.Next(items.Count)];
         }
 
         public static void Rewind(this Stream stream)

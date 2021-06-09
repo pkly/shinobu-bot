@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -22,6 +23,7 @@ using Color = SixLabors.ImageSharp.Color;
 namespace Shinobu.Commands
 {
     [Section("Image generation")]
+    [SuppressMessage("ReSharper", "AccessToDisposedClosure")]
     public class Images : ShinobuModuleBase
     {
         private const string LOVE_STRING = "{0} and {1}'s love is at **{2}%**\n\nYour shipname is **{3}**";
@@ -29,12 +31,13 @@ namespace Shinobu.Commands
         private const string FLAG_URL = "https://www.countryflags.io/{0}/flat/64.png";
         private const string ICON_URL = "http://openweathermap.org/img/wn/{0}@2x.png";
         
-        private readonly FontCollection _fontCollection = new FontCollection();
+        private readonly FontCollection _fontCollection = new();
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly FontFamily _fontFamily;
         private readonly Font _bold;
 
-        private readonly Color _weatherLightBgColor = new Color(new Rgba32(255, 233, 89));
-        private readonly Color _weatherDarkBgColor = new Color(new Rgba32(67, 68, 92));
+        private readonly Color _weatherLightBgColor = new(new Rgba32(255, 233, 89));
+        private readonly Color _weatherDarkBgColor = new(new Rgba32(67, 68, 92));
         private readonly Font _weatherTitleFont;
         private readonly Font _weatherFont;
         private readonly Font _weatherMainFont;
@@ -56,17 +59,17 @@ namespace Shinobu.Commands
         private readonly Random _random;
         private readonly HttpClient _client;
         
-        private readonly RangeHelper<string> _loveRanges = new RangeHelper<string>(new Range<string>[]
+        private readonly RangeHelper<string> _loveRanges = new(new Range<string>[]
         {
-            new Range<string>(0, "You guys aren't even remotely a match...", 0),
-            new Range<string>(1, "Maybe you're better off as distant friends", 25),
-            new Range<string>(26, "You guys are friends but I sense no romance", 50),
-            new Range<string>(51, "There's a connection between the two!", 75),
-            new Range<string>(76, "Love is in the air <3", 99),
-            new Range<string>(100, "Such a cute couple <3 <3 <3")
+            new(0, "You guys aren't even remotely a match...", 0),
+            new(1, "Maybe you're better off as distant friends", 25),
+            new(26, "You guys are friends but I sense no romance", 50),
+            new(51, "There's a connection between the two!", 75),
+            new(76, "Love is in the air <3", 99),
+            new(100, "Such a cute couple <3 <3 <3")
         });
 
-        private readonly Dictionary<bool, string> _imposterDictionary = new Dictionary<bool, string>()
+        private readonly Dictionary<bool, string> _imposterDictionary = new()
         {
             {false, "{0} was not The Imposter"},
             {true, "{0} was The Imposter"}
@@ -341,7 +344,7 @@ namespace Shinobu.Commands
                 await empty.SaveAsPngAsync(stream);
             }
 
-            return RespondWithAttachment($"{string.Format(text, member.Mention)} {Program.Env(result ? "EMOTE_MINUS" : "EMOTE_PLUS")}", stream);
+            return RespondWithAttachment($"{string.Format(text, member.Mention)} {Program.Env(result ? "EMOTE_PLUS" : "EMOTE_MINUS")}", stream);
         }
 
         [Section("Fun/memes")]
@@ -393,6 +396,7 @@ namespace Shinobu.Commands
                             _weatherMainFont,
                             Brushes.Solid(textColor), 
                             null,
+                            // ReSharper disable once PossibleLossOfFraction
                             new PointF(x.GetCurrentSize().Width / 2, 297)
                         )
                         .DrawImage(_weatherHumid, new Point(35, 250), 1)

@@ -13,6 +13,7 @@ namespace Shinobu.Extensions
             Font font,
             Color color,
             int height) =>
+            // ReSharper disable once PossibleLossOfFraction
             DrawTextCentered(context, text, font, color, new PointF(context.GetCurrentSize().Width / 2, height));
 
         public static IImageProcessingContext DrawTextCentered(

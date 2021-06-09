@@ -20,16 +20,19 @@ using Shinobu.Models.Assets;
 
 namespace Shinobu
 {
+    // ReSharper disable once ClassNeverInstantiated.Global
     internal sealed class Program
     {
         private const string REACTION_COMMANDS_FILE = "reaction-commands-api.json";
 
         private static readonly DateTime BOOT = DateTime.UtcNow;
             
-        public static Dictionary<string, ApiCommand> ApiCommands { get; private set; } = new Dictionary<string, ApiCommand>();
+        public static Dictionary<string, ApiCommand> ApiCommands { get; private set; } = new();
         public static string AssetsPath { get; private set; } = "";
 
         public static TimeSpan Uptime => DateTime.UtcNow - BOOT;
+        
+        public static long Timestamp => Convert.ToInt64((DateTime.Now.ToUniversalTime() - new DateTime(1970, 1, 1)).TotalMilliseconds);
 
         public static string Version
         {
@@ -45,17 +48,13 @@ namespace Shinobu
             }
         }
 
-        public static Color Color
-        {
-            get
-            {
-                return (Color) System.Drawing.ColorTranslator.FromHtml(Env("EMBED_COLOR") ?? "#00ff00");
-            }
-        }
+        public static string UserAgent => "ShinobuBot/v" + Version;
+
+        public static Color Color => System.Drawing.ColorTranslator.FromHtml(Env("EMBED_COLOR") ?? "#00ff00");
 
         public static string? Env(string name)
         {
-            return System.Environment.GetEnvironmentVariable(name);
+            return Environment.GetEnvironmentVariable(name);
         }
         
         static int Main(string[] args)
@@ -97,18 +96,18 @@ namespace Shinobu
                         .MinimumLevel.Is(minLevel)
                         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
                         .WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}", theme: AnsiConsoleTheme.Code)
-                        .WriteTo.File($"logs/log-{DateTime.Now:HH_mm_ss}.txt", restrictedToMinimumLevel: LogEventLevel.Verbose, fileSizeLimitBytes: null, buffered: true)
+                        .WriteTo.File($"logs/log-{DateTime.Now:HH_mm_ss}.txt", LogEventLevel.Verbose, fileSizeLimitBytes: null, buffered: true)
                         .CreateLogger();
                     x.AddSerilog(logger, true);
 
                     x.Services.Remove(x.Services.First(x => x.ServiceType == typeof(ILogger<>)));
                     x.Services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
-                    x.Services.AddSingleton<HttpClient>(y =>
+                    x.Services.AddSingleton(y => new HttpClient()
                     {
-                        var client = new HttpClient();
-                        client.DefaultRequestHeaders.Add("User-Agent", "ShinobuBot/v" + Version);
-
-                        return client;
+                        DefaultRequestHeaders =
+                        {
+                            {"User-Agent", UserAgent}
+                        }
                     });
                     x.Services.AddSingleton(typeof(Random));
                 })
@@ -120,7 +119,7 @@ namespace Shinobu
 
                     if (null != Env("OWNER_IDS"))
                     {
-                        List<Snowflake> ids = new List<Snowflake>();
+                        List<Snowflake> ids = new();
                         foreach (var id in Env("OWNER_IDS")!.Split(","))
                         {
                             try
@@ -130,14 +129,14 @@ namespace Shinobu
                             }
                             catch (Exception)
                             {
-                                continue;
+                                // ignored
                             }
                         }
 
                         bot.OwnerIds = ids;
                     }
                     
-                    bot.Activities = new LocalActivity[]
+                    bot.Activities = new[]
                     {
                         new LocalActivity(Env("PREFIX") + "help | v" + Version, ActivityType.Playing)
                     };
