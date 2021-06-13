@@ -5,6 +5,7 @@ logs/
 # csharp
 bot/bin
 bot/obj
+bot/.config
 
 ###> symfony/framework-bundle ###
 /.env.local

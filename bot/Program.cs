@@ -8,6 +8,7 @@ using CommandLine;
 using Disqord;
 using Disqord.Bot.Hosting;
 using Disqord.Gateway;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ using Newtonsoft.Json;
 using Serilog;
 using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
+using Shinobu.Database;
 using Shinobu.Models.Assets;
 
 namespace Shinobu
@@ -91,6 +93,22 @@ namespace Shinobu
                 .ConfigureAppConfiguration(x => {
                     x.AddCommandLine(args);
                 })
+                .ConfigureServices(x =>
+                {
+                    x.AddSingleton(y => new HttpClient()
+                    {
+                        DefaultRequestHeaders =
+                        {
+                            {"User-Agent", UserAgent}
+                        }
+                    });
+                    x.AddSingleton(typeof(Random));
+                    x.AddDbContext<ShinobuDbContext>(y => 
+                        y.UseMySql(Env("DB_STRING")!, new MariaDbServerVersion(new Version(10, 5, 5)))
+                            .EnableSensitiveDataLogging()
+                            .EnableDetailedErrors()
+                    );
+                })
                 .ConfigureLogging(x => {
                     var logger = new LoggerConfiguration()
                         .MinimumLevel.Is(minLevel)
@@ -102,14 +120,6 @@ namespace Shinobu
 
                     x.Services.Remove(x.Services.First(x => x.ServiceType == typeof(ILogger<>)));
                     x.Services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
-                    x.Services.AddSingleton(y => new HttpClient()
-                    {
-                        DefaultRequestHeaders =
-                        {
-                            {"User-Agent", UserAgent}
-                        }
-                    });
-                    x.Services.AddSingleton(typeof(Random));
                 })
                 .ConfigureDiscordBotSharder<ShinobuBot>((context, bot) => {
                     bot.Token = token;
@@ -138,12 +148,17 @@ namespace Shinobu
                     
                     bot.Activities = new[]
                     {
-                        new LocalActivity(Env("PREFIX") + "help | v" + Version, ActivityType.Playing)
+                        new LocalActivity(Env("PREFIX") + "help | v" + Version, ActivityType.Playing),
                     };
                 })
                 .UseDefaultServiceProvider(x => x.ValidateOnBuild = true)
                 .Build();
 
+            using (var scope = host.Services.CreateScope())
+            {
+                scope.ServiceProvider.GetRequiredService<ShinobuDbContext>().Database.Migrate();
+            }
+            
             host.Run();
             return 0;
         }

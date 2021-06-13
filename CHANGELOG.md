@@ -2,6 +2,11 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.2.0
+
+* finally implemented database things (shhhhhh)
+* block and unblock command added, block all those meanies
+
 ## 3.1.6
 
 * code cleanup! no major changes.

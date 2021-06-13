@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
 using Disqord.Rest;
+using Microsoft.EntityFrameworkCore;
 using Qmmands;
 using Shinobu.Attributes;
+using Shinobu.Database;
+using Shinobu.Database.Entity.Command;
 using Shinobu.Extensions;
 using Shinobu.Utility;
 
@@ -24,6 +27,7 @@ namespace Shinobu.Commands
 
         private readonly HttpClient _client;
         private readonly Random _random;
+        private readonly ShinobuDbContext _dbContext;
 
         private readonly Dictionary<ulong, string> _sayWebhookDictionary = new()
         {
@@ -87,10 +91,11 @@ namespace Shinobu.Commands
             new(75, "I love it!")
         });
         
-        public Fun(HttpClient client, Random random)
+        public Fun(HttpClient client, Random random, ShinobuDbContext dbContext)
         {
             _client = client;
             _random = random;
+            _dbContext = dbContext;
         }
         
         [Command("8ball")]
@@ -230,6 +235,50 @@ namespace Shinobu.Commands
                     number
                 )
             );
+        }
+
+        [Command("block")]
+        [Description("Block a user from interacting with you")]
+        public async Task<DiscordCommandResult> Block(IMember member)
+        {
+            // prepare block item
+            var block = new Block()
+            {
+                Blocked = member.Id,
+                Requester = Context.Author.Id
+            };
+
+            // check if exists
+            if (await _dbContext.Blocks
+                .Where(x => x.Blocked == block.Blocked && x.Requester == block.Requester)
+                .AnyAsync())
+            {
+                return EmbedReply("User already blocked");
+            }
+            
+            // add since it's new
+            await _dbContext.Blocks.AddAsync(block);
+            await _dbContext.SaveChangesAsync();
+
+            return EmbedReply("User blocked");
+        }
+
+        [Command("unblock")]
+        [Description("Unblock a user from interacting with you")]
+        public async Task Unblock(IMember member)
+        {
+            try
+            {
+                _dbContext.Blocks.Remove(await _dbContext.Blocks
+                    .Where(x => x.Blocked == member.Id.RawValue && x.Requester == Context.Author.Id.RawValue)
+                    .FirstAsync());
+                await _dbContext.SaveChangesAsync();
+
+                await EmbedReply("User no longer blocked");
+            }
+            catch (InvalidOperationException) // not found
+            {
+            }
         }
 
         /// <summary>
