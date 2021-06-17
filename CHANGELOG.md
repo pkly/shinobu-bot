@@ -2,6 +2,10 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.2.1
+
+* added kick command
+
 ## 3.2.0
 
 * finally implemented database things (shhhhhh)

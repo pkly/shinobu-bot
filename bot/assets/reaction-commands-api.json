@@ -1574,5 +1574,70 @@
     },
     "Group": "gif",
     "SimpleGroup": 3
+  },
+  "kick": {
+    "Name": "kick",
+    "Url": "https://api.waifu.pics/sfw/kick",
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": 0,
+          "Value": [
+            "{0} just kicked the air"
+          ]
+        },
+        {
+          "From": 1,
+          "To": 1,
+          "Value": [
+            "{0} just kicked {1} 's butt!",
+            "{1} got their ass handed to them by {0}",
+            "{1} was expelled to another galaxy by {0} 's kick",
+            "{0} gave {1} the kick of their lives"
+          ]
+        },
+        {
+          "From": 2,
+          "To": 2,
+          "Value": [
+            "{0} just kicked {1} and {2}'s butt!",
+            "{1} and {2} got their asses handed to them by {0}",
+            "{1} and {2} were expelled to another galaxy by {0} 's kick",
+            "{0} gave {1} and {2} the kick of their lives"
+          ]
+        },
+        {
+          "From": 3,
+          "To": 3,
+          "Value": [
+            "{0} just kicked {1}, {2} and {3}'s butt!",
+            "{1}, {2} and {3} got their asses handed to them by {0}",
+            "{1}, {2} and {3} were expelled to another galaxy by {0} 's kick",
+            "{0} gave {1}, {2} and {3} the kick of their lives"
+          ]
+        },
+        {
+          "From": 4,
+          "To": 4,
+          "Value": [
+            "{0} just kicked {1}, {2}, {3} and {4}'s butt!",
+            "{1}, {2}, {3} and {4} got their asses handed to them by {0}",
+            "{1}, {2}, {3} and {4} were expelled to another galaxy by {0} 's kick",
+            "{0} gave {1}, {2}, {3} and {4} the kick of their lives"
+          ]
+        },
+        {
+          "From": 5,
+          "To": null,
+          "Value": [
+            "{0} just kicked everyone 's butt!",
+            "The whole lot got their asses handed to them by {0}",
+            "Everyone's expelled to another galaxy by {0} 's kick",
+            "{0} gave everyone the kick of their lives"
+          ]
+        }
+      ]
+    }
   }
 }
