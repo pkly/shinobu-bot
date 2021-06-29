@@ -566,7 +566,7 @@
           "To": 2,
           "Value": [
             "{0} hugged {1} and {2}",
-            "{0}, {1} and and {2} are sharing a hug",
+            "{0}, {1} and {2} are sharing a hug",
             "{0} held {1} and {2} tight for a hug"
           ]
         },
