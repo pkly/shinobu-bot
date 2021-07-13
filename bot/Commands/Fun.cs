@@ -108,7 +108,7 @@ namespace Shinobu.Commands
             return Response(
                 GetEmbed(string.Format("{0} {1}", data!["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
                     .WithTitle(message + (message.EndsWith("?") ? "" : "?"))
-                    .WithAuthor(((IMember) Context.Author).NickOrName(), Context.Author.GetAvatarUrl(ImageFormat.Default, 128))
+                    .WithAuthor(((IMember) Context.Author).NickOrName(), Context.Author.GetAvatarUrl(CdnAssetFormat.Automatic, 128))
             );
         }
         
@@ -140,9 +140,11 @@ namespace Shinobu.Commands
             );
             var response = await Response(embed);
             await Task.Delay(3000);
-            await response.ModifyAsync(x => x.Embed = embed.WithDescription(
-                _coinflipEndQuote.Random()
-            ));
+            await response.ModifyAsync(x => x.Embeds = new LocalEmbed[] {
+                embed.WithDescription(
+                    _coinflipEndQuote.Random()
+                )
+            });
         }
         
         [Command("f", "rip")]
@@ -183,12 +185,14 @@ namespace Shinobu.Commands
             var loser = items[0];
             
             await Task.Delay(3000);
-            await response.ModifyAsync(x => x.Embed = embed.WithDescription(string.Format(
-                "{0} is the winner! **R.I.P. {1}** {2}",
-                winner.Mention,
-                loser.Mention,
-                Program.Env("EMOTE_DEAD")
-            )));
+            await response.ModifyAsync(x => x.Embeds = new LocalEmbed[] {
+                embed.WithDescription(string.Format(
+                    "{0} is the winner! **R.I.P. {1}** {2}",
+                    winner.Mention,
+                    loser.Mention,
+                    Program.Env("EMOTE_DEAD")
+                ))
+            });
         }
 
         [Command("gay")]

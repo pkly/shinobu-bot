@@ -49,7 +49,7 @@ namespace Shinobu
 
             return Response(
                 (new LocalMessage())
-                .WithEmbed(embed
+                .WithEmbeds(embed
                     .WithImageUrl("attachment://file.png"))
                 .AddAttachment(new LocalAttachment(stream, "file.png"))
             );

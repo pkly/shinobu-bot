@@ -23,7 +23,7 @@ namespace Shinobu.Extensions
             return member.Nick != null && member.Nick.Length > 0 ? member.Nick : member.Name;
         }
 
-        public static async Task<Image> Avatar(this IMember member, int size = 256, ImageFormat format = ImageFormat.Png)
+        public static async Task<Image> Avatar(this IMember member, int size = 256, CdnAssetFormat format = CdnAssetFormat.Png)
         {
             return await Image.LoadAsync(await CLIENT.GetStreamAsync(member.GetAvatarUrl(format, size)));
         }

@@ -2,6 +2,10 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.2.2
+
+* updated the libraries
+
 ## 3.2.1
 
 * added kick command

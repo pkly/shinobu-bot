@@ -23,7 +23,7 @@ namespace Shinobu.Extensions
             Color color,
             PointF point) =>
             context.DrawText(
-                new TextGraphicsOptions(new GraphicsOptions(), new TextOptions() {HorizontalAlignment = HorizontalAlignment.Center}),
+                new DrawingOptions() { TextOptions = new TextOptions() {HorizontalAlignment = HorizontalAlignment.Center}},
                 text,
                 font,
                 Brushes.Solid(color),

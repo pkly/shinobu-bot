@@ -61,7 +61,7 @@ namespace Shinobu.Commands
             var response = await client.GetAsync(apiCommand.Url);
             if (response.StatusCode != HttpStatusCode.OK)
             {
-                await new DiscordResponseCommandResult(context, builder.WithEmbed(embed.WithDescription("An error occurred while fetching reaction!")));
+                await new DiscordResponseCommandResult(context, builder.WithEmbeds(embed.WithDescription("An error occurred while fetching reaction!")));
                 return;
             }
 
@@ -70,7 +70,7 @@ namespace Shinobu.Commands
             var decoded = JsonConvert.DeserializeObject<Dictionary<string, string>>(await response.Content.ReadAsStringAsync());
             
             embed.WithImageUrl(apiCommand.GetFixedImageUrl(decoded[apiCommand.Path]));
-            await new DiscordResponseCommandResult(context, (new LocalMessage()).WithEmbed(embed));
+            await new DiscordResponseCommandResult(context, (new LocalMessage()).WithEmbeds(embed));
         }
     }
 }

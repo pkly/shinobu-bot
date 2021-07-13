@@ -49,9 +49,11 @@ namespace Shinobu.Commands
             var embed = GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
             var response = await Response(embed);
             await response.ModifyAsync(x => 
-                x.Embed = embed.WithDescription(
-                    String.Format(PING_MESSAGE, diff, response.CreatedAt().ToUnixTimeMilliseconds() - message)
-                )
+                x.Embeds = new LocalEmbed[] {
+                    embed.WithDescription(
+                        String.Format(PING_MESSAGE, diff, response.CreatedAt().ToUnixTimeMilliseconds() - message)
+                    )
+                }
             );
         }
 
@@ -77,7 +79,7 @@ namespace Shinobu.Commands
             return Reply(
                 GetEmbed()
                     .WithTitle(member!.NickOrName() + "'s avatar")
-                    .WithImageUrl(member.GetAvatarUrl(ImageFormat.Default, 256))
+                    .WithImageUrl(member.GetAvatarUrl(CdnAssetFormat.Automatic, 256))
             );
         }
         
@@ -263,7 +265,7 @@ namespace Shinobu.Commands
             {
                 try
                 {
-                    await Context.Author.SendMessageAsync(builder.WithEmbed(embed));
+                    await Context.Author.SendMessageAsync(builder.WithEmbeds(embed));
                     if (!embed.Equals(lastEmbed))
                     {
                         await Task.Delay(500);

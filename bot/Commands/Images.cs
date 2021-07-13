@@ -391,7 +391,7 @@ namespace Shinobu.Commands
                         .DrawTextCentered(weather.Weather[0].Main.ToLower(), _weatherFont, textColor, 345)
                         .DrawTextCentered(weather.Name, _weatherMainFont, textColor, 140)
                         .DrawText(
-                            new TextGraphicsOptions(new GraphicsOptions() { BlendPercentage = 0.7f }, new TextOptions() {HorizontalAlignment = HorizontalAlignment.Center}),
+                            new DrawingOptions() { GraphicsOptions = new GraphicsOptions() { BlendPercentage = 0.7f }, TextOptions = new TextOptions() {HorizontalAlignment = HorizontalAlignment.Center}},
                             $"feels like {Convert.ToInt16(weather.Main.Feels_like).ToString()}°C",
                             _weatherMainFont,
                             Brushes.Solid(textColor), 
