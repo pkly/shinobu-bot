@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -14,6 +15,11 @@ using MoreLinq;
 using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Extensions;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Drawing.Processing;
+using SixLabors.ImageSharp.PixelFormats;
+using SixLabors.ImageSharp.Processing;
+using Color = SixLabors.ImageSharp.Color;
 
 namespace Shinobu.Commands
 {
@@ -81,6 +87,42 @@ namespace Shinobu.Commands
                     .WithTitle(member!.NickOrName() + "'s avatar")
                     .WithImageUrl(member.GetAvatarUrl(CdnAssetFormat.Automatic, 256))
             );
+        }
+
+        [Command("banner")]
+        [Description("Show a user's profile banner (or color)")]
+        public async Task<DiscordCommandResult> Banner(IMember? member = null)
+        {
+            member ??= Context.GetCurrentMember();
+            
+            // re-fetch user cuz otherwise no banner
+            // also this crashes if you fetch a member lmao
+            var user = await Context.Bot.FetchUserAsync(member!.Id);
+
+            var embed = GetEmbed()
+                .WithTitle(member!.NickOrName() + "'s banner");
+
+            string? url = user.GetBannerUrl(CdnAssetFormat.Automatic, 512);
+            if (url == null && user!.AccentColor == null)
+            {
+                return Reply("User has no banner or accent color");
+            }
+            
+            if (url != null)
+            {
+                return Reply(embed.WithImageUrl(url));
+            }
+            else
+            {
+                var stream = new MemoryStream();
+                using (Image empty = new Image<Rgba32>(512, 200))
+                {
+                    empty.Mutate(x => x.Fill(Color.ParseHex(user.AccentColor.ToString()!)));
+                    await empty.SaveAsPngAsync(stream);
+                }
+
+                return ReplyWithAttachment(embed, stream);
+            }
         }
         
         [Command("emote", "emoji", "enlarge", "steal")]

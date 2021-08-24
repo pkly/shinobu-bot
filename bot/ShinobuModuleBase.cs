@@ -54,5 +54,31 @@ namespace Shinobu
                 .AddAttachment(new LocalAttachment(stream, "file.png"))
             );
         }
+
+        protected DiscordCommandResult ReplyWithAttachment(Stream stream)
+        {
+            return ReplyWithAttachment(GetEmbed(), stream);
+        }
+
+        protected DiscordCommandResult ReplyWithAttachment(
+            string description,
+            Stream stream)
+        {
+            return ReplyWithAttachment(GetEmbed(description), stream);
+        }
+        
+        protected DiscordCommandResult ReplyWithAttachment(
+            LocalEmbed embed,
+            Stream stream)
+        {
+            stream.Rewind(); // this would later crash if not rewound so
+
+            return Reply(
+                (new LocalMessage())
+                .WithEmbeds(embed
+                    .WithImageUrl("attachment://file.png"))
+                .AddAttachment(new LocalAttachment(stream, "file.png"))
+            );
+        }
     }
 }
