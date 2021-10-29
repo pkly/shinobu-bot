@@ -28,7 +28,7 @@ namespace Shinobu.Commands
     {
         private const string LOVE_STRING = "{0} and {1}'s love is at **{2}%**\n\nYour shipname is **{3}**";
         private const string WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}";
-        private const string FLAG_URL = "https://www.countryflags.io/{0}/flat/64.png";
+        private const string FLAG_URL = "https://flagcdn.com/w40/{0}.png";
         private const string ICON_URL = "http://openweathermap.org/img/wn/{0}@2x.png";
         
         private readonly FontCollection _fontCollection = new();
@@ -374,12 +374,12 @@ namespace Shinobu.Commands
             }
             
             var stream = new MemoryStream();
-            using (Image flag = await Image.LoadAsync(await _client.GetStreamAsync(string.Format(FLAG_URL, weather.Sys.Country))))
+            using (Image flag = await Image.LoadAsync(await _client.GetStreamAsync(string.Format(FLAG_URL, weather.Sys.Country.ToLower()))))
             using (Image icon = await Image.LoadAsync(await _client.GetStreamAsync(string.Format(ICON_URL, weather.Weather[0].Icon))))
             using (Image bg = new Image<Rgba32>(400, 168))
             using (Image empty = new Image<Rgba32>(400, 400))
             {
-                flag.Mutate(x => x.Resize(64, 64));
+                flag.Mutate(x => x.Resize(60, 40));
                 icon.Mutate(x => x.Resize(160, 160));
                 
                 bg.Mutate(x => x.Fill(textColor));
@@ -403,7 +403,7 @@ namespace Shinobu.Commands
                         .DrawTextCentered($"{weather.Main.Humidity}%", _weatherHumidityFont, textColor, new PointF(51, 290))
                         .DrawImage(_weatherWind, new Point(330, 250), 1)
                         .DrawTextCentered($"{Convert.ToInt16(weather.Wind.Speed).ToString()}km/h", _weatherSpeedFont, textColor, new PointF(350, 290))
-                        .DrawImage(flag, new Point(-2, 9), 1)
+                        .DrawImage(flag, new Point(0, 20), 1)
                         .DrawImage(icon, new Point(120, -2), 1)
                 );
 
