@@ -19,6 +19,7 @@ using Serilog.Events;
 using Serilog.Sinks.SystemConsole.Themes;
 using Shinobu.Database;
 using Shinobu.Models.Assets;
+using Shinobu.Services;
 
 namespace Shinobu
 {
@@ -53,6 +54,18 @@ namespace Shinobu
         public static string UserAgent => "ShinobuBot/v" + Version;
 
         public static Color Color => System.Drawing.ColorTranslator.FromHtml(Env("EMBED_COLOR") ?? "#00ff00");
+
+        public static LocalEmbed GetEmbed(string? description = null)
+        {
+            var embed = (new LocalEmbed())
+                .WithColor(Color);
+
+            if (description != null) {
+                embed.WithDescription(description);
+            }
+
+            return embed;
+        }
 
         public static string? Env(string name)
         {
@@ -103,6 +116,7 @@ namespace Shinobu
                         }
                     });
                     x.AddSingleton(typeof(Random));
+                    x.AddSingleton(typeof(FontService));
                     x.AddDbContext<ShinobuDbContext>(y => 
                         y.UseMySql(Env("DB_STRING")!, new MariaDbServerVersion(new Version(10, 5, 5)))
                             .EnableSensitiveDataLogging()

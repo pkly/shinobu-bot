@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Version>3.2.5</Version>
+    <Version>3.3.0</Version>
     <OutputType>Exe</OutputType>
     <TargetFramework>net5.0</TargetFramework>
     <Nullable>enable</Nullable>
@@ -8,8 +8,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
-    <PackageReference Include="Disqord" Version="1.0.0-10242021-142" />
-    <PackageReference Include="Disqord.Bot" Version="1.0.0-10242021-142" />
+    <PackageReference Include="Disqord" Version="1.0.0-11212021-150" />
+    <PackageReference Include="Disqord.Bot" Version="1.0.0-11212021-150" />
     <PackageReference Include="DotNetEnv" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.8">

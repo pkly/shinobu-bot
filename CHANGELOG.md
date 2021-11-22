@@ -2,6 +2,10 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.3.0
+
+* added the +bet, +bet-all, +leaderboard and winter event (only in Shinobu & Friends (this time))
+
 ## 3.2.3
 
 * added the +banner command

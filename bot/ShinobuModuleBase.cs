@@ -9,36 +9,24 @@ namespace Shinobu
     {
         protected DiscordResponseCommandResult EmbedReply(string description)
         {
-            return Reply(GetEmbed(description));
+            return Reply(Program.GetEmbed(description));
         }
 
         protected DiscordResponseCommandResult Embed(string description)
         {
-            return Response(GetEmbed(description));
-        }
-
-        protected LocalEmbed GetEmbed(string? description = null)
-        {
-            var embed = (new LocalEmbed())
-                .WithColor(Program.Color);
-
-            if (description != null) {
-                embed.WithDescription(description);
-            }
-
-            return embed;
+            return Response(Program.GetEmbed(description));
         }
 
         protected DiscordCommandResult RespondWithAttachment(Stream stream)
         {
-            return RespondWithAttachment(GetEmbed(), stream);
+            return RespondWithAttachment(Program.GetEmbed(), stream);
         }
         
         protected DiscordCommandResult RespondWithAttachment(
             string description,
             Stream stream)
         {
-            return RespondWithAttachment(GetEmbed(description), stream);
+            return RespondWithAttachment(Program.GetEmbed(description), stream);
         }
 
         protected DiscordCommandResult RespondWithAttachment(
@@ -57,14 +45,14 @@ namespace Shinobu
 
         protected DiscordCommandResult ReplyWithAttachment(Stream stream)
         {
-            return ReplyWithAttachment(GetEmbed(), stream);
+            return ReplyWithAttachment(Program.GetEmbed(), stream);
         }
 
         protected DiscordCommandResult ReplyWithAttachment(
             string description,
             Stream stream)
         {
-            return ReplyWithAttachment(GetEmbed(description), stream);
+            return ReplyWithAttachment(Program.GetEmbed(description), stream);
         }
         
         protected DiscordCommandResult ReplyWithAttachment(

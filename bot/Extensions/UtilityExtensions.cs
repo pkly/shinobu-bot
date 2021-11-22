@@ -28,6 +28,11 @@ namespace Shinobu.Extensions
             return Convert.ToBoolean(random.Next(2)); // why 2 lmao C#
         }
 
+        public static bool FitsPercentage(this Random random, short percentage)
+        {
+            return random.Next(0, 100) <= 100 - percentage;
+        }
+
         public static string ToReadable(this TimeSpan span)
         {
             var total = span.TotalSeconds;

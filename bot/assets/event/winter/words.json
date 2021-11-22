@@ -1,0 +1,1365 @@
+[
+    {
+        "Query": "Shinobu & Friends",
+        "Answer": [
+            "Shinobu & Friends",
+            "Shinobu And Friends",
+            "Nibba's Dungeon"
+        ]
+    },
+    {
+        "Query": "2+2",
+        "Answer": ["4"]
+    },
+    {
+        "Query": "9+10",
+        "Answer": ["21"]
+    },
+    {
+        "Query": "21*3",
+        "Answer": ["63"]
+    },
+    {
+        "Query": "7*6",
+        "Answer": ["42"]
+    },
+    {
+        "Query": "1+1+4+2",
+        "Answer": ["8"]
+    },
+    {
+        "Query": "60/3",
+        "Answer": ["20"]
+    },
+    {
+        "Query": "8*3",
+        "Answer": ["24"]
+    },
+    {
+        "Query": "69*2",
+        "Answer": ["138"]
+    },
+    {
+        "Query": "The sex number",
+        "Answer": ["69"]
+    },
+    {
+        "Query": "Nibba's Age",
+        "Answer": ["22"]
+    },
+    {
+        "Query": "9+241",
+        "Answer": ["250"]
+    },
+    {
+        "Query": "(2*17)/2",
+        "Answer": ["17"]
+    },
+    {
+        "Query": "93284+716",
+        "Answer": ["94000"]
+    },
+    {
+        "Query": "(5+5)*2",
+        "Answer": ["20"]
+    },
+    {
+        "Query": "(20*20)+20",
+        "Answer": ["420"]
+    },
+    {
+        "Query": "999/3",
+        "Answer": ["333"]
+    },
+    {
+        "Query": "83*2",
+        "Answer": ["166"]
+    },
+    {
+        "Query": "2*2*2",
+        "Answer": ["8"]
+    },
+    {
+        "Query": "(10/10)+9",
+        "Answer": ["10"]
+    },
+    {
+        "Query": "9283463+7",
+        "Answer": ["9283470"]
+    },
+    {
+        "Query": "32+25",
+        "Answer": ["57"]
+    },
+    {
+        "Query": "733+ 67",
+        "Answer": ["800"]
+    },
+    {
+        "Query": "13*4",
+        "Answer": ["52"]
+    },
+    {
+        "Query": "Cyberpunk 20??",
+        "Answer": ["77"]
+    },
+    {
+        "Query": "1-10",
+        "Answer": ["-9"]
+    },
+    {
+        "Query": "999-1000",
+        "Answer": ["-1"]
+    },
+    {
+        "Query": "9*9",
+        "Answer": ["81"]
+    },
+    {
+        "Query": "My Little Pog?????",
+        "Answer": ["Champ"]
+    },
+    {
+        "Query": "0*91231",
+        "Answer": ["0"]
+    },
+    {
+        "Query": "x*10=90",
+        "Answer": ["9"]
+    },
+    {
+        "Query": "x/3=6",
+        "Answer": ["18"]
+    },
+    {
+        "Query": "14x*2x=32",
+        "Answer": ["2"]
+    },
+    {
+        "Query": "1+2+3",
+        "Answer": ["6"]
+    },
+    {
+        "Query": "Advent",
+        "Answer": null
+    },
+    {
+        "Query": "Angels",
+        "Answer": null
+    },
+    {
+        "Query": "Announcement",
+        "Answer": null
+    },
+    {
+        "Query": "Bethlehem",
+        "Answer": null
+    },
+    {
+        "Query": "Blitzen",
+        "Answer": null
+    },
+    {
+        "Query": "Candles",
+        "Answer": null
+    },
+    {
+        "Query": "Candy Canes",
+        "Answer": null
+    },
+    {
+        "Query": "Cards",
+        "Answer": null
+    },
+    {
+        "Query": "Cedar",
+        "Answer": null
+    },
+    {
+        "Query": "Ceremonies",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas Eve",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas Card",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas Carol",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas Cookies",
+        "Answer": null
+    },
+    {
+        "Query": "Christmas Tree",
+        "Answer": null
+    },
+    {
+        "Query": "Christmastime",
+        "Answer": null
+    },
+    {
+        "Query": "Comet",
+        "Answer": null
+    },
+    {
+        "Query": "Cranberry Sauce",
+        "Answer": null
+    },
+    {
+        "Query": "Crowds",
+        "Answer": null
+    },
+    {
+        "Query": "Cupid",
+        "Answer": null
+    },
+    {
+        "Query": "Dancer",
+        "Answer": null
+    },
+    {
+        "Query": "Dasher",
+        "Answer": null
+    },
+    {
+        "Query": "December",
+        "Answer": null
+    },
+    {
+        "Query": "December 25",
+        "Answer": null
+    },
+    {
+        "Query": "Dolls",
+        "Answer": null
+    },
+    {
+        "Query": "Donner",
+        "Answer": null
+    },
+    {
+        "Query": "Dressing",
+        "Answer": null
+    },
+    {
+        "Query": "Father Christmas",
+        "Answer": null
+    },
+    {
+        "Query": "Feliz Navidad",
+        "Answer": null
+    },
+    {
+        "Query": "Frosty the Snowman",
+        "Answer": null
+    },
+    {
+        "Query": "Gift Boxes",
+        "Answer": null
+    },
+    {
+        "Query": "Gifts",
+        "Answer": null
+    },
+    {
+        "Query": "Ham",
+        "Answer": null
+    },
+    {
+        "Query": "Holy",
+        "Answer": null
+    },
+    {
+        "Query": "Icicles",
+        "Answer": null
+    },
+    {
+        "Query": "Jack Frost",
+        "Answer": null
+    },
+    {
+        "Query": "Jesus",
+        "Answer": null
+    },
+    {
+        "Query": "Joyeux Noel",
+        "Answer": null
+    },
+    {
+        "Query": "Krampus",
+        "Answer": null
+    },
+    {
+        "Query": "Kris Kringle",
+        "Answer": null
+    },
+    {
+        "Query": "Lists",
+        "Answer": null
+    },
+    {
+        "Query": "Merry Christmas",
+        "Answer": null
+    },
+    {
+        "Query": "Miracle",
+        "Answer": null
+    },
+    {
+        "Query": "New Year",
+        "Answer": null
+    },
+    {
+        "Query": "Noel",
+        "Answer": null
+    },
+    {
+        "Query": "North Pole",
+        "Answer": null
+    },
+    {
+        "Query": "Parades",
+        "Answer": null
+    },
+    {
+        "Query": "Pine",
+        "Answer": null
+    },
+    {
+        "Query": "Prancer",
+        "Answer": null
+    },
+    {
+        "Query": "Pumpkin Pie",
+        "Answer": null
+    },
+    {
+        "Query": "Punch",
+        "Answer": null
+    },
+    {
+        "Query": "Red/green",
+        "Answer": null
+    },
+    {
+        "Query": "Rudolph",
+        "Answer": null
+    },
+    {
+        "Query": "Sacred",
+        "Answer": null
+    },
+    {
+        "Query": "Saint Nicholas",
+        "Answer": null
+    },
+    {
+        "Query": "Santa Claus",
+        "Answer": null
+    },
+    {
+        "Query": "Santa's Elves",
+        "Answer": null
+    },
+    {
+        "Query": "Santa's Helpers",
+        "Answer": null
+    },
+    {
+        "Query": "Santa's List",
+        "Answer": null
+    },
+    {
+        "Query": "Santa's Workshop",
+        "Answer": null
+    },
+    {
+        "Query": "Sauce",
+        "Answer": null
+    },
+    {
+        "Query": "Scrooge",
+        "Answer": null
+    },
+    {
+        "Query": "Sleighbells",
+        "Answer": null
+    },
+    {
+        "Query": "Snowflakes",
+        "Answer": null
+    },
+    {
+        "Query": "St. Nick",
+        "Answer": null
+    },
+    {
+        "Query": "Stand",
+        "Answer": null
+    },
+    {
+        "Query": "Stickers",
+        "Answer": null
+    },
+    {
+        "Query": "Stocking Stuffers",
+        "Answer": null
+    },
+    {
+        "Query": "Sweet Potato",
+        "Answer": null
+    },
+    {
+        "Query": "Toys",
+        "Answer": null
+    },
+    {
+        "Query": "Traffic",
+        "Answer": null
+    },
+    {
+        "Query": "Vixen",
+        "Answer": null
+    },
+    {
+        "Query": "Worship",
+        "Answer": null
+    },
+    {
+        "Query": "Xmas",
+        "Answer": null
+    },
+    {
+        "Query": "Angel",
+        "Answer": null
+    },
+    {
+        "Query": "Artificial Tree",
+        "Answer": null
+    },
+    {
+        "Query": "Bells",
+        "Answer": null
+    },
+    {
+        "Query": "Birth",
+        "Answer": null
+    },
+    {
+        "Query": "Blizzard",
+        "Answer": null
+    },
+    {
+        "Query": "Blustery",
+        "Answer": null
+    },
+    {
+        "Query": "Boots",
+        "Answer": null
+    },
+    {
+        "Query": "Bough",
+        "Answer": null
+    },
+    {
+        "Query": "Bow",
+        "Answer": null
+    },
+    {
+        "Query": "Box",
+        "Answer": null
+    },
+    {
+        "Query": "Candle",
+        "Answer": null
+    },
+    {
+        "Query": "Candy",
+        "Answer": null
+    },
+    {
+        "Query": "Candy Cane",
+        "Answer": null
+    },
+    {
+        "Query": "Cap",
+        "Answer": null
+    },
+    {
+        "Query": "Card",
+        "Answer": null
+    },
+    {
+        "Query": "Carolers",
+        "Answer": null
+    },
+    {
+        "Query": "Caroling",
+        "Answer": null
+    },
+    {
+        "Query": "Carols",
+        "Answer": null
+    },
+    {
+        "Query": "Celebrate",
+        "Answer": null
+    },
+    {
+        "Query": "Celebration",
+        "Answer": null
+    },
+    {
+        "Query": "Ceremony",
+        "Answer": null
+    },
+    {
+        "Query": "Charity",
+        "Answer": null
+    },
+    {
+        "Query": "Chestnuts",
+        "Answer": null
+    },
+    {
+        "Query": "Chill",
+        "Answer": null
+    },
+    {
+        "Query": "Chilly",
+        "Answer": null
+    },
+    {
+        "Query": "Chimney",
+        "Answer": null
+    },
+    {
+        "Query": "Cider",
+        "Answer": null
+    },
+    {
+        "Query": "Coal",
+        "Answer": null
+    },
+    {
+        "Query": "Cold",
+        "Answer": null
+    },
+    {
+        "Query": "Cookie",
+        "Answer": null
+    },
+    {
+        "Query": "Creche",
+        "Answer": null
+    },
+    {
+        "Query": "Decorate",
+        "Answer": null
+    },
+    {
+        "Query": "Decorations",
+        "Answer": null
+    },
+    {
+        "Query": "Display",
+        "Answer": null
+    },
+    {
+        "Query": "Eggnog",
+        "Answer": null
+    },
+    {
+        "Query": "Elf",
+        "Answer": null
+    },
+    {
+        "Query": "Elves",
+        "Answer": null
+    },
+    {
+        "Query": "Eve",
+        "Answer": null
+    },
+    {
+        "Query": "Evergreen",
+        "Answer": null
+    },
+    {
+        "Query": "Exchange",
+        "Answer": null
+    },
+    {
+        "Query": "Family",
+        "Answer": null
+    },
+    {
+        "Query": "Family Reunion",
+        "Answer": null
+    },
+    {
+        "Query": "Feast",
+        "Answer": null
+    },
+    {
+        "Query": "Festival",
+        "Answer": null
+    },
+    {
+        "Query": "Festive",
+        "Answer": null
+    },
+    {
+        "Query": "Fir",
+        "Answer": null
+    },
+    {
+        "Query": "Fireplace",
+        "Answer": null
+    },
+    {
+        "Query": "Firewood",
+        "Answer": null
+    },
+    {
+        "Query": "Frankincense",
+        "Answer": null
+    },
+    {
+        "Query": "Frosty",
+        "Answer": null
+    },
+    {
+        "Query": "Fruitcake",
+        "Answer": null
+    },
+    {
+        "Query": "Garland",
+        "Answer": null
+    },
+    {
+        "Query": "Gift",
+        "Answer": null
+    },
+    {
+        "Query": "Gift-giving",
+        "Answer": null
+    },
+    {
+        "Query": "Gingerbread",
+        "Answer": null
+    },
+    {
+        "Query": "Gingerbread House",
+        "Answer": null
+    },
+    {
+        "Query": "Gingerbread Man",
+        "Answer": null
+    },
+    {
+        "Query": "Gingerbread Woman",
+        "Answer": null
+    },
+    {
+        "Query": "Give",
+        "Answer": null
+    },
+    {
+        "Query": "Gold",
+        "Answer": null
+    },
+    {
+        "Query": "Goodwill",
+        "Answer": null
+    },
+    {
+        "Query": "Goose",
+        "Answer": null
+    },
+    {
+        "Query": "Green",
+        "Answer": null
+    },
+    {
+        "Query": "Greetings",
+        "Answer": null
+    },
+    {
+        "Query": "Guest",
+        "Answer": null
+    },
+    {
+        "Query": "Happy",
+        "Answer": null
+    },
+    {
+        "Query": "Holiday",
+        "Answer": null
+    },
+    {
+        "Query": "Holly",
+        "Answer": null
+    },
+    {
+        "Query": "Hope",
+        "Answer": null
+    },
+    {
+        "Query": "Hot Chocolate",
+        "Answer": null
+    },
+    {
+        "Query": "Hot Cider",
+        "Answer": null
+    },
+    {
+        "Query": "Hug",
+        "Answer": null
+    },
+    {
+        "Query": "Ice Skates",
+        "Answer": null
+    },
+    {
+        "Query": "Icicle",
+        "Answer": null
+    },
+    {
+        "Query": "Icy",
+        "Answer": null
+    },
+    {
+        "Query": "Ivy",
+        "Answer": null
+    },
+    {
+        "Query": "Jingle Bells",
+        "Answer": null
+    },
+    {
+        "Query": "Jolly",
+        "Answer": null
+    },
+    {
+        "Query": "Joy",
+        "Answer": null
+    },
+    {
+        "Query": "Joyful",
+        "Answer": null
+    },
+    {
+        "Query": "Kings",
+        "Answer": null
+    },
+    {
+        "Query": "Lights",
+        "Answer": null
+    },
+    {
+        "Query": "List",
+        "Answer": null
+    },
+    {
+        "Query": "Log",
+        "Answer": null
+    },
+    {
+        "Query": "Love",
+        "Answer": null
+    },
+    {
+        "Query": "Manger",
+        "Answer": null
+    },
+    {
+        "Query": "Merry",
+        "Answer": null
+    },
+    {
+        "Query": "Mince Pie",
+        "Answer": null
+    },
+    {
+        "Query": "Mistletoe",
+        "Answer": null
+    },
+    {
+        "Query": "Mittens",
+        "Answer": null
+    },
+    {
+        "Query": "Myrrh",
+        "Answer": null
+    },
+    {
+        "Query": "Nativity",
+        "Answer": null
+    },
+    {
+        "Query": "Naughty",
+        "Answer": null
+    },
+    {
+        "Query": "Nice",
+        "Answer": null
+    },
+    {
+        "Query": "Nippy",
+        "Answer": null
+    },
+    {
+        "Query": "Nutcracker",
+        "Answer": null
+    },
+    {
+        "Query": "Occasion",
+        "Answer": null
+    },
+    {
+        "Query": "Ornaments",
+        "Answer": null
+    },
+    {
+        "Query": "Package",
+        "Answer": null
+    },
+    {
+        "Query": "Pageant",
+        "Answer": null
+    },
+    {
+        "Query": "Parade",
+        "Answer": null
+    },
+    {
+        "Query": "Partridge",
+        "Answer": null
+    },
+    {
+        "Query": "Party",
+        "Answer": null
+    },
+    {
+        "Query": "Pie",
+        "Answer": null
+    },
+    {
+        "Query": "Pine Tree",
+        "Answer": null
+    },
+    {
+        "Query": "Pinecone",
+        "Answer": null
+    },
+    {
+        "Query": "Plum Pudding",
+        "Answer": null
+    },
+    {
+        "Query": "Poinsettia",
+        "Answer": null
+    },
+    {
+        "Query": "Popcorn String",
+        "Answer": null
+    },
+    {
+        "Query": "Presents",
+        "Answer": null
+    },
+    {
+        "Query": "Receive",
+        "Answer": null
+    },
+    {
+        "Query": "Reindeer",
+        "Answer": null
+    },
+    {
+        "Query": "Rejoice",
+        "Answer": null
+    },
+    {
+        "Query": "Reunion",
+        "Answer": null
+    },
+    {
+        "Query": "Ribbon",
+        "Answer": null
+    },
+    {
+        "Query": "Ritual",
+        "Answer": null
+    },
+    {
+        "Query": "Sales",
+        "Answer": null
+    },
+    {
+        "Query": "Scarf",
+        "Answer": null
+    },
+    {
+        "Query": "Season",
+        "Answer": null
+    },
+    {
+        "Query": "Season's Greetings",
+        "Answer": null
+    },
+    {
+        "Query": "Shopping",
+        "Answer": null
+    },
+    {
+        "Query": "Skate",
+        "Answer": null
+    },
+    {
+        "Query": "Sled",
+        "Answer": null
+    },
+    {
+        "Query": "Sleigh",
+        "Answer": null
+    },
+    {
+        "Query": "Sleigh Bells",
+        "Answer": null
+    },
+    {
+        "Query": "Snow",
+        "Answer": null
+    },
+    {
+        "Query": "Snowball",
+        "Answer": null
+    },
+    {
+        "Query": "Snowbound",
+        "Answer": null
+    },
+    {
+        "Query": "Snowfall",
+        "Answer": null
+    },
+    {
+        "Query": "Snowflake",
+        "Answer": null
+    },
+    {
+        "Query": "Snowman",
+        "Answer": null
+    },
+    {
+        "Query": "Snowy",
+        "Answer": null
+    },
+    {
+        "Query": "Socks",
+        "Answer": null
+    },
+    {
+        "Query": "Spirit",
+        "Answer": null
+    },
+    {
+        "Query": "Star",
+        "Answer": null
+    },
+    {
+        "Query": "Stocking",
+        "Answer": null
+    },
+    {
+        "Query": "Stocking Stuffer",
+        "Answer": null
+    },
+    {
+        "Query": "Sugarplum",
+        "Answer": null
+    },
+    {
+        "Query": "Sweater",
+        "Answer": null
+    },
+    {
+        "Query": "Tidings",
+        "Answer": null
+    },
+    {
+        "Query": "Tinsel",
+        "Answer": null
+    },
+    {
+        "Query": "Toboggan",
+        "Answer": null
+    },
+    {
+        "Query": "Togetherness",
+        "Answer": null
+    },
+    {
+        "Query": "Toy",
+        "Answer": null
+    },
+    {
+        "Query": "Tradition",
+        "Answer": null
+    },
+    {
+        "Query": "Tree",
+        "Answer": null
+    },
+    {
+        "Query": "Trimming",
+        "Answer": null
+    },
+    {
+        "Query": "Trips",
+        "Answer": null
+    },
+    {
+        "Query": "Turkey",
+        "Answer": null
+    },
+    {
+        "Query": "Unwrap",
+        "Answer": null
+    },
+    {
+        "Query": "Vacation",
+        "Answer": null
+    },
+    {
+        "Query": "Visit",
+        "Answer": null
+    },
+    {
+        "Query": "Wassail",
+        "Answer": null
+    },
+    {
+        "Query": "Winter",
+        "Answer": null
+    },
+    {
+        "Query": "Wintertime",
+        "Answer": null
+    },
+    {
+        "Query": "Wintry",
+        "Answer": null
+    },
+    {
+        "Query": "Wise Men",
+        "Answer": null
+    },
+    {
+        "Query": "Wish",
+        "Answer": null
+    },
+    {
+        "Query": "Wonder",
+        "Answer": null
+    },
+    {
+        "Query": "Workshop",
+        "Answer": null
+    },
+    {
+        "Query": "Wrap",
+        "Answer": null
+    },
+    {
+        "Query": "Wrapping Paper",
+        "Answer": null
+    },
+    {
+        "Query": "Wreath",
+        "Answer": null
+    },
+    {
+        "Query": "Yule",
+        "Answer": null
+    },
+    {
+        "Query": "nibba is hot",
+        "Answer": null
+    },
+    {
+        "Query": "ly is cute",
+        "Answer": null
+    },
+    {
+        "Query": "fish go bloorp",
+        "Answer": null
+    },
+    {
+        "Query": "3080 STRIX OC",
+        "Answer": null
+    },
+    {
+        "Query": "Rawr XD",
+        "Answer": null
+    },
+    {
+        "Query": "UwU OwO UmU",
+        "Answer": null
+    },
+    {
+        "Query": "Poggers",
+        "Answer": null
+    },
+    {
+        "Query": "Based",
+        "Answer": null
+    },
+    {
+        "Query": "Cringe",
+        "Answer": null
+    },
+    {
+        "Query": "258479 wink",
+        "Answer": null
+    },
+    {
+        "Query": "I'm gay",
+        "Answer": null
+    },
+    {
+        "Query": "h",
+        "Answer": null
+    },
+    {
+        "Query": "seaweed is a ____",
+        "Answer": [
+            "schizo",
+            "filipino",
+            "retard"
+        ]
+    },
+    {
+        "Query": "amy is (a) _____",
+        "Answer": [
+            "stress",
+            "doctor",
+            "goddess",
+            "gay"
+        ]
+    },
+    {
+        "Query": "andro is (a) _____",
+        "Answer": [
+            "goddess",
+            "queen",
+            "horny",
+            "black"
+        ]
+    },
+    {
+        "Query": "nibba is (a) _____",
+        "Answer": [
+            "god",
+            "badass",
+            "hot",
+            "tall",
+            "my dad",
+            "rich",
+            "handsome",
+            "my husband",
+            "greek",
+            "hwasa simp"
+        ]
+    },
+    {
+        "Query": "fish is (a) _____",
+        "Answer": [
+            "fish",
+            "aussie",
+            "racist",
+            "misogynist",
+            "gamer",
+            "nibba's wife",
+            "frog owner"
+        ]
+    },
+    {
+        "Query": "yoot is (a) _____",
+        "Answer": [
+            "weeb",
+            "spoon",
+            "commie",
+            "rlcs pro",
+            "cool dude",
+            "homosexual"
+        ]
+    },
+    {
+        "Query": "ly is (a) _____",
+        "Answer": [
+            "coder",
+            "programmer",
+            "femboy",
+            "cutie",
+            "pole"
+        ]
+    },
+    {
+        "Query": "jack is (a) _____",
+        "Answer": [
+            "bri ish",
+            "wanker",
+            "girl",
+            "not real",
+            "brit",
+            "cc simp",
+            "sauce"
+        ]
+    },
+    {
+        "Query": "name one member",
+        "Answer": [
+            "meta",
+            "andro",
+            "amy",
+            "rock",
+            "seaweed",
+            "fish",
+            "UTC",
+            "nibba",
+            "mio",
+            "jack",
+            "ly",
+            "spaceship",
+            "marty",
+            "dino",
+            "wakka",
+            "dakota",
+            "boba",
+            "banzai",
+            "fuscia",
+            "shinobu artist",
+            "lode",
+            "dandy",
+            "yun",
+            "macaroon",
+            "god",
+            "satan",
+            "deez nuts"
+        ]
+    },
+    {
+        "Query": "deez",
+        "Answer": [
+            "nuts",
+            "deez"
+        ]
+    },
+    {
+        "Query": "sawcon",
+        "Answer": [
+            "deez nuts",
+            "sawcon"
+        ]
+    },
+    {
+        "Query": "ligma",
+        "Answer": [
+            "ligma",
+            "balls"
+        ]
+    },
+    {
+        "Query": "9*12(73/3)+2(33*7)",
+        "Answer": [
+            "idk",
+            "wtf",
+            "wow",
+            "fuck you",
+            "no",
+            "omg",
+            "fuck",
+            "shit",
+            "what the fuck",
+            "dunno",
+            "too hard",
+            "21"
+        ]
+    },
+    {
+        "Query": "are traps gay?",
+        "Answer": [
+            "yes",
+            "no",
+            "cum"
+        ]
+    },
+    {
+        "Query": "what animal says moo?",
+        "Answer": [
+            "cow",
+            "dog",
+            "dolphin",
+            "your mom",
+            "ur mom"
+        ]
+    },
+    {
+        "Query": "fuck, marry or kill nibba?",
+        "Answer": [
+            "fuck",
+            "marry",
+            "kill",
+            "all",
+            "yes"
+        ]
+    },
+    {
+        "Query": "banzai is (a) _____",
+        "Answer": [
+            "romanian",
+            "loser",
+            "vroom",
+            "cringe",
+            "based",
+            "sus",
+            "pickleboy",
+            "child"
+        ]
+    },
+    {
+        "Query": "spell icup",
+        "Answer": [
+            "i see you pee",
+            "i c u p",
+            "no",
+            "spell icup",
+            "lmao"
+        ]
+    },
+    {
+        "Query": "say the furry thing",
+        "Answer": [
+            "rawr",
+            "nyaa",
+            "rawr xd",
+            "meow",
+            "miau",
+            "uwu",
+            "owo"
+        ]
+    }
+]

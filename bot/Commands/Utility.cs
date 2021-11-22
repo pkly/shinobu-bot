@@ -52,7 +52,7 @@ namespace Shinobu.Commands
         {
             long message = Context.Message.CreatedAt().ToUnixTimeMilliseconds();
             long diff = Program.Timestamp - message;
-            var embed = GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
+            var embed = Program.GetEmbed(String.Format(PING_MESSAGE, diff, '?'));
             var response = await Response(embed);
             await response.ModifyAsync(x => 
                 x.Embeds = new LocalEmbed[] {
@@ -83,7 +83,7 @@ namespace Shinobu.Commands
             member ??= Context.GetCurrentMember();
 
             return Reply(
-                GetEmbed()
+                Program.GetEmbed()
                     .WithTitle(member!.NickOrName() + "'s avatar")
                     .WithImageUrl(member.GetAvatarUrl(CdnAssetFormat.Automatic, 256))
             );
@@ -99,7 +99,7 @@ namespace Shinobu.Commands
             // also this crashes if you fetch a member lmao
             var user = await Context.Bot.FetchUserAsync(member!.Id);
 
-            var embed = GetEmbed()
+            var embed = Program.GetEmbed()
                 .WithTitle(member!.NickOrName() + "'s banner");
 
             string? url = user.GetBannerUrl(CdnAssetFormat.Automatic, 512);
@@ -148,7 +148,7 @@ namespace Shinobu.Commands
             }
             
             return Reply(
-                GetEmbed()
+                Program.GetEmbed()
                     .WithImageUrl(emoji.GetUrl())
                     .WithTitle(emoji.Name ?? "No emote name")
                     .WithFooter("ID: " + emoji.Id + string.Format(", {0}", emoji.IsAnimated ? "Animated (.gif)" : "Image (.png)"))
@@ -255,7 +255,7 @@ namespace Shinobu.Commands
             var last = sections.Last();
             foreach (var attributePair in sections)
             {
-                var embed = GetEmbed()
+                var embed = Program.GetEmbed()
                     .WithTitle(attributePair.Value.Name);
                 
                 var description = "\n";
@@ -347,7 +347,7 @@ namespace Shinobu.Commands
         public DiscordCommandResult Invite()
         {
             return Reply(
-                GetEmbed(string.Format(
+                Program.GetEmbed(string.Format(
                     INVITE_TEXT,
                     INVITE_URL,
                     SUPPORT_SERVER

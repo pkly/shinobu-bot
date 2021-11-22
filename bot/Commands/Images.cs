@@ -12,6 +12,7 @@ using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Extensions;
 using Shinobu.Models.Api.OpenWeather;
+using Shinobu.Services;
 using Shinobu.Utility;
 using SixLabors.Fonts;
 using SixLabors.ImageSharp;
@@ -30,11 +31,6 @@ namespace Shinobu.Commands
         private const string WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric&appid={1}";
         private const string FLAG_URL = "https://flagcdn.com/w40/{0}.png";
         private const string ICON_URL = "http://openweathermap.org/img/wn/{0}@2x.png";
-        
-        private readonly FontCollection _fontCollection = new();
-        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
-        private readonly FontFamily _fontFamily;
-        private readonly Font _bold;
 
         private readonly Color _weatherLightBgColor = new(new Rgba32(255, 233, 89));
         private readonly Color _weatherDarkBgColor = new(new Rgba32(67, 68, 92));
@@ -58,7 +54,8 @@ namespace Shinobu.Commands
 
         private readonly Random _random;
         private readonly HttpClient _client;
-        
+        private readonly FontService _fontService;
+
         private readonly RangeHelper<string> _loveRanges = new(new Range<string>[]
         {
             new(0, "You guys aren't even remotely a match...", 0),
@@ -75,8 +72,12 @@ namespace Shinobu.Commands
             {true, "{0} was The Imposter"}
         };
 
-        public Images(Random random, HttpClient client)
+        public Images(Random random, HttpClient client, FontService fontService)
         {
+            _random = random;
+            _client = client;
+            _fontService = fontService;
+
             _bonk = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/bonk.jpg");
             _ejected = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/ejected.png");
             _marry = Image.Load<Rgba32>(Program.AssetsPath + "/images/meme/marry.jpg");
@@ -89,22 +90,16 @@ namespace Shinobu.Commands
             _weatherHumid = Image.Load<Rgba32>(Program.AssetsPath + "/images/weather/humidity.png");
             _weatherWind = Image.Load<Rgba32>(Program.AssetsPath + "/images/weather/wind.png");
 
-            _fontFamily = _fontCollection.Install(Program.AssetsPath + "/fonts/Roboto.ttf");
-            _bold = _fontFamily.CreateFont(34, FontStyle.Bold);
-            
             // pre-modify weather and wind images anyway
             _weatherHumid.Mutate(x => x.Resize(31, 31));
             _weatherWind.Mutate(x => x.Resize(35, 35));
             
             // pre-create all the fonts we'll need anyway
-            _weatherTitleFont = _fontFamily.CreateFont(80);
-            _weatherFont = _fontFamily.CreateFont(40);
-            _weatherMainFont = _fontFamily.CreateFont(24);
-            _weatherHumidityFont = _fontFamily.CreateFont(21);
-            _weatherSpeedFont = _fontFamily.CreateFont(18);
-
-            _random = random;
-            _client = client;
+            _weatherTitleFont = _fontService.FontFamily.CreateFont(80);
+            _weatherFont = _fontService.FontFamily.CreateFont(40);
+            _weatherMainFont = _fontService.FontFamily.CreateFont(24);
+            _weatherHumidityFont = _fontService.FontFamily.CreateFont(21);
+            _weatherSpeedFont = _fontService.FontFamily.CreateFont(18);
         }
 
         [IgnoresExtraArguments]
@@ -302,7 +297,7 @@ namespace Shinobu.Commands
             }
 
             return RespondWithAttachment(
-            GetEmbed(string.Format(
+            Program.GetEmbed(string.Format(
                     LOVE_STRING,
                     memberA.Mention,
                     memberB.Mention,
@@ -338,7 +333,7 @@ namespace Shinobu.Commands
                 empty.Mutate(x => 
                     x.Fill(color)
                         .DrawImage(copy, 1)
-                        .DrawTextCentered(string.Format(text, member.NickOrName()), _bold, Color.White, 314)
+                        .DrawTextCentered(string.Format(text, member.NickOrName()), _fontService.Bold, Color.White, 314)
                 );
 
                 await empty.SaveAsPngAsync(stream);

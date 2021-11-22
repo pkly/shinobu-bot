@@ -106,7 +106,7 @@ namespace Shinobu.Commands
             var data = await JsonSerializer.DeserializeAsync<Dictionary<string, Dictionary<string, string>>>(response);
 
             return Response(
-                GetEmbed(string.Format("{0} {1}", data!["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
+                Program.GetEmbed(string.Format("{0} {1}", data!["magic"]["answer"], Program.Env(_eightballTypeDictionary[data["magic"]["type"]])))
                     .WithTitle(message + (message.EndsWith("?") ? "" : "?"))
                     .WithAuthor(((IMember) Context.Author).NickOrName(), Context.Author.GetAvatarUrl(CdnAssetFormat.Automatic, 128))
             );
@@ -135,7 +135,7 @@ namespace Shinobu.Commands
         [Description("It flips a coin, what else would it do?")]
         public async Task Coinflip()
         {
-            var embed = GetEmbed(
+            var embed = Program.GetEmbed(
                 Program.Env("EMOTE_COINFLIP") + " " + _coinflipStartQuote.Random() + " . . . "
             );
             var response = await Response(embed);
@@ -175,7 +175,7 @@ namespace Shinobu.Commands
                 return;
             }
 
-            var embed = GetEmbed(Program.Env("EMOTE_LOADING") + " " + _fightStartQuotes.Random());
+            var embed = Program.GetEmbed(Program.Env("EMOTE_LOADING") + " " + _fightStartQuotes.Random());
             var response = await Response(embed);
 
             var items = new List<IUser> {Context.Author, member};
@@ -202,7 +202,7 @@ namespace Shinobu.Commands
             var user = (IUser?) member ?? Context.Author;
             var result = (int) Math.Round(Math.Abs((((Math.Cos(user.Id)) * Math.PI) * 0.5) + 0.5) * 100);
             return Response(
-                GetEmbed(
+                Program.GetEmbed(
                         string.Format(
                             user.IsSameAs(Context.Author) ? GAY_SELF : GAY_ELSE,
                             result.ToString(),
