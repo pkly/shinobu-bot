@@ -149,7 +149,7 @@ namespace Shinobu.Services.Event
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromMinutes(7), stoppingToken);
+                await Task.Delay(TimeSpan.FromMinutes(_random.Next(6, 13)), stoppingToken);
                 if (stoppingToken.IsCancellationRequested)
                 {
                     break; // graceful exit
