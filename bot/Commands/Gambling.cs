@@ -53,6 +53,17 @@ namespace Shinobu.Commands
 
             return EmbedReply(string.Join("\n", users));
         }
+
+        [Command("balance", "bal")]
+        public async Task<DiscordResponseCommandResult> Balance()
+        {
+            var wallet = await _walletService.GetWallet(Context.Author.Id);
+
+            return EmbedReply(string.Format(
+                "You have {0} points in your wallet",
+                wallet.Points
+            ));
+        }
         
         [Command("bet")]
         public async Task<DiscordResponseCommandResult> Bet([Minimum(5)][Maximum(BET_MAX)]uint amount)
