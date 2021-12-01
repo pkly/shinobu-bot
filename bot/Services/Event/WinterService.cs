@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Disqord;
@@ -25,7 +26,8 @@ namespace Shinobu.Services.Event
         private readonly WalletService _walletService;
 
         private readonly Image<Rgba32> _bg;
-        private readonly List<EventQuery> _eventQueries;
+        private List<EventQuery> _eventQueries;
+        private readonly List<EventQuery> _originalQueries;
 
         private EventQuery? _currentQuery;
         private int _points = 0;
@@ -52,6 +54,7 @@ namespace Shinobu.Services.Event
             _walletService = walletService;
             _bg = Image.Load<Rgba32>(Program.AssetsPath + "/images/event/winter.png");
             _eventQueries = JsonConvert.DeserializeObject<List<EventQuery>>(File.ReadAllText(Program.AssetsPath + "/event/winter/words.json")) ?? new List<EventQuery>();
+            _originalQueries = _eventQueries.ToList(); // shallow copy
             _eventFont = _fontService.FontFamily.CreateFont(120, FontStyle.Bold);
 
             ulong temp;
@@ -70,7 +73,21 @@ namespace Shinobu.Services.Event
             
             lock (_lock)
             {
-                _currentQuery = _eventQueries.Random();
+                try
+                {
+                    var index = _eventQueries.RandomKey();
+                    _currentQuery = _eventQueries[index];
+                    _eventQueries.RemoveAt(index);
+
+                    if (0 == _eventQueries.Count)
+                    {
+                        _eventQueries = _originalQueries.ToList(); // shallow copy
+                    }
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    _currentQuery = null;
+                }
                 _answerCount = 0;
                 _points = _random.Next(100, 1000) * (_random.Next(5) == 4 ? 5 : 1);
                 _userAnswerIds = new List<Snowflake>();

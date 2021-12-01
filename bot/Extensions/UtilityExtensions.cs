@@ -18,6 +18,11 @@ namespace Shinobu.Extensions
             return items.Count == 0 ? default : items[RANDOM.Next(items.Count)];
         }
 
+        public static int RandomKey<T>(this IList<T> items)
+        {
+            return items.Count == 0 ? 0 : RANDOM.Next(items.Count);
+        }
+
         public static void Rewind(this Stream stream)
         {
             stream.Seek(0, SeekOrigin.Begin);
