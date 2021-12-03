@@ -121,9 +121,9 @@ namespace Shinobu.Commands
                     ));
                 }
 
-                await _walletService.AddPoints(lowest.UserId, amount);
+                await _walletService.AddPoints(lowest.UserId, amount / 2);
                 return EmbedReply(string.Format(
-                    "You lose **{0}** points! {1} takes them away!",
+                    "You lose **{0}** points! {1} takes half of them away!",
                     amount,
                     "<@" + lowest.UserId + ">"
                 ));

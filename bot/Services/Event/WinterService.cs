@@ -149,7 +149,7 @@ namespace Shinobu.Services.Event
                     reward = (int) Math.Round(_points * _claimMultipliers[_answerCount++]);
 
                     message.WithEmbeds(Program.GetEmbed(string.Format(
-                        "> Good job <@{0}>, you get **{1}** points!",
+                        "Good job <@{0}>, you get **{1}** points!",
                         e.Member.Id,
                         reward
                     )));
