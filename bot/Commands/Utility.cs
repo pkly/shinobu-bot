@@ -29,7 +29,7 @@ namespace Shinobu.Commands
         private const string PING_MESSAGE = "Receive delay {0}ms, latency is {1}ms";
 
         private const string INVITE_TEXT = "**[Click this link]({0}) to invite me!**\nJoin our [support server]({1})!";
-        private const string INVITE_URL = "https://discord.com/oauth2/authorize?client_id=490901986502377512&scope=bot&permissions=388160";
+        private const string INVITE_URL = "https://discord.com/oauth2/authorize?client_id=925828587653845014&scope=bot&permissions=388160";
         private const string SUPPORT_SERVER = "https://discord.gg/qwdMmsG/";
         private const string CHANGELOG_URL = "https://raw.githubusercontent.com/pkly/shinobu-bot/master/CHANGELOG.md";
 
