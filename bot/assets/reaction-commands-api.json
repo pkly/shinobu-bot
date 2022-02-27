@@ -1639,5 +1639,20 @@
         }
       ]
     }
+  },
+  "komi": {
+    "Name": "komi",
+    "Url": "https://config.shinobu.chat/api/cmd/komi",
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": null,
+          "Value": [
+            "{0}, here's your Komi pic!"
+          ]
+        }
+      ]
+    }
   }
 }

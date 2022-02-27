@@ -2,6 +2,10 @@
 
 Here are the latest and greatest about everyone's favorite anime bot!
 
+## 3.3.5
+
+* Add +komi command, update website to allow for easier adding of commands in the future
+
 ## 3.3.x
 
 * fixes, changes, added +balance command

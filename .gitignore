@@ -22,3 +22,5 @@ bot/.config
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+docker/mariadblib
