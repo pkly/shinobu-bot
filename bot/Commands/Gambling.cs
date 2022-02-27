@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Disqord;
 using Disqord.Bot;
-using Disqord.Extensions.Interactivity.Menus;
 using Microsoft.EntityFrameworkCore;
 using Qmmands;
 using Shinobu.Attributes;
 using Shinobu.Database;
 using Shinobu.Extensions;
-using Shinobu.Interaction.View;
 using Shinobu.Services.Profile;
 
 namespace Shinobu.Commands
@@ -80,20 +78,21 @@ namespace Shinobu.Commands
             return await DoBet(wallet.UserId, 43, amount);
         }
 
-        [Command("bet-all")]
-        public async Task<DiscordCommandResult> BetAll()
-        {
-            var wallet = await _walletService.GetWallet(Context.Author.Id);
-            if (wallet.Points <= 5)
-            {
-                return EmbedReply(string.Format(
-                    "You only have {0} points in your wallet, minimum is 5",
-                    wallet.Points
-                ));
-            }
-            
-            return View(new ConfirmView("Are you absolutely sure you want your big chance at riches?", DoBetAll));
-        }
+        // needs a rework, too lazy to do it now since the event is over
+        // [Command("bet-all")]
+        // public async Task<DiscordCommandResult> BetAll()
+        // {
+        //     var wallet = await _walletService.GetWallet(Context.Author.Id);
+        //     if (wallet.Points <= 5)
+        //     {
+        //         return EmbedReply(string.Format(
+        //             "You only have {0} points in your wallet, minimum is 5",
+        //             wallet.Points
+        //         ));
+        //     }
+        //     
+        //     return View(new ConfirmView("Are you absolutely sure you want your big chance at riches?", DoBetAll));
+        // }
 
         private async Task<DiscordResponseCommandResult> DoBetAll()
         {
