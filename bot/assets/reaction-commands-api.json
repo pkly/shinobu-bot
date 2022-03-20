@@ -134,16 +134,6 @@
     "Group": "waifu",
     "SimpleGroup": 1
   },
-  "neko": {
-    "Name": "neko",
-    "Url": "https://api.waifu.pics/sfw/neko",
-    "Aliases": [
-      "catgirl",
-      "nekos"
-    ],
-    "Group": "waifu",
-    "SimpleGroup": 2
-  },
   "bite": {
     "Name": "bite",
     "Url": "https://api.waifu.pics/sfw/bite",
