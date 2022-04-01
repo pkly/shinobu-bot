@@ -327,7 +327,7 @@ namespace Shinobu.Commands
 
             if (final == null)
             {
-                await Response(message); // reply with just bot
+                await Embed(message); // reply with just bot
             }
             else
             {
