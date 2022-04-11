@@ -1480,15 +1480,6 @@
     "ReplaceUrl": "https://rra.ram.moe{0}",
     "SimpleGroup": 1
   },
-  "waifu": {
-    "Name": "waifu",
-    "Url": "https://api.waifu.pics/sfw/waifu",
-    "Group": "waifu",
-    "Aliases": [
-      "randomwaifu"
-    ],
-    "SimpleGroup": 2
-  },
   "megumin": {
     "Name": "megumin",
     "Url": "https://api.waifu.pics/sfw/megumin",
