@@ -78,15 +78,35 @@ namespace Shinobu.Commands
         
         [Command("avatar", "pfp", "image", "profilepic", "pic")]
         [Description("Show a user's profile picture")]
-        public DiscordCommandResult Avatar(IMember? member = null)
+        public async Task Avatar(IMember? member = null)
         {
             member ??= Context.GetCurrentMember();
 
-            return Reply(
-                Program.GetEmbed()
-                    .WithTitle(member!.NickOrName() + "'s avatar")
-                    .WithImageUrl(member.GetAvatarUrl(CdnAssetFormat.Automatic, 256))
-            );
+            if (null == member!.AvatarHash && null == member!.GuildAvatarHash)
+            {
+                await Reply(
+                    Program.GetEmbed("User has no avatar(s) set")
+                );
+                return;
+            }
+
+            if (null != member!.AvatarHash)
+            {
+                await Reply(
+                    Program.GetEmbed()
+                        .WithTitle(member!.NickOrName() + "'s avatar")
+                        .WithImageUrl(member.GetAvatarUrl(CdnAssetFormat.Automatic, 256))
+                );
+            }
+
+            if (null != member!.GuildAvatarHash)
+            {
+                await Reply(
+                    Program.GetEmbed()
+                        .WithTitle(member!.NickOrName() + "'s server avatar")
+                        .WithImageUrl(member!.GetGuildAvatarUrl(CdnAssetFormat.Automatic, 256))
+                );
+            }
         }
 
         [Command("banner")]
