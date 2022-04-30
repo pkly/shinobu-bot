@@ -13,7 +13,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class ApiController extends AbstractController
 {
-    #[Route('/api/cmd/{name}', name: 'api.cmd', requirements: ['name' => 'komi'])]
+    #[Route('/api/cmd/{name}', name: 'api.cmd', requirements: ['name' => 'komi|anya'])]
     public function additionalCommand(
         Request $request,
         string $name,

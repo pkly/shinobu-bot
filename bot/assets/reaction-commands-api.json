@@ -1635,5 +1635,20 @@
         }
       ]
     }
+  },
+  "anya": {
+    "Name": "anya",
+    "Url": "https://config.shinobu.chat/api/cmd/anya",
+    "Actions": {
+      "Ranges": [
+        {
+          "From": 0,
+          "To": null,
+          "Value": [
+            "{0}, here's your Anya pic!"
+          ]
+        }
+      ]
+    }
   }
 }
